@@ -1,0 +1,59 @@
+ 
+
+<!--==========================================
+                   Formacion Academica
+===========================================-->
+
+
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Formacion Academica</h4>
+        </div>
+
+        <div id="timeline-experience">
+                {{#each webapidataF as |item|}} 
+                <!-- FIRST TIMELINE -->
+                <div class="timeline-block">
+                    <!-- Circulo con la primer Letra  -->
+                    {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}
+                
+                    <!-- TIMELINE CONTENT -->
+                    <div class="card timeline-content">
+                        <div class="card-content">
+                           
+                            <!-- TIMELINE TITLE -->                            
+                            <h5 class="text-uppercase">Grado Formacion: {{item.GradoFormacion}}</h5>
+                            <hr id="linea2">
+
+                            <!-- TIMELINE TITLE INFO -->
+                            <div class="timeline-info">                                                                                     
+                                                                
+                                <h6>
+                                    Titulo: <small>{{item.titulo}}</small>
+                                </h6>
+                                <h6>
+                                    Institucion: <small>{{item.institucion}}</small>
+                                </h6>
+                                <h6>
+                                    Fecha Inicio: <small>{{item.fechainicio}}</small>
+                                </h6>
+                                <h6>
+                                    Fecha Fin: <small>{{item.fechafin}}</small>
+                                </h6>                                
+                            </div>
+                            
+                            {{!-- <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-4">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            </a> --}}
+                            <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal2">
+                                {{fa-icon 'user-edit'}} Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}                              
+        </div>
+    </div>
+
+

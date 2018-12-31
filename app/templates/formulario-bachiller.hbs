@@ -1,0 +1,84 @@
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Bachiller</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+        <div class="form-group">          
+          <p>Tipo Colegio</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-signal text-info"></i></div>                  
+                <select  id="sel2" onchange={{action 'tipoColegioSelected' value="target.value"}} >
+                    {{#each TipoColegio as |itemTipoColegio|}}
+                        <option value={{itemTipoColegio.Name}}  selected={{is-eq itemTipoColegio.Name form.tipoColegio}} >{{itemTipoColegio.Name}}</option>
+                    {{/each}}
+                </select>      
+          </div>                 
+        </div>
+
+        <div class="form-group">          
+          <p>Ultimo Grado Vencido</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-graduation-cap text-info"></i></div>                
+                <select  id="sel2" onchange={{action 'gadoColegioHabla' value="target.value"}} >
+                    {{#each GradoColegio as |itemGradoColegio|}}
+                        <option value={{itemGradoColegio.Name}}  selected={{is-eq itemGradoColegio.Name form.ultimoCursoVencido}} >{{itemGradoColegio.Name}}</option>
+                    {{/each}}
+                </select>                 
+          </div>                 
+          {{!-- <label hidden={{selectableValidar}} class="errorMessage mensaje-error is-valid">Porfavor Ingrese un nombre valido</label>      --}}
+        </div>
+
+        <div class="form-group">          
+          <p>Nombre Colegio</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-tag text-info"></i></div>                
+                {{input
+                    value=form.nombreColegio
+                    placeholder="Nombre Colegio"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}                             
+          </div>               
+          <label hidden={{colegioValido}} class="errorMessage mensaje-error is-valid">{{mensajeErrorColegio}}</label>  
+        </div>        
+
+        
+
+        <div class="form-group">          
+          <p>Lugar</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-tag text-info"></i></div>               
+                {{input
+                    value=form.lugar
+                    placeholder="Lugar"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}                  
+          </div>    
+          <label hidden={{lugarValido}} class="errorMessage mensaje-error is-valid">{{mensajeErrorLugar}}</label>             
+        </div>
+
+        
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" disabled={{isDisabledBachiller}} class="btn btn-primary" data-dismiss="modal" {{action 'onGuardar'}}>Guardar</button>
+        
+      </div>
+    </div>
+  </div>
+
+
+

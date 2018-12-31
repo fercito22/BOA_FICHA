@@ -1,0 +1,129 @@
+
+   
+{{!-- <div class="modal-dialog" role="document"> --}}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Formulario Contacto Emergencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        
+          <form>
+
+        <div class="form-group">          
+          <p>Relacion</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user text-info"></i></div>              
+                <select  id="sel2" onchange={{action 'relacionSelected' value="target.value"}} >                    
+                    {{#each CombosParentesco as |itemParentesco|}}
+                        <option value={{itemParentesco.Nombre}}  selected={{is-eq itemParentesco.Nombre formcont.Relacion}} >{{itemParentesco.Nombre}}</option>
+                    {{/each}}
+                </select> 
+          </div>                 
+        </div>
+
+        <div class="form-group">          
+          <p>Nombre Contacto</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user text-info"></i></div>               
+                {{input
+                    value=formcont.nombreContacto
+                    placeholder="Nombre Contacto"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}                              
+                      
+          </div>                 
+        </div>
+
+        <div class="form-group">          
+          <p>Direccion</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-map-signs text-info"></i></div>                   
+                {{input
+                    value=formcont.Direccion
+                    placeholder="Direccion"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}             
+                      
+          </div>                 
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">          
+                <p>Telefono  de Domicilio</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-phone text-info"></i></div>                  
+                            {{input
+                                value=formcont.TelefonoDomicilio
+                                placeholder="Telefono Domicilio"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}    
+                    </div>                 
+                </div> 
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">          
+                <p>Nro. Celular</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-mobile text-info"></i></div>                
+                            {{input
+                                value=formcont.NroCelular
+                                placeholder="Nro. Celular"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}          
+                    </div>                 
+                </div> 
+
+            </div>
+        </div>
+
+
+        <div class="form-group">          
+            <p>Direccion Trabajo</p>
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-map-signs text-info"></i></div>              
+                    {{input
+                        value=formcont.DireccionTrabajo
+                        placeholder="Direccion Trabajo"
+                        autocomplete='off'
+                        class="form-control text-secondary border border-info "
+                    }}                       
+            </div>                 
+        </div>
+
+        <div class="form-group">          
+            <p>Telefono de Trabajo</p>
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-phone text-info"></i></div>               
+                    {{input
+                        value=formcont.TelefonoTrabajo
+                        placeholder="Telefono de Trabajo"
+                        autocomplete='off'
+                        class="form-control text-secondary border border-info "
+                    }}                 
+            </div>                 
+        </div> 
+      </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'principal' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" class="btn btn-primary" disabled={{isDisabledContacto}} data-dismiss="modal" {{action 'onGuardarContacto'}}>Guardar</button>
+      </div>
+    </div>
+  {{!-- </div> --}}
+
+
+

@@ -1,0 +1,151 @@
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Medico Cabecera</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+        <div class="form-group">          
+          <p>Medico Cabecera</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user text-info"></i></div>              
+                {{input
+                    value=formmedico.NombreMedico
+                    placeholder="Medico Cabecera"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}                                     
+          </div>   
+          <label hidden={{nombreMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>
+          {{!-- <label hidden={{longitud2}} class="errorMessage mensaje-error">no hay nada</label> --}}
+        </div>
+
+        <div class="form-group">          
+          <p>Direccion Consultorio</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-map-signs text-info"></i></div>              
+                {{input
+                    value=formmedico.DireccionMedico
+                    placeholder="Direccion"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}
+          </div>  
+          <label hidden={{direccionValido}} class="errorMessage mensaje-error">{{mensajeErrorDireccion}}</label>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Telefono Fijo</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-phone text-info"></i></div>              
+                            {{input
+                                value=formmedico.TelefonoMedico
+                                placeholder="Telefono Domicilio"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}
+                    </div>   
+                    <label hidden={{TelefonoMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorNumeros}}</label>              
+                </div> 
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Telefono Celular</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-mobile text-info"></i></div>              
+                            {{input
+                                value=formmedico.NroCelularMedico
+                                placeholder="Telefono Celular"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}
+                    </div> 
+                    <label hidden={{NroCelularValido}} class="errorMessage mensaje-error">{{mensajeErrorNumerosCelular}}</label>
+                </div> 
+            </div>
+        </div>   
+        
+
+        <div class="form-group">          
+          <p>Alergias</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-file-medical text-info"></i></div>              
+                <select  id="sel2" onchange={{action 'alergiasSelected' value="target.value"}} >
+                    {{!-- <option disabled selected> -- Alergias -- </option> --}}
+                    {{#each AlergiasMedicas as |itemAlergia|}}
+                        <option value={{itemAlergia.Name}}  selected={{is-eq itemAlergia.Name formmedico.Name}} >{{itemAlergia.Name}}</option>
+                    {{/each}}
+                </select>
+          </div>      
+          {{!-- <label hidden={{alergiasMedicasValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>            --}}
+        </div> 
+
+        <div class="form-group">          
+          <p>Medicamentos</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fas fa-briefcase-medical text-info"></i></div>              
+                {{input
+                    value=formmedico.Medicamentos
+                    placeholder="Medicamentos"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}
+          </div>  
+          <label hidden={{medicamentosValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>               
+        </div> 
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>RH Sanguineo</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-gratipay text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'factorSanguineoSelected' value="target.value"}} >
+                                {{#each CombosFactorSanguineo as |itemSanguineo|}}
+                                    <option value={{itemSanguineo.Name}}  selected={{is-eq itemSanguineo.Name formmedico.GrupoSanquineo}} >{{itemSanguineo.Name}}</option>
+                                {{/each}}
+                            </select>
+                    </div>                 
+                </div> 
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Factor Sanguineo</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-gratipay text-info"></i></div>               
+                            <select  id="sel2" onchange={{action 'rhSanguineoSelected' value="target.value"}} >
+                                {{#each rhSanguineoCombo as |itemRH|}}
+                                    <option value={{itemRH.Label}}  selected={{is-eq itemRH.Label formmedico.RH_Sanguineo}} >{{itemRH.Label}}</option>
+                                {{/each}}
+                            </select>
+                    </div>                 
+                </div> 
+            </div>
+        </div>
+
+        
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" class="btn btn-primary" disabled={{isDisabledMedico}} data-dismiss="modal" {{action 'onGuardarMedico'}}>Guardar</button>
+      </div>
+    </div>
+  </div>
+
+
+
+

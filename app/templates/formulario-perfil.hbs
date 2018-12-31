@@ -1,0 +1,164 @@
+   
+{{!-- <div class="modal-dialog" role="document"> --}}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="form-group">
+          {{!-- <label for="exampleInputEmail1">Edad</label>
+          <input type="text" class="form-control" placeholder="Edad">    --}}          
+          <labe>Nombres</labe>
+          {{!-- <div class="input-group-prepend"></div> --}}
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                {{input
+                value = formp.Nombre1
+                placeholder="Nombre"
+                autocomplete='on'
+                class="form-control text-secondary border border-info "
+              }}
+          </div>
+          <label hidden={{NombreVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>                 
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+            <labe>Apellido Paterno</labe>
+              <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                    {{input
+                      value=formp.Apellido1
+                      placeholder="Apellido Paterno"
+                      autocomplete='off'
+                      class="form-control text-secondary border border-info "
+                    }} 
+              </div> 
+            <label hidden={{ApellidoPaternoVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>                   
+          </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <labe>Apellido Materno</labe> 
+                <div class="input-group-prepend">
+                    {{!-- <div class="input-group-text"><i class="fa fa-user text-info"></i></div> --}}
+                      {{input
+                        value=formp.Apellido2
+                        placeholder="Apellido Materno"
+                        autocomplete='off'
+                        class="form-control text-secondary border border-info "
+                      }}
+                </div>
+              <label hidden={{ApellidoMaternoVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+              <p>Fecha Nacimiento</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-calendar text-info"></i></div>
+                        {{pikaday-input format="YYYY/MM/DD" onSelection=(action 'onFechaNacimiento') value=vFrom class="form-control text-secondary border border-info " placeholder="Fecha Emision" }}
+                        {{!-- {{pikaday-input format="YYYY/MM/DD" onSelection=(action 'onFechaIni') value=vFrom class="form-control text-secondary border border-info " placeholder="Fecha Emision" }} --}}
+                </div>
+                
+                <label hidden={{FechaNacimientoVal}} class="errorMessage mensaje-error">{{mensajeErrorFecIni}}</label>                
+          </div>
+
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <labe>Ciudad Nacimiento</labe>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-globe text-info"></i></div>
+                      {{input
+                        value=formp.CiudadNacimiento
+                        placeholder="Ciudad Nacimiento"
+                        autocomplete='off'
+                        class="form-control text-secondary border border-info "
+                      }}
+                </div>
+              <label hidden={{CiudadNacimientoVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>           
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <labe>Pais</labe>
+                <div class="input-group-prepend">
+                    {{!-- <div class="input-group-text"><i class="fa fa-globe text-info"></i></div>               --}}
+                      {{input
+                        value=formp.LugarDeNacimiento
+                        placeholder="Lugar Nacimiento"
+                        autocomplete='off'
+                        class="form-control text-secondary border border-info "
+                      }}
+                </div> 
+              <label hidden={{LugarDeNacimientoVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>          
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          {{!-- <label for="exampleInputEmail1">Edad</label>
+          <input type="text" class="form-control" placeholder="Edad">    --}}          
+          <labe>Nacionalidad</labe>
+          {{!-- <div class="input-group-prepend"></div> --}}
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                {{input
+                value = formp.Nacionalidad
+                placeholder="Nacionalidad"
+                autocomplete='on'
+                class="form-control text-secondary border border-info "
+              }}
+          </div>
+          <label hidden={{NacionalidadVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>                 
+        </div>
+        
+        <div class="form-group">
+          <labe>Direccion</labe>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-map-signs text-info"></i></div>
+                {{input
+                  value=formp.Direccion
+                  placeholder="Direccion"
+                  autocomplete='off'
+                  class="form-control text-secondary border border-info "
+                }}
+          </div> 
+          {{!-- <label hidden={{DireccionValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>          --}}
+        </div>
+        
+        <div class="form-group">
+          <p>Estado Civil</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-tag text-info"></i></div>
+                <select class="form-control" id="sel2" onchange={{action 'estadoCivilSelected' value="target.value"}} >
+                    <option disabled selected> -- Estado Civil -- </option>
+                    {{#each webapidataCivil as |itemEstado|}}
+                        <option value={{itemEstado.estadoCivilID}} selected={{is-eq itemEstado.estadoCivilID formp.EstadoCivil}} >{{itemEstado.Nombre}}</option>
+                    {{/each}}
+                </select>
+          </div>          
+        </div>
+
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'principal' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" class="btn btn-primary" disabled={{isDisabledPerfil}} data-dismiss="modal" {{action 'onGuardarPerfil'}}>Guardar</button>
+      </div>
+    </div>
+  {{!-- </div> --}}

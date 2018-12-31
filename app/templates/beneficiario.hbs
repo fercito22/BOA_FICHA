@@ -1,0 +1,91 @@
+
+  
+  <div class="content-wrapper" id="seccion1">
+    
+    <div class="alert alert-success alert-dismissible fade show"  role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      <center><strong>Bienvenido!</strong> Usted ingreso a su Ficha Personal.</center>
+    </div>
+    
+   
+<!--==========================================
+                   Beneficiarios
+===========================================-->
+
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Declaracion Jurada</h4>
+        </div>
+        <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal2">
+            {{fa-icon 'user-edit'}} Nuevo
+        </button>
+        <br>
+
+        <div id="timeline-experience">
+                {{#each Declaracion as |item|}} 
+                <!-- FIRST TIMELINE -->
+                <div class="timeline-block">
+                    <!-- Circulo con la primer Letra  -->
+                    {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}
+                
+                    <!-- TIMELINE CONTENT -->
+                    <div class="card timeline-content">
+                        <div class="card-content">
+                           
+                            <!-- TIMELINE TITLE -->
+                            <h5 class="text-uppercase ">{{item.Nombres}} {{item.Apellido1}} {{item.Apellido2}}</h5>
+                            
+                            <hr id="linea2"> 
+                            <!-- TIMELINE TITLE INFO -->
+                            <div class="timeline-info"> 
+                                
+                                <h6>
+                                    Beneficiario: <small>{{item.Beneficiario}}</small>
+                                </h6>
+                                <h6>
+                                    Parentesco: <small>{{item.TipoParentesco}}</small>
+                                </h6>
+                                <h6>
+                                    Finado: <small>{{item.Finado}}</small>
+                                </h6>                                
+                                <h6>
+                                    N° Documento: <small>{{item.Tipo_NroDocumento}}</small>
+                                </h6>
+                            </div>
+                            
+                            <!-- TIMELINE PARAGRAPH -->
+                           <button onclick={{action "idEditar" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+                                {{fa-icon 'user-edit'}} 
+                            </button>                             
+                            <button onclick={{action "idEliminar" item}} id="botonEditar" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" >
+                                {{fa-icon 'trash'}}
+                            </button>                          
+                        </div>
+                    </div>
+                </div>
+                {{/each}}                              
+        </div>
+    </div>
+
+    </div>  
+
+
+    <!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-beneficiario'}}
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'beneficiario-nuevo'}}
+    </div>
+</div>
+
+

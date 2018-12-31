@@ -1,0 +1,201 @@
+        
+<h3>Formulario Documentos Personales</h3>
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Documentos Personales</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <p>Tipo Documento</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>
+                    <select  id="sel2" onchange={{action 'tipoDocumentoSelected' value="target.value"}} >
+                        <option disabled selected> -- Seleccione un Documento -- </option>
+                        {{#each TipoDocumento as |itemDocumento|}}
+                            <option value={{itemDocumento.documentoID}}  selected={{is-eq itemDocumento.documentoID form.DocumentoID}} >{{itemDocumento.Nombre}}</option>
+                        {{/each}}            
+                    </select>                    
+                </div>
+                <label hidden={{selectValidoDoc}} class="errorMessage mensaje-error">{{mensajeErrorSelectDoc}}</label>
+          </div>
+
+          {{#if visibleCiudad}}
+            <div class="form-group">
+              <p>Departamento</p> 
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-globe text-info"></i></div>
+                        <select  id="sel2" onchange={{action 'referenciaSelected' value="target.value"}} >
+                        <option disabled selected> -- Seleccione un Departamento -- </option>
+                        {{#each DepartamentosBolivia as |itemDepartamento|}}
+                            <option value={{itemDepartamento.Id}}  >{{itemDepartamento.Nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div> 
+                <label hidden={{selectValidoRef}} class="errorMessage mensaje-error">{{mensajeErrorSelectRef}}</label>               
+          </div>
+        {{/if}}
+
+        {{#if visibleLicencia}}
+            <div class="form-group">
+              <p>Tipo Licencia</p>
+                <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>
+                    <select  id="sel3" onchange={{action 'referenciaSelected' value="target.value"}} >
+                        <option disabled selected> -- Seleccione tipo Licencia -- </option>
+                        {{#each TipoLicencia as |itemLicencia|}}
+                            <option value={{itemLicencia.Id}}   >{{itemLicencia.Nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>   
+                <label hidden={{selectValidoRef}} class="errorMessage mensaje-error">{{mensajeErrorSelectRef}}</label>               
+          </div>
+        {{/if}}
+
+        {{#if visiblePaises}}
+            <div class="form-group">
+              <p>Lista Paises</p>
+                <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-globe text-info"></i></div>
+                    <select  id="sel4" onchange={{action 'referenciaSelected' value="target.value"}} >
+                        <option disabled selected> -- Seleccione un pais -- </option>
+                        {{#each ListaPaises as |itemPais|}}
+                            <option value={{itemPais.paisID}}  selected={{is-eq itemPais.paisID 1}} >{{itemPais.nombrePais}}</option>
+                        {{/each}}
+                    </select>
+                </div>               
+                <label hidden={{selectValidoRef}} class="errorMessage mensaje-error">{{mensajeErrorSelectRef}}</label>
+          </div>
+        {{/if}}
+
+        {{#if visibleVacuna}}
+            <div class="form-group">
+                <p>Vacunas</p>                
+                    <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-syringe text-info"></i></div>
+                        <select  id="sel5" onchange={{action 'referenciaSelected' value="target.value"}} >
+                            <option disabled selected> -- Seleccione la vacuna -- </option>
+                            {{#each CombosVacunas as |itemVacuna|}}
+                                {{!-- selected={{is-eq itemVacuna.Name form.Name}} --}}
+                                <option value={{itemVacuna.Name}}   >{{itemVacuna.Nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </div>               
+                    <label hidden={{selectValidoRef}} class="errorMessage mensaje-error">{{mensajeErrorSelectRef}}</label>
+            </div>
+        {{/if}}    
+          
+          <div class="form-group">
+              <p>Numero</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>
+                        {{input
+                            value=form.Numero
+                            placeholder="Numero"
+                            autocomplete='off'
+                            required=true
+                            tabIndex=5
+                            class="form-control text-secondary border border-info  is-valid"
+                        }} 
+                </div>     
+            <label hidden={{NumeroValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>   
+          </div>
+           
+          <div class="form-group">
+              <p>Fecha Emision</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-calendar text-info"></i></div>
+                        {{pikaday-input format="YYYY/MM/DD" onSelection=(action 'onFechaIni') class="form-control text-secondary border border-info " placeholder="Fecha Emision" }}
+                </div>
+                
+                <label hidden={{FechaIniValido}} class="errorMessage mensaje-error">{{mensajeErrorFecIni}}</label>                
+          </div>
+          <div class="form-group">
+              <div class="row">
+                  {{#unless CheckBoxEstado}} 
+                    <div class="col-sm">                                       
+                            <p>Fecha Vencimiento</p>
+                            <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-calendar text-info"></i></div>                                
+                                {{pikaday-input format="YYYY/MM/DD"  onSelection=(action 'onFechaFin' ) class="form-control text-secondary border border-info " placeholder="Valido Hasta" }}
+                            </div>
+
+                            <label hidden={{FechaFinValido}} class="errorMessage mensaje-error ">{{mensajeErrorFecFin}}</label>
+                    </div>
+                    {{/unless}} 
+
+                    <div class="col-sm">
+                    <p>Indefinido</p>
+                        <div class="input-group-prepend">
+                            {{!-- <div class="input-group-text"><i class="fa fa-tag text-info"></i></div> --}}
+                                {{input type="checkbox" checked=CheckBoxEstado change=(action "indefinidoCheckBoxEstado")}}
+                        </div>
+                    </div>
+              </div>
+              
+              
+
+               {{!-- {{componente-datetimepicker date=form.FechaVencimiento  format='YYYY-MM-DD' onchange=(action 'onFecha')}} --}}
+                    {{!-- {{date-time-picker date=form.FechaVencimiento  format='MM/DD/YYYY'}} --}}
+                    {{!-- {{bs-datetimepicker date=form.FechaVencimiento }} --}}
+                    {{!-- {{date-picker date=model.birthday valueFormat='date' yearRange="-100, 0"}} --}}
+
+                {{!-- {{datetimepicker-wrappercomponent id="ddBirthDate" lang="ES" onChange=(action 'onFecha') customeplaceholder="test"}} --}}
+                {{!-- {{datetimepicker-wrappercomponent  onChange=(action 'onFecha') }}  --}}
+                    {{!--       
+                    {{datetimepicker-wrappercomponent  onChange=(action 'onBirthDateChange') }}           
+                </div>   --}}
+                {{!-- {{datatimepicker-wrapper date=myDate}} --}}
+                {{!-- {{bs-datetimepicker date=mydate format='YYYY-MM-DD'}} --}}
+                {{!-- {{bs-datetimepicker date=form.FechaVencimiento format='YYYY-MM-DD'}} --}} 
+                        
+          </div> 
+
+          <div class="form-group">
+              <p>Observacion</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>
+                        {{input
+                            value=form.Observacion
+                            placeholder="Observacion"
+                            autocomplete='off'                            
+                            tabIndex=5
+                            class="form-control text-secondary border border-info  is-valid"
+                        }} 
+                </div>                           
+            {{!-- <label hidden={{observacionval}} class="errorMessage mensaje-error is-valid">{{mensajeErrorObservacion}}</label> --}}            
+          </div>          
+          <div class="form-group">
+                            
+          </div>
+<form class="form">   
+    
+</form>
+
+{{!-- <div class="actions">
+  <div>      
+    <button disabled={{estadoInvitado}} {{action 'onGuardar'}}>
+      Guardar
+    </button>
+
+    {{#link-to 'index' tagName="button"}}
+      Inicio
+    {{/link-to}}
+  </div>
+</div> --}}
+
+
+      </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
+                Regresar
+            {{/link-to}} --}}
+            <button type="button" class="btn btn-primary" disabled={{isDisabled}} data-dismiss="modal" {{action 'onGuardar'}}>Guardar</button>
+        </div>
+    </div>
+  </div>

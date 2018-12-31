@@ -1,0 +1,50 @@
+
+
+
+<!--==========================================
+                   Bachiller
+===========================================-->
+
+
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Bachiller</h4>
+        </div>
+        <div id="timeline-experience">                
+                <!-- FIRST TIMELINE -->
+                <div class="timeline-block">                
+                    <!-- TIMELINE CONTENT -->
+                    <div class="card timeline-content">
+                        <div class="card-content">                           
+                            <!-- TIMELINE TITLE -->                            
+                            <h5 class="timeline-title">Colegio: {{webapidataE.[0].NombreColegio}}</h5>
+                            <!-- TIMELINE TITLE INFO -->
+                            <div class="timeline-info"> 
+                                <hr id="linea2">                            
+                                <h6>
+                                    Lugar: <small>{{webapidataE.[0].Lugar}}</small>
+                                </h6>
+                                <h6>
+                                    Tipo Colegio: <small>{{webapidataE.[0].TipoColegio}}</small>
+                                </h6>
+                                <h6>
+                                    Ultimo Curso: <small>{{webapidataE.[0].UltimoCursoVencido}}</small>
+                                </h6>                               
+                            </div>
+                            
+                            <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-4">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                                            
+        </div>
+        <br>
+        <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+            {{fa-icon 'user-edit'}} Editar
+        </button> <br>
+    </div>
+
+

@@ -1,0 +1,81 @@
+      
+   
+{{!-- <div class="modal-dialog" role="document"> --}}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <form>
+        <div class="form-group">          
+          <p>Idioma</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-language text-info"></i></div>              
+                <select  id="sel3" onchange={{action 'idiomaSelected' value="target.value"}} >
+                {{#each webapidataComboIdioma as |itemIdioma|}} 
+                    <option value={{itemIdioma.idiomaID}}  selected={{is-eq itemIdioma.idiomaID formi.idiomaID}} >{{itemIdioma.Nombre}}</option>
+                {{/each}}                
+            </select>                
+          </div>                 
+        </div>
+        
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">          
+                <p>Habla</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'nivelSelectedHabla' value="target.value"}} >
+                                {{#each idiomaNivel as |itemHabla|}}
+                                    <option value={{itemHabla.Code}}  selected={{is-eq itemHabla.Label formi.habla}} >{{itemHabla.Label}}</option>
+                                {{/each}}
+                            </select>                
+                    </div>                 
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">          
+                <p>Lee</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-readme text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'nivelSelectedLee' value="target.value"}} >
+                                {{#each idiomaNivel as |itemLee|}}
+                                    <option value={{itemLee.Code}}  selected={{is-eq itemLee.Label formi.lee}} >{{itemLee.Label}}</option>
+                                {{/each}}
+                            </select>                
+                    </div>                 
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">          
+                <p>Escribe</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-pen-fancy text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'nivelSelectedEscribe' value="target.value"}} >
+                                {{#each idiomaNivel as |itemEscribe|}}
+                                    <option value={{itemEscribe.Code}}  selected={{is-eq itemEscribe.Label formi.escribe}} >{{itemEscribe.Label}}</option>
+                                {{/each}}
+                            </select>                
+                    </div>                 
+                </div>
+            </div> 
+        </div>  
+      </form>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'principal' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" class="btn btn-primary" {{action 'onGuardar'}}>Guardar</button>
+      </div>
+    </div>
+  {{!-- </div> --}}

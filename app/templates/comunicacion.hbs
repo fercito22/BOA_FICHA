@@ -1,0 +1,100 @@
+<hr style="margin-left: -17.5%;" id="borde1">
+      <center><span id="negrita" class="title" style="margin-left: -20%;">Comunicacion</span></center><br>
+{{!-- 
+        <hr id="borde1"> --}}
+        <div class="row">
+
+
+            {{!-- {{#each webapidata as |item|}} 
+                <div class="col-md-6">                                              
+                    <span class="title">{{item.ComunicacionNombre}}: <span id="negrita">{{item.Valor}}</span></span>                                              
+                </div>
+            {{/each}}   --}}
+
+            {{#each webapidata as |item|}} 
+                {{#unless (is-eq item.tipoComunicacionID 3)}} 
+                    {{#unless (is-eq item.tipoComunicacionID 4)}} 
+                        <div class="col-md-6">                                              
+                            <span class="title">{{item.ComunicacionNombre}}: <span id="negrita" {{action "funcionDobleClick" on="doubleClick" }}>{{item.Valor}}</span></span>
+                            {{!-- <button onclick={{action "editarComunicacion" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModaleditarcomunicacion">
+                                {{fa-icon 'edit'}}
+                            </button>  --}}
+                            <button  hidden={{isDisabledComunicacion}} onclick={{action "editarComunicacion" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalceditar">
+                                {{fa-icon 'edit'}}
+                            </button> <br>
+                           
+                            {{!-- <button onclick={{action "borrarIdioma" idioma}}  >
+                                {{fa-icon 'edit'}}
+                            </button>
+                            <button onclick={{action "borrarIdioma" idioma}} id="botonEditar" >
+                                {{fa-icon 'trash'}}
+                            </button> --}}
+                        </div> 
+                    {{/unless}} 
+                {{/unless}}
+            {{/each}} 
+            {{#each webapidata as |item|}} 
+                {{#unless (is-eq item.tipoComunicacionID 1)}} 
+                    {{#unless (is-eq item.tipoComunicacionID 2)}} 
+                        {{#unless (is-eq item.tipoComunicacionID 5)}} 
+                            {{#unless (is-eq item.tipoComunicacionID 6)}} 
+                                {{#unless (is-eq item.tipoComunicacionID 7)}} 
+                                    <div class="col-md-6">                                              
+                                        <span class="title">{{item.ComunicacionNombre}}: <span {{action "funcionDobleClick" on="doubleClick" }} id="negrita">{{item.Valor}}</span></span>
+                                        <button  hidden={{isDisabledComunicacion}} onclick={{action "editarComunicacion" item}} id="botonEditar" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" >
+                                            {{fa-icon 'edit'}}
+                                        </button> 
+                                        {{!-- <button onclick={{action "borrarIdioma" idioma}} id="botonEditar" >
+                                            {{fa-icon 'trash'}}
+                                        </button>
+                                        <button onclick={{action "borrarIdioma" idioma}}  >
+                                            {{fa-icon 'edit'}}
+                                        </button> --}}
+                                    </div>                     
+                                {{/unless}} 
+                            {{/unless}}  
+                        {{/unless}}  
+                    {{/unless}} 
+                {{/unless}}
+            {{/each}} 
+        </div>
+
+
+<div class="modal fade" id="exampleModaleditarcomunicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabeleditarcomunicacion" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-editarcomunicacion'}}
+    </div>
+</div>
+
+
+
+        {{!-- <div class="col-md-6">                                              
+                <span class="title">Email Boa: <span id="negrita">{{webapidata.[2].Valor}}</span></span>                                              
+        </div>
+        <div class="col-md-6">                                              
+                <span class="title">Email Personal: <span id="negrita">{{webapidata.[1].Valor}}</span></span>                                             
+        </div>                                                                                       
+        </div>
+
+
+        {{#if (is-eq webapidata.[4].Valor "")}}
+
+        {{/if}}
+        {{#unless hasPaid}}
+            <div class="row">
+                <div class="col-md-6">                                              
+                    <span class="title">Telefono: <span id="negrita">{{webapidata.[3].Valor}}</span></span>                                              
+                </div>
+                <div class="col-md-6">                                              
+                    <span class="title">Celular: <span id="negrita">{{webapidata.[4].Valor}}</span></span>
+                </div>                                                                                       
+            </div>                                                
+        {{/unless}}
+        
+        {{#unless (is-eq webapidata.[4].Valor "")}}                                                
+            
+        {{/unless}}
+
+ {{#each webapidataComunicacion as |item|}}     
+    <span class="title">{{item.tipoComunicacionID}}: <span id="negrita">{{item.valor}}</span></span>
+{{/each}}   --}}

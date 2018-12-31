@@ -1,0 +1,110 @@
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Formulario Declaracion Jurada</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+        <div class="form-group">          
+          <p>Parentesco</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user text-info"></i></div>                 
+                <select  id="sel2" onchange={{action 'parentescoSelected' value="target.value"}} >
+                    <option disabled selected> -- Parentesco -- </option>
+                    {{#each Parentesco as |itemParentesco|}}
+                        <option value={{itemParentesco.parentescoID}}  selected={{is-eq itemParentesco.parentescoID formeditar.parentescoID}}  >{{itemParentesco.Nombre}}</option>
+                    {{/each}}
+                </select>                
+          </div>                 
+        </div>
+
+        <div class="form-group">          
+            <p>Nombre</p>
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-user text-info"></i></div>                  
+                    {{input
+                        value=formeditar.Nombres
+                        placeholder="Nombres"
+                        autocomplete='off'
+                        class="form-control text-secondary border border-info "
+                    }}                         
+            </div>                     
+            <label hidden={{NombreValido}} class="errorMessage mensaje-error is-valid">{{mensajeErrorNombre}}</label>        
+        </div>
+
+        <div class="row"> 
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Apellido Paterno</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                            {{input
+                                value=formeditar.Apellido2
+                                placeholder="Apellido Paterno"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}                             
+                    </div>     
+                    <label hidden={{apellidoValido}} class="errorMessage mensaje-error is-valid">{{mensajeErrorApellidoPat}}</label>            
+                </div>
+            </div>           
+
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Apellido Materno</p>
+                    <div class="input-group-prepend">
+                        {{!-- <div class="input-group-text"><i class="fa fa-user text-info"></i></div>               --}}
+                            {{input
+                                value=formeditar.Apellido1
+                                placeholder="Apellido Materno"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}                             
+                    </div>     
+                    <label hidden={{apellidoMaValido}} class="errorMessage mensaje-error is-valid">{{mensajeErrorApellidoMat}}</label>              
+                </div>
+            </div>            
+        </div>        
+
+        <div class="form-group">          
+          <p>Nro. Carnet</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>               
+                {{input
+                    value=formeditar.Tipo_NroDocumento
+                    placeholder="Nro. Carnet"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}                   
+          </div>     
+          <label hidden={{numeroVal}} class="errorMessage mensaje-error is-valid">{{mensajeErrorNumeros}}</label>            
+        </div>
+
+        <div class="form-group">          
+          <p>Finado</p>
+          <div class="input-group-prepend">
+              {{!-- <div class="input-group-text"><i class="fa fa-user text-info"></i></div> --}}
+                {{input type="checkbox" checked=CheckBoxEstado change=(action "finadoCheckBoxEstado")}}     
+          </div>                 
+        </div>
+        
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" disabled={{isDisabledBeneficiarioEdit}} class="btn btn-primary" {{action 'onGuardar' }} data-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+
+

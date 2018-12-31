@@ -1,0 +1,64 @@
+
+<!--==========================================
+                   ENTRENAMIENTO
+===========================================-->
+
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Entrenamiento</h4>
+        </div>
+
+        <div id="timeline-experience">
+
+            {{#each webapidataJ as |item|}} 
+                <!-- FIRST TIMELINE -->
+                <div class="timeline-block">
+                    <!-- Circulo con la primer Letra  -->
+                    {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}
+
+                    <!-- TIMELINE CONTENT -->
+                    <div class="card timeline-content">
+                        <div class="card-content">
+                            <!-- TIMELINE TITLE -->
+                            <h5 class="text-uppercase ">{{item.Nombre}}</h5>
+                            <hr id="linea2">
+                            <!-- TIMELINE TITLE INFO -->
+                            <div class="timeline-info">                                
+                                <h6>
+                                    Institucion:<small>{{item.Institucion}}</small>
+                                </h6>
+                                <h6>
+                                    Nombre:<small>{{item.Nombre}}</small>
+                                </h6>
+                                <h6>
+                                    Descripcion:<small>{{item.Descripcion}}</small>
+                                </h6>
+                                <h6>
+                                    NroHoras:<small>{{item.NroHoras}}</small>
+                                </h6>
+                                <h6>
+                                    Fecha Entrega:<small>{{item.FechaEntrega}}</small>
+                                </h6>
+                                <h6>
+                                    Fecha Fin:<small>{{item.FechaFinVigencia}}</small>
+                                </h6>
+                                
+                            </div>
+                            <!-- TIMELINE PARAGRAPH -->
+                            {{!-- <p>
+                                {{item.Descripcion}}
+                            </p> --}}
+                            <!-- BUTTON TRIGGER MODAL -->
+                            {{!-- <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-4">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            </a> --}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+   

@@ -1,0 +1,92 @@
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelc">Formulario Comunicacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>           
+
+        <div class="row">
+            <div class="form-group">          
+                <p>Idioma</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-language text-info"></i></div>              
+                        <select  id="sel3" onchange={{action 'comunicacionSelected' value="target.value"}} >
+                            <option disabled selected> -- Seleccione un Idioma -- </option>
+                            {{#each webapidataComunicacion as |item|}} 
+                                <option value={{item.tipoComunicacionID}}  selected={{is-eq item.tipoComunicacionID formcomu.tipoComunicacionID}} >{{item.Nombre}}</option>
+                            {{/each}}                
+                    </select>                
+                </div>                 
+            </div>
+            
+            <div class="col-sm-6">                
+                <div class="form-group">          
+                    <p>Comunicacion</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-tag text-info"></i></div>                
+                            {{input
+                                value=formcomu.Valor
+                                placeholder="Dato"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}             
+                    </div>                 
+                </div>
+            </div>           
+        </div>   
+
+{{!-- <div class="set-form">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <textarea  value={{formcomu.Valor}} name="Question" placeholder="Question" th:field="${questionAnswerSet.question}" id="question" style="resize: none; width: 100%;"></textarea>
+        </td>
+        <td>
+          <textarea name="Answer" placeholder="Answer" th:field="${questionAnswerSet.answer}" id="answer" style="resize: none; width: 100%;"></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="set-form">
+  <input type="button" id="more_fields"  value="Add More" class="btn btn-info {{action 'generarInput'}}" />
+</div>
+ --}}
+        
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        
+        <button type="button" class="btn btn-primary" data-dismiss="modal" {{action 'onGuardarComunicacion'}}>Guardar</button>
+        {{!-- <button type="button" class="btn btn-primary" {{action 'generarInput'}}>Generar</button> --}}
+      </div>
+    </div>
+  </div>
+
+{{!--   
+  <div id="main">
+        <div>
+            <button onclick={{action 'generarInput'}}>Nuevo Campo</button>
+            <button type="button" class="btn btn-primary" onclick={{action 'generarInput'}}>Generar</button>           
+        </div>       
+    </div>
+  
+
+   <script type="text/x-handlebars" data-template-name="components/foo-bar">
+    <p>Component {{name}}</p>
+    <h2>Creado</h2>
+  </script>  --}}

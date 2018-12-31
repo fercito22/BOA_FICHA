@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "future";
+    src: url("../font/FuturaStd-Book.woff") format('woff');
+}
+#page-top{
+    font-family: future;
+}
+#borde{
+    border: 2px solid #ffffff;
+    background: #214363;
+    color: #ffffff;
+   
+}
+#contenido{
+    padding-bottom: 3%;
+    
+   
+}
+#borde1{
+   border: 1px solid #ffffff;
+}
+#seccion1{
+    background: #EEEEEE;
+}
+#negrita{
+    font-weight: bold;
+}
+#botonEditar{
+    border: 1px #f5a300 solid;
+    color: #ffffff;
+    background: #FF6F04;
+}
+#botonEditar:hover{
+    background: #FF6F04;
+    color: #000000;
+    border: 1px #FF6F04 solid;
+}
+#opciones:hover{
+    background: #EEEEEE;
+
+}
+#selec {
+    background: #f5a300 ;
+    color: #ffffff;
+  }
+/* #linea{    
+    border-radius: 0%;
+    width: 30%;
+    background: #ffffff;
+} */
+
+ 
+  

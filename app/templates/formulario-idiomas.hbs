@@ -1,0 +1,86 @@
+<h2>Formulario idiomas</h2>
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelidiomas">Formulario Idioma</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="form-group">          
+          <p>Idioma</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-language text-info"></i></div>              
+                <select  id="sel3" onchange={{action 'idiomaSelected' value="target.value"}} >
+                    <option disabled selected> -- Seleccione un Idioma -- </option>
+                    {{#each webapidataComboIdioma as |itemIdioma|}} 
+                        <option value={{itemIdioma.idiomaID}}  selected={{is-eq itemIdioma.idiomaID formidiomas.idiomaID}} >{{itemIdioma.Nombre}}</option>
+                    {{/each}}                
+            </select>                
+          </div>                 
+        </div>
+        
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">          
+                <p>Habla</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'nivelSelectedHabla' value="target.value"}} >
+                                <option disabled selected> -- Nivel -- </option>
+                                {{#each idiomaNivel as |itemHabla|}}
+                                    <option value={{itemHabla.Code}}  selected={{is-eq itemHabla.Label formidiomas.habla}} >{{itemHabla.Label}}</option>
+                                {{/each}}
+                            </select>                
+                    </div>                 
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">          
+                <p>Lee</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-readme text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'nivelSelectedLee' value="target.value"}} >
+                                <option disabled selected> -- Nivel -- </option>
+                                {{#each idiomaNivel as |itemLee|}}
+                                    <option value={{itemLee.Code}}  selected={{is-eq itemLee.Label formidiomas.lee}} >{{itemLee.Label}}</option>
+                                {{/each}}
+                            </select>                
+                    </div>                 
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">          
+                <p>Escribe</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-pen-fancy text-info"></i></div>              
+                            <select  id="sel2" onchange={{action 'nivelSelectedEscribe' value="target.value"}} >
+                                <option disabled selected> -- Nivel -- </option>
+                                {{#each idiomaNivel as |itemEscribe|}}
+                                    <option value={{itemEscribe.Code}}  selected={{is-eq itemEscribe.Label formidiomas.escribe}} >{{itemEscribe.Label}}</option>
+                                {{/each}}
+                            </select>                
+                    </div>                 
+                </div>
+
+            </div>            
+
+        </div>
+       
+        
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>       
+        <button type="button" class="btn btn-primary" disabled={{isDisabledIdioma}} data-dismiss="modal"  {{action 'onGuardarIdiomas'}}>Guardar</button>
+      </div>
+    </div>
+  </div>
+
+

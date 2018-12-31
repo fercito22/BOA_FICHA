@@ -1,0 +1,35 @@
+ <hr style="margin-left: -17.5%;" id="borde1">
+      <center><span id="negrita" class="title" style="margin-left: -20%;">Idiomas</span></center><br>
+            
+            
+
+
+            {{#each webapidataIdiomas as |idioma|}}
+                <div class="col-md-6">                                                
+                    <h5 class="text-uppercase ">Idioma: {{idioma.Nombre}}</h5>
+                </div>
+            <div class="row">
+                                    
+                    <div class="col-md-3">                                                                    
+                        <span class="title">Lee: <span {{action "funcionDobleClickIdioma" on="doubleClick" }} id="negrita">{{idioma.Lee}}</span></span>
+                    </div>
+                    <div class="col-md-3">                                                                    
+                        <span class="title">Habla: <span {{action "funcionDobleClickIdioma" on="doubleClick" }} id="negrita">{{idioma.Habla}}</span></span>
+                    </div>
+                    <div class="col-md-3">                                                                    
+                        <span class="title">Escribe: <span {{action "funcionDobleClickIdioma" on="doubleClick" }} id="negrita">{{idioma.Escribe}}</span></span>
+                    </div> 
+
+                    <div class="col-md-3">                                                                    
+                        <button hidden={{isDisabledIdiomaBoton}}  onclick={{action "borrarIdioma" idioma}} id="botonEditar" >
+                            {{fa-icon 'trash'}}
+                        </button>
+                    </div> 
+
+                           
+                </div>   
+               
+            {{/each}}
+            
+           
+                  

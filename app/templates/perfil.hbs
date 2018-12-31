@@ -1,0 +1,145 @@
+<div class="header-background section">
+        <div id="v-card-holder">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <!-- V-CARD -->
+                        <div id="v-card" class="card" id="borde" >
+
+                            <!-- PROFILE PICTURE -->
+                            <div id="profile" class="right">
+                                {{!-- <center><img alt="profile-image " class="img-responsive rounded-circle" src="img/erio.jpeg" style="width: 20%;"></center> --}}
+                                <center>
+                                    <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="http://{{webapidataFotografia}}">
+                                    </center>
+                                
+                                <div class="slant"></div>
+                            </div>
+
+                            <div class="card-content" id="contenido">
+
+                                <!-- NAME & STATUS -->
+                               <center> <div class="info-headings">
+                                   {{!-- <h4 class="text-uppercase left">{{webapidata.[0].Nombre1}} {{webapidata.[0].Apellido1}} {{webapidata.[0].Apellido2}}</h4>
+                                    <h6 class="text-capitalize left">{{ webapidata.[0].Descripcion }} </h6> --}}
+
+                                    <h4 class="text-uppercase left">{{webapidata.[0].Nombre1}} {{webapidata.[0].Apellido1}} {{webapidata.[0].Apellido2}}</h4>
+                                    <h6 class="text-capitalize left">{{ webapidata.[0].Descripcion }}</h6>
+                                </div> </center> 
+                                <hr id="borde1">
+
+                                <!-- CONTACT INFO -->
+                                <div class="infos" id="info" style="margin-left: 15%;">                                    
+                                    <div class="row">
+                                      <div class="col-md-6">   
+                                          {{!-- id="exampleModal2"    --}}
+                                            <span class="title"  {{action "dobleClick" on="doubleClick" }}>Edad: <span id="negrita">{{webapidata.[0].edad}}</span></span>                                        
+                                      </div>
+                                      <div class="col-md-6">                                       
+                                            <span class="title">Fecha Nacimiento: <span id="negrita">{{webapidata.[0].FechaNacimiento}}</span></span>
+                                      </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-6">                                          
+                                              <span class="title">Direccion: <span id="negrita">{{webapidata.[0].Direccion}}</span></span>                                          
+                                        </div>
+                                        <div class="col-md-6">                                         
+                                              <span class="title">Estado Civil: <span id="negrita">{{webapidata.[0].NombreCivil}}</span></span>                                      
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">                                            
+                                                <span class="title">Lugar Nacimiento: <span id="negrita">{{webapidata.[0].LugarDeNacimiento}}</span></span>                                            
+                                          </div>
+                                          <div class="col-md-6">                                            
+                                                <span class="title">Nacionalidad: <span id="negrita">{{webapidata.[0].Nacionalidad}}</span></span>                                          
+                                          </div>
+                                          </div>
+                                        
+
+                                            <br><button  id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+                                                {{!-- <br><button onclick={{action "editarPerfil"}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal"></button> --}}
+                                                {{fa-icon 'user-edit'}} 
+                                            </button> <br>
+
+                                            {{partial 'idiomas'}}                                             
+                                            <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalidiomas">
+                                                {{fa-icon 'plus-square'}}
+                                            </button> <br> 
+
+
+                                            {{partial 'comunicacion'}}
+                                            <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalc">
+                                                {{fa-icon 'plus-square'}}
+                                            </button> 
+                                            <br>
+                                            {{!-- <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalceditar">
+                                                {{fa-icon 'user-edit'}}
+                                            </button> <br> --}}
+                                       
+                                                  
+                                         {{partial 'contacto-emergencia'}}
+                               
+                                            <br>
+                                            <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal2">
+                                                {{fa-icon 'user-edit'}} 
+                                            </button> 
+                                            <br>
+
+                                        {{partial 'medico-cabecera'}}
+
+                                        <br>
+                                            <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal3">
+                                                {{fa-icon 'user-edit'}} 
+                                            </button> 
+                                        <br>
+                              
+                                </div>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-perfil'}}
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-contacto'}}
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-medico'}}
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelc" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-comunicacion'}}
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalceditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelceditar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-editarcomunicacion'}}
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalidiomas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelidiomas" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-idiomas'}}
+    </div>
+</div>
+
+

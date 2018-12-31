@@ -1,0 +1,128 @@
+
+
+{{!-- <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table> --}}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'detalle-tallas'}}
+    </div>
+</div>
+
+
+<div class="content-wrapper" id="seccion1" >
+    
+    {{!-- <div class="alert alert-success alert-dismissible fade show"  role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      <center><strong>Bienvenido!</strong> Usted ingreso a su Ficha Personal.</center>
+    </div> --}}
+
+    
+    <!--==========================================
+                   Formacion Academica
+===========================================-->
+    <div class="container">
+        {{!-- <h2>1{{obj.CantidadMovimiento}}</h2>
+        <h2>2{{obj.CodTalla}}</h2>
+        <h2>3{{obj.prenda}}</h2> --}}
+                        
+        <hr id="linea2">
+        <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+            {{fa-icon 'id-card'}} Detalle
+        </button> 
+        {{#each webapidataTallasDetalle.objeto as |item|}} 
+            <p value={{item.CodTalla}}  >{{item.prenda}}</p>  
+            <div class="timeline-info">
+                {{#unless (is-eq item.CantidadMovimiento 0) }}
+                    <h6>
+                        Prenda: <small>{{item.prenda}}</small>
+                    </h6>
+                    <h6>
+                        EsExtra: <small>{{item.EsExtra}}</small>
+                    </h6>
+                    <h6>
+                        Cantidad: <small>{{item.CantidadMovimiento}}</small>
+                    </h6>
+                    <h6>
+                        Fecha: <small>{{item.fechaMov}}</small>
+                    </h6>
+                {{/unless}}  
+                <br>
+            </div>   
+        {{/each}} 
+            <!-- SECTION TITLE -->
+            <div class="section-title">
+                <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Tallas</h4>
+            </div>   
+
+            <div id="timeline-experience">
+                    {{#each webapidataTallas as |prenda|}}
+                        <!-- FIRST TIMELINE -->
+                        <div class="timeline-block">
+                            <!-- Circulo con la primer Letra  -->
+                            {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}                    
+                            <!-- TIMELINE CONTENT -->
+                            <div class="card timeline-content">
+                                <div class="card-content">                            
+                                    <!-- TIMELINE TITLE -->
+                                    <h5 class="text-uppercase ">{{prenda.nombre}}</h5>
+                                    <hr id="linea2"> 
+                                    <!-- TIMELINE TITLE INFO -->
+                                    <div class="timeline-info">  
+                                        <h6>
+                                            Genero: <small>{{prenda.genero}}</small>
+                                        </h6>
+                                        <h6>
+                                            Con Talla: <small>{{prenda.ConTalla}}</small>
+                                        </h6>
+                                        <h6>
+                                            {{#unless (is-eq prenda.ListaTallas.length 0) }}
+                                                Talla: <small>
+                                                        {{!-- <select disabled={{desabilitado}} id="sel3" onchange={{action 'prendaSelected' prenda }} >
+                                                            {{#each prenda.ListaTallas as |item|}} 
+                                                                <option  value={{item.codigo}}  selected={{is-eq item.codigo prenda.CodTalla}} >{{item.nombre}}</option>
+                                                            {{/each}}                            
+                                                        </select> --}}
+                                                        <select disabled={{desabilitado}} id="sel3" onchange={{action 'prendaSelected' value="target.value" }} >
+                                                            {{#each prenda.ListaTallas as |item|}} 
+                                                                <option  value='{{item.codigo}},{{item.nombre}},{{prenda.EmpleadoItemID}}'  selected={{is-eq item.codigo prenda.CodTalla}} >{{item.nombre}}</option>
+                                                            {{/each}}                            
+                                                        </select>
+                                                        
+                                                    </small>
+                                            {{/unless}}
+                                            {{!-- <button onclick={{action "idEditar" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+                                                {{fa-icon 'user-edit'}} 
+                                            </button> --}}
+                                        </h6> 
+                                        <br>
+                                    </div>                                
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}                              
+            </div>
+
+            {{!-- <div class="modal-footer">                
+                <button type="button" hidden={{isDisabledTallas}} class="btn btn-primary" {{action 'onGuardar'}}>Guardar</button>
+            </div> --}}
+            
+        </div>
+    </div>  
+
+ {{!-- selected={{is-eq item.codigo prenda.CodTalla}} --}}

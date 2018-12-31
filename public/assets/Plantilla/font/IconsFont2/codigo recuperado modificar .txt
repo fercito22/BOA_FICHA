@@ -1,0 +1,265 @@
+@model Intranet.Data.SPA_GetDetalleMemo_Result
+
+@{
+    ViewBag.Title = "DetalleMemos";
+}
+
+@{
+    ViewBag.Title = "Detalle Memo";
+}
+
+<h2>Detalle Memo</h2>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |*@
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>
+<a style="width:100px; height:25px; background: #0094ff; padding: 2px; position: absolute; right: 30px; border-radius: 5px;" href="@Url.Action("ListaMemoProsedure", "LlamadasDeAtencion")" title="Actualizar Almacen">Ir Atras</a>
+<div>
+    <section class="detalleMemo">
+
+        <table>
+            @*<legend>FormularioLlamadaAtencion</legend>*@
+            @*<tr>
+                    <td class="label_form">
+                        @Html.DisplayNameFor(model => model.formularioID)
+                    </td>
+                    <td class="label_form2">
+                        @Html.DisplayFor(model => model.formularioID)
+                    </td>
+                </tr>*@
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.nombre_completo)*@
+                    Nombre Completo:
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.nombre_completo)
+                </td>
+            </tr>
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.fecha_emision)*@
+                    Fecha de Emision
+                </td>
+                <td class="label_form2">
+                    @*@Model.fecha_emision.ToString("dd/MMMM/yyyy")*@
+                </td>
+            </tr>
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.motivo_llamada_atencion)*@
+                    Motivo Memo
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.motivo_llamada_atencion)
+                </td>
+            </tr>
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.nombre_emisor_memo)*@
+                    Nombre Emisor
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.nombre_emisor_memo)
+                </td>
+            </tr>
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.numero_cite_memo)*@
+                    Numero Cite
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.numero_cite_memo)
+                </td>
+            </tr>
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.fecha_visacion)*@
+                    Fecha Visacion
+                </td>
+                <td class="label_form2">
+                    @*@Model.fecha_visacion.ToString("dd/MMMM/yyyy")*@
+                </td>
+            </tr>
+            @*<tr>
+                <td class="label_form">
+                    @Html.DisplayNameFor(model => model.)
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.registroUsuarioID)
+                </td>
+            </tr>*@
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.emisorID)*@
+                    Emisor
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.emisorID)
+                </td>
+            </tr>
+            <tr>
+                <td class="label_form">
+                    @*@Html.DisplayNameFor(model => model.tipo_llamada_atecion)*@
+                    Tipo Memo
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.tipo_llamada_atecion)
+                </td>
+            </tr>
+
+            @*<tr>
+                    <td class="label_form">
+                        @Html.DisplayNameFor(model => model.estadoMemo)
+                    </td>
+                    <td class="label_form2">
+                        @Html.DisplayFor(model => model.estadoMemo)
+                    </td>
+                </tr>*@
+            <tr>
+                <td class="label_form">
+                    @Html.DisplayNameFor(model => model.numero_cite_sistema)
+                </td>
+                <td class="label_form2">
+                    @Html.DisplayFor(model => model.numero_cite_sistema)
+                </td>
+            </tr>
+            @*<tr>
+                    <td class="label_form">
+                        @Html.DisplayNameFor(model => model.fechaReg)
+                    </td>
+                    <td class="label_form2">
+                        @Html.DisplayFor(model => model.fechaReg)
+                    </td>
+                </tr>*@
+
+        </table>
+    </section>
+</div>
+
+
+
+
+(SELECT RTRIM(RTRIM(T2.Nombre1 + ' '+ T2.Apellido1)+' ' + T2.Apellido2) as nombre_usuario
+     FROM  DocumentosBOA.dbo.FormularioLlamadaAtencion T1 
+		INNER JOIN
+		Personal.dbo.Empleado T2 on T1.registroUsuarioID = T2.empleadoID 
+     WHERE  T2.empleadoID = T1.registroUsuarioID ) As usuario
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+    <fieldset>
+        <legend>SPA_GetDetalleMemo_Result</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nombre_completo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nombre_completo)
+            @Html.ValidationMessageFor(model => model.nombre_completo)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.empleadoID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.empleadoID)
+            @Html.ValidationMessageFor(model => model.empleadoID)
+        </div>*@
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.formularioID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.formularioID)
+            @Html.ValidationMessageFor(model => model.formularioID)
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fecha_emision)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fecha_emision)
+            @Html.ValidationMessageFor(model => model.fecha_emision)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.motivo_llamada_atencion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.motivo_llamada_atencion)
+            @Html.ValidationMessageFor(model => model.motivo_llamada_atencion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nombre_emisor_memo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nombre_emisor_memo)
+            @Html.ValidationMessageFor(model => model.nombre_emisor_memo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.numero_cite_memo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.numero_cite_memo)
+            @Html.ValidationMessageFor(model => model.numero_cite_memo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.numero_cite_sistema)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.numero_cite_sistema)
+            @Html.ValidationMessageFor(model => model.numero_cite_sistema)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fecha_visacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fecha_visacion)
+            @Html.ValidationMessageFor(model => model.fecha_visacion)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.emisorID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.emisorID)
+            @Html.ValidationMessageFor(model => model.emisorID)
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.tipo_llamada_atecion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.tipo_llamada_atecion)
+            @Html.ValidationMessageFor(model => model.tipo_llamada_atecion)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

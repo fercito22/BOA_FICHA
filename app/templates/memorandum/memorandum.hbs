@@ -1,0 +1,94 @@
+    
+
+  <div class="content-wrapper" id="seccion1">
+    
+    <div class="alert alert-success alert-dismissible fade show"  role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      <center><strong>Bienvenido!</strong> Usted ingreso a su Ficha Personal.</center>
+    </div>
+    
+
+<!--==========================================
+                   MEMOS
+===========================================-->
+
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Memos</h4>
+        </div>
+
+        <div id="timeline-experience">
+                {{#each webapidataK as |item|}} 
+                <!-- FIRST TIMELINE -->
+                <div class="timeline-block">
+                    <!-- Circulo con la primer Letra  -->
+                    {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}
+                
+                    <!-- TIMELINE CONTENT -->
+                    <div class="card timeline-content">
+                        <div class="card-content">
+                           
+                            <!-- TIMELINE TITLE -->
+                            {{#if (is-eq item.tipo_llamada_atecion "Felicitaciones")}}
+                                <h5 class="text-uppercase">Felicitaciones</h5>
+                            {{/if}}
+                            {{#if (is-eq item.tipo_llamada_atecion "LlamadaDeAtencion")}}
+                                <h5 class="text-uppercase">Llamada De Atencion</h5>
+                            {{/if}}
+
+                            <hr id="linea2">
+
+                            <!-- TIMELINE TITLE INFO -->
+                            <div class="timeline-info">                                
+                                <h6>
+                                    Tipo Memo: <small>{{item.tipo_llamada_atecion}}</small>
+                                </h6>
+                                <h6>
+                                    Cite: <small>{{item.numero_cite_memo}}</small>
+                                </h6>
+                                <h6>
+                                    Emisor: <small>{{item.nombre_emisor_memo}}</small>
+                                </h6>
+                                <h6>
+                                    Motivo: <small>{{item.motivo_llamada_atencion}}</small>
+                                </h6>
+                            </div>
+                            
+                            <!-- TIMELINE PARAGRAPH -->
+                            {{!-- <p>
+                                {{item.Descripcion}}
+                            </p> --}}
+                            <!-- BUTTON TRIGGER MODAL -->
+                            {{!-- <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-4">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            </a> --}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}                              
+        </div>
+    </div>
+
+
+
+
+
+
+
+    </div>   
+
+
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <!-- Modal -->
+{{!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">    
+    {{partial 'educacion/formulario-bachiller'}}
+  </div>
+</div> --}}
+
+
+

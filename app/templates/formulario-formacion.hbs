@@ -1,0 +1,112 @@
+
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Formulario Formacion Academica</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form>
+
+        <div class="form-group">          
+          <p>Grado Formacion</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-graduation-cap text-info"></i></div>              
+                <select  id="sel2" onchange={{action 'nivelAcademicoSelected' value="target.value"}} >
+                    {{#each NivelAcademico as |itemNivel|}}
+                        <option value={{itemNivel.nivelAcademicoID}} selected={{is-eq itemNivel.nivelAcademicoID formac.nivelAcademicoID}}>{{itemNivel.Nivel}}</option>
+                    {{/each}}
+                </select>                   
+          </div>                 
+        </div>
+
+        <div class="form-group">          
+          <p>Titulo</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>               
+                {{input
+                    value=formac.titulo
+                    placeholder="Titulo"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }}                 
+          </div>             
+          <label hidden={{tituloVal}} class="errorMessage mensaje-error is-valid">Porfavor Ingrese un nombre valido</label>
+        </div>
+
+        <div class="form-group">          
+          <p>Institucion</p>
+          <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-university text-info"></i></div>              
+                {{input
+                    value=formac.institucion
+                    placeholder="Institucion"
+                    autocomplete='off'
+                    class="form-control text-secondary border border-info "
+                }} 
+                <label hidden={{institucionVal}} class="errorMessage mensaje-error is-valid">{{mensajeErrorTexto}}</label>                  
+          </div>                 
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Desde</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar text-info"></i></div>                
+                            {{!-- {{input
+                                value=form.fechainicio
+                                placeholder="Fecha Inicio"
+                                autocomplete='off'
+                                class="form-control text-secondary border border-info "
+                            }}    --}}
+                            {{pikaday-input 
+                                value=formac.fechainicio
+                                format="YYYY/MM/DD" 
+                                onSelection=(action 'onFechaIni') 
+                                class="form-control text-secondary border border-info " 
+                                placeholder="Fecha Ini" 
+                            }}                                      
+                    </div>     
+                    <label hidden={{fechainicioVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>
+                </div>
+            </div>         
+
+            <div class="col-sm-6">
+                <div class="form-group">          
+                    <p>Hasta</p>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar text-info"></i></div>   
+                            {{pikaday-input 
+                                value=formac.fechainicio
+                                format="YYYY/MM/DD" 
+                                onSelection=(action 'onFechaIni') 
+                                class="form-control text-secondary border border-info " 
+                                placeholder="Fecha Ini" 
+                            }}             
+                           
+                            {{!-- {{pikaday-input value=formac.fechafin format="YYYY/MM/DD" onSelection=(action 'onFechaFin') class="form-control text-secondary border border-info " placeholder="Fecha Emision" }} --}}
+                    </div>                      
+                </div>
+                <label hidden={{fechainicioVal}} class="errorMessage mensaje-error is-valid">{{mensajeErrorTexto}}</label>                                
+            </div>
+        </div>              
+
+        
+      </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
+            Regresar
+        {{/link-to}} --}}
+        <button type="button" class="btn btn-primary" disabled={{isDisabledFormacion}}  data-dismiss="modal" {{action 'onGuardar'}}>Guardar</button>
+      </div>
+    </div>
+  </div>
