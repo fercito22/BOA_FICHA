@@ -18,6 +18,10 @@ export default Controller.extend({
     visible: false,
     lista: [],
     lista2: [],
+    fotografiaV: true,
+    idiomasV:true,
+    //formacionV:true,
+    formacionV2:false,
 
     botEdi1 : false,    
     isDisabledComunicacion: not('botEdi1'),
@@ -193,7 +197,7 @@ export default Controller.extend({
     actions:{
        
         validateFieldsPerfil(){
-            console.log("Validate Fields Ingreso");
+           // console.log("Validate Fields Ingreso");
             if(this.get("Nombre1") == -1){
                 this.set("mensajeErrorTexto", Validar.mensajeTexto);
                 this.set("formValidPerfil",false);
@@ -225,7 +229,7 @@ export default Controller.extend({
         },
 
         validateFields(){
-            console.log("Validate Fields Ingreso");
+            //console.log("Validate Fields Ingreso");
             if(this.get("Nombre1") == -1){
                 this.set("mensajeErrorTexto", Validar.mensajeTexto);
                 //this.set("formValid",false);
@@ -243,7 +247,7 @@ export default Controller.extend({
                 //this.set("formValid",false);
             }
             if(this.get("FechaNacimiento") == -1){
-                console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
+                //console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
                 this.set("mensajeErrorFecha", Validar.mensajeFecha);
                 //this.set("formValid",false);
             }                         
@@ -255,7 +259,7 @@ export default Controller.extend({
             this.set("nombre", this.get("res").nombre);
         },
         onGuardarPerfil(){   
-            console.log("Ingresa al controlador principal");
+            //console.log("Ingresa al controlador principal");
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
             const formularioService = this.get("formp");             
@@ -263,17 +267,17 @@ export default Controller.extend({
             this.set("formValidPerfil",true);
             this.send("validateFields");       
 
-            console.log("validateFieldssss", this.get("formValid"));
+            //console.log("validateFieldssss", this.get("formValid"));
 
-            if(this.get("formValidPerfil") == true){
-                console.log("SU FORMULARIO ES CORRECTO NUEVO **** ");
-            }
-            else{
-                console.log("SU FORMULARIO NO ES CORRECTO  NUEVO ###### ");
-            }  
+            // if(this.get("formValidPerfil") == true){
+            //     console.log("SU FORMULARIO ES CORRECTO NUEVO **** ");
+            // }
+            // else{
+            //     console.log("SU FORMULARIO NO ES CORRECTO  NUEVO ###### ");
+            // }  
 
             if(this.get("formValidPerfil")){
-                console.log("Ingreso ala validacion Perfil");
+                //console.log("Ingreso ala validacion Perfil");
                 servicioFormulario.updateFormulario(formularioService)
                 .then(resultado=>{
                     //$().alert();
@@ -292,9 +296,9 @@ export default Controller.extend({
 
         onGuardarContacto(){            
             var servicioFormularioContacto = this.get("servicioFormularioContacto");
-            console.log("Ingresa al controlador onGuardarContacto ** CONTACTO **");
+            //console.log("Ingresa al controlador onGuardarContacto ** CONTACTO **");
 
-            console.log(this.get("formcont"));
+           // console.log(this.get("formcont"));
             var rel = "";
             if(this.get("relacion") == undefined){
                 rel = this.get("formcont.Relacion");
@@ -316,7 +320,7 @@ export default Controller.extend({
             console.log("USER DATA ", userData);
             servicioFormularioContacto.updateFormulario(userData)
             .then(resultado=>{                
-                console.log("controlador servicio", resultado);
+                //console.log("controlador servicio", resultado);
                  
                  this.transitionToRoute('index'); 
                  //this.flashMessage('success', 'Content saved!');
@@ -334,12 +338,12 @@ export default Controller.extend({
 
         onGuardarMedico(){     
             var servicioFormularioMedico = this.get("servicioFormularioMedico");      
-            console.log("Ingresa al controlador principal");
+           // console.log("Ingresa al controlador principal");
             //var servicioFormularioMedico = this.get("servicioFormularioMedico");
             const formularioService = this.get("formmedico"); 
             //console.log("** MEDICO ** " , servicioFormularioMedico);
-            console.log("** MEDICO FORM ** " , formularioService);            
-            console.log("Ingresa al controlador onGuardarMedico ** MEdico **");
+           // console.log("** MEDICO FORM ** " , formularioService);            
+           // console.log("Ingresa al controlador onGuardarMedico ** MEdico **");
                        
             var userData = {                    
                 NombreMedico: this.get("formmedico.NombreMedico"),    
@@ -352,7 +356,7 @@ export default Controller.extend({
                 RH_Sanguineo: this.get("formmedico.RH_Sanguineo"),
                 //Identificador: this.get("formmedico.Identificador"),     
             };  
-            console.log("Ingreso");
+           // console.log("Ingreso");
 
              servicioFormularioMedico.updateFormulario(userData)
             .then(resultado=>{                
@@ -372,8 +376,8 @@ export default Controller.extend({
             var servicioIdiomas = this.get("servicioIdiomas");                  
             //var servicioFormularioMedico = this.get("servicioFormularioMedico");
             const formularioService = this.get("formidiomas");             
-            console.log("** IDIOMA FORM ** " , formularioService);            
-            console.log("Ingresa al controlador onGuardarIdiomas ** MEdico **");
+           // console.log("** IDIOMA FORM ** " , formularioService);            
+           // console.log("Ingresa al controlador onGuardarIdiomas ** MEdico **");
 
             var userData = {
                 //FirstName : this.get("name"),                    
@@ -383,7 +387,7 @@ export default Controller.extend({
                 escribe: this.get("nivelEscribe")
             };
            
-            console.log("Ingreso");
+            //console.log("Ingreso");
             servicioIdiomas.updateFormulario(userData)
             .then(resultado=>{                
                 this.transitionToRoute('principal');   
@@ -418,8 +422,8 @@ export default Controller.extend({
             //this.set("selectedComunicacion",value);
             //var servicioFormularioMedico = this.get("servicioFormularioMedico");
             const formularioService = this.get("formcomu");             
-            console.log("** COMUNICACION FORM ** " , formularioService);            
-            console.log("Ingresa al controlador onGuardarIdiomas ** MEdico **");           
+           // console.log("** COMUNICACION FORM ** " , formularioService);            
+           // console.log("Ingresa al controlador onGuardarIdiomas ** MEdico **");           
             var tipocomu = 0;
             if(this.get("selectedComunicacion") == undefined){
                 tipocomu = this.get("formcomu.tipoComunicacionID");
@@ -432,7 +436,7 @@ export default Controller.extend({
                 tipoComunicacionID: tipocomu,
                 Valor: this.get("formcomu.Valor")  // formularioService.Valor
             };        
-            console.log("userData " , userData);   
+           // console.log("userData " , userData);   
             
             servicioFormulario.updateFormularioComunicacion(userData)
             .then(resultado=>{                
@@ -448,43 +452,43 @@ export default Controller.extend({
         }, 
 
         estadoCivilSelected(value){
-            console.log("Ingresa Estado Civil" , value);
+           // console.log("Ingresa Estado Civil" , value);
             this.set("estadoCivil",value);
         }, 
         onFechaNac(data){            
             this.send("validateFields");            
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
+          //  console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
+         //   console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
             //FechaNacimiento
             this.set("FechaNacimiento",moment(data).format('YYYY/MM/DD'));
-            console.log("FECHA ACTUAL DE NACIMIENTO -***** " , this.get("FechaNacimiento"));
+         //   console.log("FECHA ACTUAL DE NACIMIENTO -***** " , this.get("FechaNacimiento"));
         },
         relacionSelected(value){
             this.set("selectValidoRelacion", true);            
-            console.log("Ingresa relacion" , value);
+          //  console.log("Ingresa relacion" , value);
             this.set("relacion",value);
         },
 
         alergiasSelected(value){
-            console.log("Ingresa alergias" , value);
+          //  console.log("Ingresa alergias" , value);
             this.set("alergias",value);
         },
         factorSanguineoSelected(value){
-            console.log("Ingresa factoSanguineo" , value);
+          //  console.log("Ingresa factoSanguineo" , value);
             this.set("factoSanguineo",value);
         },
         rhSanguineoSelected(value){
-            console.log("Ingresa rhSanguineo" , value);
+           // console.log("Ingresa rhSanguineo" , value);
             this.set("rhSanguineo",value);
         },
 
         generarInput: function() {
-            console.log("Ingreso al generador");      
+          //  console.log("Ingreso al generador");      
             this.set('count', this.get('count') + 1);
             //var comp = this.container.lookup('component:foo-bar');
             var applicationInstance = getOwner(this);
             var comp = applicationInstance.lookup('component:foo-bar');
-            console.log("Componente look", comp)
+          //  console.log("Componente look", comp)
             comp.set('name', this.get('count'));
             document.getElementsByClassName('table')[0].getElementsByTagName('tbody')[0].innerHTML += '<tr><td><textarea name="Question" placeholder="Question" th:field="${questionAnswerSet.question}" id="question" style="resize: none; width: 100%;"></textarea></td><td><textarea name="Answer" placeholder="Answer" th:field="${questionAnswerSet.answer}" id="answer" style="resize: none; width: 100%;"></textarea></td></tr>';
             // '<div class="input-group-prepend"> {{input value=form.nombreColegio placeholder="Nombre Colegio" class="form-control text-secondary border border-info"}} </div>'
@@ -509,37 +513,37 @@ export default Controller.extend({
         comunicacionSelected(value){            
             let selectedRow = this.get('formcomu');
             this.set("formcomu.tipoComunicacionID",value)
-            console.log('dayRow before: ' + selectedRow.Nombre);
-            console.log("Ingresa selectable" , value);            
+           // console.log('dayRow before: ' + selectedRow.Nombre);
+          //  console.log("Ingresa selectable" , value);            
             this.set("selectedComunicacion",value);
         },
         idiomaSelected(value){
             this.set("selectValidoIdioma", true);
             //console.log('selected state: ' + state);
             let selectedRow = this.get('formidiomas');
-            console.log('dayRow before: ' + selectedRow.value);
+          //  console.log('dayRow before: ' + selectedRow.value);
             // this.get('dayRow').set('state', state);
             // console.log('dayRow after: ' + selectedRow.state);
-            console.log("Ingresa selectable" , value);
+          //  console.log("Ingresa selectable" , value);
             this.set("selectedIdioma",value);
         },
         nivelSelectedHabla(value){
             this.set("selectValidoHabla", true);
-            console.log("Ingresa nivel-habla" , value);
+          //  console.log("Ingresa nivel-habla" , value);
             this.set("nivelHabla",value);
         },
         nivelSelectedLee(value){
             this.set("selectValidoLee", true);
-            console.log("Ingresa selectable-nivel-lee" , value);
+         //   console.log("Ingresa selectable-nivel-lee" , value);
             this.set("nivelLee",value);
         },
         nivelSelectedEscribe(value){
             this.set("selectValidoEscribe", true);
-            console.log("Ingresa selectable-nivel-escribe" , value);
+           // console.log("Ingresa selectable-nivel-escribe" , value);
             this.set("nivelEscribe",value);
         },
         borrarIdioma(dato){
-            console.log("Ingreso ", dato);
+           // console.log("Ingreso ", dato);
             var servicioIdiomas = this.get("servicioIdiomas");  
             
             servicioIdiomas.deleteFormulario(dato)
@@ -551,13 +555,13 @@ export default Controller.extend({
             .catch(error=>{
                 alert(resultado.mensaje);                 
             });           
-           console.log("ACCION **" , dato);
+         //  console.log("ACCION **" , dato);
         },
         editarComunicacion(event){
             this.set("formcomu.tipoComunicacionID",event.tipoComunicacionID)
             this.set("formcomu.Valor",event.Valor)          
-           console.log("ACCION **" , event.tipoComunicacionID); 
-           console.log("ACCION **" , event.Valor); 
+          // console.log("ACCION **" , event.tipoComunicacionID); 
+         //  console.log("ACCION **" , event.Valor); 
         },         
         // editarPerfil(event){
         //     this.set("formcomu.tipoComunicacionID",event.tipoComunicacionID)
@@ -568,8 +572,8 @@ export default Controller.extend({
 
         onFechaNacimiento(data){
             this.send("validateFields");                        
-            console.log("Fecha Seleccionada NAcimiento",   moment(data).format('YYYY/MM/DD'));            
-            console.log(this.get("FechaNacimiento"));
+           // console.log("Fecha Seleccionada NAcimiento",   moment(data).format('YYYY/MM/DD'));            
+          //  console.log(this.get("FechaNacimiento"));
             this.set("FechaNacimiento", moment(data).format('YYYY/MM/DD'));
         },          
 

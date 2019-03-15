@@ -21,75 +21,95 @@
         <div class="section-title">
             <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Memos</h4>
         </div>
-
-        <div id="timeline-experience">
-                {{#each webapidataK as |item|}} 
-                <!-- FIRST TIMELINE -->
-                <div class="timeline-block">
-                    <!-- Circulo con la primer Letra  -->
-                    {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}
-                
-                    <!-- TIMELINE CONTENT -->
-                    <div class="card timeline-content">
-                        <div class="card-content">
-                           
-                            <!-- TIMELINE TITLE -->
-                            {{#if (is-eq item.tipo_llamada_atecion "Felicitaciones")}}
-                                <h5 class="text-uppercase">Felicitaciones</h5>
-                            {{/if}}
-                            {{#if (is-eq item.tipo_llamada_atecion "LlamadaDeAtencion")}}
-                                <h5 class="text-uppercase">Llamada De Atencion</h5>
-                            {{/if}}
-
-                            <hr id="linea2">
-
-                            <!-- TIMELINE TITLE INFO -->
-                            <div class="timeline-info">                                
-                                <h6>
-                                    Tipo Memo: <small>{{item.tipo_llamada_atecion}}</small>
-                                </h6>
-                                <h6>
-                                    Cite: <small>{{item.numero_cite_memo}}</small>
-                                </h6>
-                                <h6>
-                                    Emisor: <small>{{item.nombre_emisor_memo}}</small>
-                                </h6>
-                                <h6>
-                                    Motivo: <small>{{item.motivo_llamada_atencion}}</small>
-                                </h6>
-                            </div>
-                            
-                            <!-- TIMELINE PARAGRAPH -->
-                            {{!-- <p>
-                                {{item.Descripcion}}
-                            </p> --}}
-                            <!-- BUTTON TRIGGER MODAL -->
-                            {{!-- <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-4">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </a> --}}
-                        </div>
-                    </div>
-                </div>
-                {{/each}}                              
+        <br>
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Felicitaciones</h4>
         </div>
+        <div id="timeline-experience">
+            {{#each webapidataK as |item|}}
+                {{#if (is-eq2 item.tipo_llamada_atecion "Felicitaciones")}}                        
+                        <!-- FIRST TIMELINE -->
+                        <div class="timeline-block">
+                            <!-- Circulo con la primer Letra  -->
+                            {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}                    
+                            <!-- TIMELINE CONTENT -->
+                            <div class="card timeline-content">
+                                <div class="card-content">                            
+                                    <!-- TIMELINE TITLE -->
+                                    {{#if (is-eq2 item.tipo_llamada_atecion "Felicitaciones")}}
+                                        <h5 class="text-uppercase">Felicitaciones</h5>
+                                    {{/if}}        
+                                    <hr id="linea2">
+                                    <!-- TIMELINE TITLE INFO -->
+                                    <div class="timeline-info">                                
+                                        {{!-- <h6>
+                                            Tipo Memo: <small>{{item.tipo_llamada_atecion}}</small>
+                                        </h6> --}}
+                                        <h6>
+                                            Cite: <small>{{item.numero_cite_memo}}</small>
+                                        </h6>
+                                        <h6>
+                                            Emisor: <small>{{item.nombre_emisor_memo}}</small>
+                                        </h6>
+                                        <h6>
+                                            Motivo: <small>{{item.motivo_llamada_atencion}}</small>
+                                        </h6>
+                                    </div>
+                                    
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                {{/if}}                           
+            {{/each}} 
+        </div>
+        <hr id="linea2">
+        <br>
+
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Llamada De Atencion</h4>
+        </div>
+        <div id="timeline-experience">
+            {{#each webapidataK as |item|}}
+                {{#if (is-eq2 item.tipo_llamada_atecion "LlamadaDeAtencion")}}                        
+                        <!-- FIRST TIMELINE -->
+                        <div class="timeline-block">
+                            <!-- Circulo con la primer Letra  -->
+                            {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}                    
+                            <!-- TIMELINE CONTENT -->
+                            <div class="card timeline-content">
+                                <div class="card-content">                            
+                                    <!-- TIMELINE TITLE -->
+                                    {{#if (is-eq2 item.tipo_llamada_atecion "LlamadaDeAtencion")}}
+                                        <h5 class="text-uppercase">Llamada De Atencion</h5>
+                                    {{/if}}        
+                                    <hr id="linea2">
+                                    <!-- TIMELINE TITLE INFO -->
+                                    <div class="timeline-info">                                
+                                        {{!-- <h6>
+                                            Tipo Memo: <small>{{item.tipo_llamada_atecion}}</small>
+                                        </h6> --}}
+                                        <h6>
+                                            Cite: <small>{{item.numero_cite_memo}}</small>
+                                        </h6>
+                                        <h6>
+                                            Emisor: <small>{{item.nombre_emisor_memo}}</small>
+                                        </h6>
+                                        <h6>
+                                            Motivo: <small>{{item.motivo_llamada_atencion}}</small>
+                                        </h6>
+                                    </div>                                    
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                {{/if}}                           
+            {{/each}} 
+        </div>
+
+        <br>
     </div>
 
 
-
-{{!-- 
-      <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
-        {{fa-icon 'user-edit'}} Agregar Idiomas
-    </button> <br> --}}
 
     </div>   
-
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <!-- Modal -->
-
-{{!-- 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-         {{partial 'formulario2'}}
-    </div>
-</div> --}}

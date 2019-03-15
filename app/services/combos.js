@@ -210,8 +210,12 @@ export default Service.extend({
     callTipoDocumento: function(){
         
         return new RSVP.Promise(function(resolve, reject){
+            var parametros = {
+                id: Config.usuario_id                             
+           }; 
             var request = $.ajax({
-                type: "GET",                                
+                type: "GET", 
+                data: parametros,                                 
                 url: Config.serverpath + '/api/Combo/TipoDocumento',
                 contentType:'application/json',
             });

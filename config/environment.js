@@ -50,7 +50,14 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.baseURL = '/dist';
+    ENV.locationType = 'none';
   }
+
+//   var bootstrapFonts = pickFiles('vendor/bootstrap/dist/fonts', {
+//     srcDir: '/',
+//     destDir: '/fonts'
+// });
 
   return ENV;
 };

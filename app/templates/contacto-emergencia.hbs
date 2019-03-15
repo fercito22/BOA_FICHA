@@ -2,33 +2,49 @@
       <center><span id="negrita" class="title" style="margin-left: -20%;">Contacto de Emergencia</span></center><br>
             
             <div class="row">
-            
-            <div class="col-md-6">                                                
-                  <h5 class="text-uppercase ">Relacion: {{webapidataC.[0].Relacion}}</h5>
+                  {{#unless  (is-eq webapidataC.[0].Relacion null) }}    
+                        <div class="col-md-6">                                                
+                              <h5 class="text-uppercase ">Relacion: {{webapidataC.[0].Relacion}}</h5>
+                        </div>          
+                  {{/unless}}
+                  {{#unless  (is-eq webapidataC.[0].NombreContacto null) }}    
+                        <div class="col-md-6">                                                
+                              <span class="title">Nombre: <span id="negrita">{{webapidataC.[0].NombreContacto}}</span></span>                                               
+                        </div>          
+                  {{/unless}} 
+                             
+                  {{#unless  (is-eq webapidataC.[0].TelefonoDomicilio null) }}    
+                        <div class="col-md-6">                  
+                              <span class="title">Telefono Domicilio: <span id="negrita">{{webapidataC.[0].TelefonoDomicilio}}</span></span>
+                        </div>           
+                  {{/unless}}
             </div>
-            <div class="col-md-6">                                                
-                  <span class="title">Nombre: <span id="negrita">{{webapidataC.[0].NombreContacto}}</span></span>                                               
-            </div>
-            <div class="col-md-6">                                                
-                  <span class="title">Direccion: <span id="negrita">Bolivia Cochabamba</span></span>                                            
-            </div>
+
+            <div class="row">                  
+                  
+                  {{#unless  (is-eq webapidataC.[0].NroCelular null) }}    
+                        <div class="col-md-6">                  
+                              <span class="title">Telefono Celular: <span id="negrita">{{webapidataC.[0].NroCelular}}</span></span>                  
+                        </div>           
+                  {{/unless}}
+                  {{#unless  (is-eq webapidataC.[0].TelefonoTrabajo null) }}    
+                        <div class="col-md-6">                  
+                              <span class="title">Telefono Trabajo: <span id="negrita">{{webapidataC.[0].TelefonoTrabajo}}</span></span>                  
+                        </div>           
+                  {{/unless}}                  
             </div>
 
             <div class="row">
-            <div class="col-md-6">
-            
-                  <span class="title">Telefono: <span id="negrita">{{webapidataC.[0].TelefonoDomicilio}}</span></span>
-            
-            </div>
-            <div class="col-md-6">
-            
-                  <span class="title">Telefono Celular: <span id="negrita">{{webapidataC.[0].NroCelular}}</span></span>
-            
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-md-6">                                                
-                  <span class="title">Direccion: <span id="negrita">{{webapidataC.[0].Direccion}}</span></span>                                               
-            </div>
+                  {{#unless  (is-eq webapidataC.[0].Direccion null) }}    
+                        <div class="col-md-6">                                                
+                              <span class="title">Direccion Domicilio: <span id="negrita">{{webapidataC.[0].Direccion}}</span></span>                                               
+                        </div>          
+                  {{/unless}} 
+                  {{#unless  (is-eq webapidataC.[0].DireccionTrabajo null) }}    
+                        <div class="col-md-6">                                                
+                              <span class="title">Direccion Trabajo: <span id="negrita">{{webapidataC.[0].DireccionTrabajo}}</span></span>                                               
+                        </div>        
+                  {{/unless}} 
+                  
             
             </div>

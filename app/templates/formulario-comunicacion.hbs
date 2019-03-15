@@ -3,31 +3,31 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelc">Formulario Comunicacion</h5>
+        <h5 class="modal-title" id="exampleModalLabelc">Agregar Tipo De Comunicacion</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>           
+        <form>          
 
-        <div class="row">
-            <div class="form-group">          
-                <p>Idioma</p>
+          <div class="form-group">          
+                <labe>Comunicacion</labe>
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-language text-info"></i></div>              
-                        <select  id="sel3" onchange={{action 'comunicacionSelected' value="target.value"}} >
-                            <option disabled selected> -- Seleccione un Idioma -- </option>
+                        <select   onchange={{action 'comunicacionSelected' value="target.value"}} >
+                            <option disabled selected> -- Tipo Comunicacion -- </option>
                             {{#each webapidataComunicacion as |item|}} 
                                 <option value={{item.tipoComunicacionID}}  selected={{is-eq item.tipoComunicacionID formcomu.tipoComunicacionID}} >{{item.Nombre}}</option>
                             {{/each}}                
                     </select>                
                 </div>                 
-            </div>
-            
+            </div> 
+
+        <div class="row">   
             <div class="col-sm-6">                
                 <div class="form-group">          
-                    <p>Comunicacion</p>
+                    <labe>Dato</labe>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-tag text-info"></i></div>                
                             {{input

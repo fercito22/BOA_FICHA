@@ -26,13 +26,12 @@ export default Service.extend({
     },
 
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE Medico CAbecera");
-        console.log(form);
+         console.log("Ingreso al servicio UPDATE Medico CAbecera");
+         console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
-               // tipo: 2,
                 empleadoID: Config.usuario_id ,                
-                NombreMedico: form.NombreMedico,
+                NombreMedico: form.NombreMedico.toUpperCase(),
                 TelefonoMedico: form.TelefonoMedico,
                 Nrocelular: form.NroCelularMedico,
                 AlergiasMedicas: form.AlergiasMedicas,
@@ -42,8 +41,8 @@ export default Service.extend({
                 RH_Sanguineo: form.RH_Sanguineo,
                 Identificador: 2
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                       
       
           var request = $.ajax({
             type: 'POST',            

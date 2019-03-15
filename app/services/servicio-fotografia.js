@@ -4,14 +4,17 @@ import $ from 'jquery'
 import RSVP from 'rsvp';
 
 import Config from '../models/config';
+//import Config2 from 'md5';
+//import md5 from 'md5';
 
 export default Service.extend({
     callFotografia: function(){
         return new RSVP.Promise(function(resolve, reject){
             var parametros = {
-                 id_funcionario : "53"//53" 2460
+                 id_funcionario : Config.usuario_id_erp //"53"//53" 2460
             };
-            
+            // var pss = md5('sistema.dotaciones' /* key, raw */);  
+            // console.log("contraseña Cifrada",pss); 
             // function funcionPass() {
             //     var passt = 'sistema.dotaciones';
             //     var pss = md5('sistema.dotaciones' /* key, raw */);   

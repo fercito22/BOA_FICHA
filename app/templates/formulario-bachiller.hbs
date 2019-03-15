@@ -9,13 +9,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-
+        <form>      
         <div class="form-group">          
           <p>Tipo Colegio</p>
           <div class="input-group-prepend">
               <div class="input-group-text"><i class="fa fa-signal text-info"></i></div>                  
-                <select  id="sel2" onchange={{action 'tipoColegioSelected' value="target.value"}} >
+                <select   onchange={{action 'tipoColegioSelected' value="target.value"}} >
                     {{#each TipoColegio as |itemTipoColegio|}}
                         <option value={{itemTipoColegio.Name}}  selected={{is-eq itemTipoColegio.Name form.tipoColegio}} >{{itemTipoColegio.Name}}</option>
                     {{/each}}
@@ -27,7 +26,7 @@
           <p>Ultimo Grado Vencido</p>
           <div class="input-group-prepend">
               <div class="input-group-text"><i class="fa fa-graduation-cap text-info"></i></div>                
-                <select  id="sel2" onchange={{action 'gadoColegioHabla' value="target.value"}} >
+                <select   onchange={{action 'gadoColegio' value="target.value"}} >
                     {{#each GradoColegio as |itemGradoColegio|}}
                         <option value={{itemGradoColegio.Name}}  selected={{is-eq itemGradoColegio.Name form.ultimoCursoVencido}} >{{itemGradoColegio.Name}}</option>
                     {{/each}}

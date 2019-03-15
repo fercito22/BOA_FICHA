@@ -28,26 +28,24 @@ export default Service.extend({
     },
     
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE Contacto Emergencia");
-        console.log(form);
+         console.log("Ingreso al servicio UPDATE Formacion Academica");
+         console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
-               // tipo: 2,
                 empleadoID: Config.usuario_id ,                
                 nivelAcademicoID: form.nivelAcademicoID,
                 titulo: form.titulo,
                 institucion: form.institucion,
                 fechainicio: form.fechainicio,
                 fechafin: form.fechafin,
-                Identificador: 2
-           };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+                educacionSuperiorID: form.educacionSuperiorID,
+                Identificador: 1
+           };           
       
-          var request = $.ajax({
+            var request = $.ajax({
             type: 'POST',            
             data: parametros,
-            url: Config.serverpath + '/api/GetIdiomas',
+            url: Config.serverpath + '/api/GetFormacionAcademica',
             //contentType:'application/json',
           });          
 
@@ -58,6 +56,74 @@ export default Service.extend({
             reject(response);
         });        
      });
-    }
+    },
+
+    newFormulario:function(form){
+        // console.log("New Datos Titulo Servicio");
+        // console.log(form);
+        return new RSVP.Promise(function(resolve,reject){
+            var parametros = {               
+                empleadoID: Config.usuario_id,                
+                nivelAcademicoID: form.nivelAcademicoID,
+                titulo: form.titulo,
+                institucion: form.institucion,
+                fechainicio: form.fechainicio,
+                fechafin: form.fechafin,
+                educacionSuperiorID: 0,
+                Identificador: 0
+           };
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                             
+          var request = $.ajax({
+            type: 'POST',            
+            data: parametros,
+            url: Config.serverpath + '/api/GetFormacionAcademica',
+            //contentType:'application/json',
+          });          
+
+        request.done(function (response){
+            resolve(response);
+        });
+        request.fail(function (response){
+            reject(response);
+        });        
+     });
+    },
+
+    deleteFormulario:function(form){
+         console.log("ELIMINAR Datos Titulo Servicio");
+         console.log(form);
+        return new RSVP.Promise(function(resolve,reject){
+            var parametros = {               
+                empleadoID: Config.usuario_id,                
+                nivelAcademicoID: form.nivelAcademicoID,
+                titulo: form.titulo,
+                institucion: form.institucion,
+                fechainicio: form.fechainicio,
+                fechafin: form.fechafin,
+                educacionSuperiorID: form.educacionSuperiorID,
+                Identificador: 3
+           };
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                             
+          var request = $.ajax({
+            type: 'POST',            
+            data: parametros,
+            url: Config.serverpath + '/api/GetFormacionAcademica',
+            //contentType:'application/json',
+          });          
+
+        request.done(function (response){
+            resolve(response);
+        });
+        request.fail(function (response){
+            reject(response);
+        });        
+     });
+    },
+
+
+
+    
 
 });

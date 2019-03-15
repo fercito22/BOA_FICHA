@@ -16,22 +16,21 @@
     </tbody>
   </table> --}}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
          {{partial 'detalle-tallas'}}
-    </div>
+   
 </div>
 
 
 <div class="content-wrapper" id="seccion1" >
     
-    {{!-- <div class="alert alert-success alert-dismissible fade show"  role="alert">
+     <div class="alert alert-success alert-dismissible fade show"  role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
       </button>
       <center><strong>Bienvenido!</strong> Usted ingreso a su Ficha Personal.</center>
-    </div> --}}
-
+    </div>
     
     <!--==========================================
                    Formacion Academica
@@ -41,10 +40,13 @@
         <h2>2{{obj.CodTalla}}</h2>
         <h2>3{{obj.prenda}}</h2> --}}
                         
-        <hr id="linea2">
+        
         <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
             {{fa-icon 'id-card'}} Detalle
         </button> 
+        <br>  
+        <hr id="linea2">
+        
         {{#each webapidataTallasDetalle.objeto as |item|}} 
             <p value={{item.CodTalla}}  >{{item.prenda}}</p>  
             <div class="timeline-info">
@@ -98,7 +100,7 @@
                                                                 <option  value={{item.codigo}}  selected={{is-eq item.codigo prenda.CodTalla}} >{{item.nombre}}</option>
                                                             {{/each}}                            
                                                         </select> --}}
-                                                        <select disabled={{desabilitado}} id="sel3" onchange={{action 'prendaSelected' value="target.value" }} >
+                                                        <select disabled={{desabilitado}}  onchange={{action 'prendaSelected' value="target.value" }} >
                                                             {{#each prenda.ListaTallas as |item|}} 
                                                                 <option  value='{{item.codigo}},{{item.nombre}},{{prenda.EmpleadoItemID}}'  selected={{is-eq item.codigo prenda.CodTalla}} >{{item.nombre}}</option>
                                                             {{/each}}                            
@@ -116,13 +118,10 @@
                             </div>
                         </div>
                     {{/each}}                              
-            </div>
-
-            {{!-- <div class="modal-footer">                
-                <button type="button" hidden={{isDisabledTallas}} class="btn btn-primary" {{action 'onGuardar'}}>Guardar</button>
-            </div> --}}
+            </div>            
             
         </div>
+        <br>
     </div>  
 
  {{!-- selected={{is-eq item.codigo prenda.CodTalla}} --}}

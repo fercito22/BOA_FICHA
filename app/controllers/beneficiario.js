@@ -4,8 +4,6 @@ import {inject} from '@ember/service';
 import { match, not } from '@ember/object/computed';
 import Validar from '../models/validaciones'
 import { and } from '@ember/object/computed';
-//import { or } from '@ember/object/computed';
-//import valida from '../models/validaciones';
 
 export default Controller.extend({
     servicioFormulario: inject("servicio-declaracion"),    
@@ -48,24 +46,13 @@ export default Controller.extend({
 
         CheckBoxEstado: false,
 
-        // mensajeErrorTexto: '',
-        // mensajeErrorNumerosFijo: '',
-        // mensajeErrorNumerosCelular: '',
-        // mensajeErrorDireccion: '',
-        // mensajeErrorFecha: '',        
-
-        // nombreCol: match('form.nombreColegio', Validar.texto),
-        // maxMinCol: match('form.nombreColegio' , Validar.textoMinMax),
-        // colegioValido: and('nombreCol', 'maxMinCol'),
-        // nombreColegio: not('colegioValido'),     
-
-        //nombresVal: match('form.Nombres', /^[a-zA-Z ]+$/),
-        // nombresVal: match('form.Nombres', Validar.texto),
-        // estadoNombres: not('nombresVal'),
-
         //--------------------
         //  Validacion Edicion
         //--------------------
+
+        // isValid: match('emailAddress', /^.+@.+\..+$/),
+        // sDisabled: not('isValid'),
+
         mensajeErrorNombre: 'Porfavor Ingrese un nombre valido',
         mensajeErrorApellidoPat: 'Ingrese un apellido Valido',
         mensajeErrorApellidoMat: 'Ingrese un apellido Valido',
@@ -78,33 +65,7 @@ export default Controller.extend({
 
         habilitarEdit: and('NombreValido', 'apellidoValido', 'apellidoMaValido'),// 'numeroValido'),
         isDisabledBeneficiarioEdit: not('habilitarEdit'),
-
-        // nombresVal: match('formeditar.Nombres', Validar.texto),
-        // maxMinnombre: match('formeditar.Nombres' , Validar.textoMinMax),
-        // NombreValido: and('nombresVal', 'maxMinnombre'),       
-
-        // apellidoVal: match('formeditar.Apellido1', Validar.texto),
-        // maxMinApellido: match('formeditar.Apellido1' , Validar.textoMinMax),
-        // apellidoValido: and('apellidoVal', 'maxMinApellido'),         
-
-        // apellidoValMa: match('formeditar.Apellido2', Validar.texto),
-        // maxMinApellidoMA: match('formeditar.Apellido2' , Validar.textoMinMax),
-        // apellidoMaValido: and('apellidoValMa', 'maxMinApellidoMA'), 
         
-        // numeroVal: match('formeditar.Tipo_NroDocumento', Validar.numeros),
-        // maxMinNumero: match('formeditar.Tipo_NroDocumento' , Validar.maxMinNumero),
-        // validarNumero: match('formeditar.Tipo_NroDocumento' , Validar.numeros),
-        // numeroValido: and('numeroVal', 'maxMinNumero' ),// 'validarNumero'),
-
-        // NombreValido: match('formeditar.Nombres', Validar.textoMinMax),
-        // apellidoValido: match('formeditar.Apellido1', Validar.textoMinMax),
-        // apellidoMaValido: match('formeditar.Apellido2', Validar.textoMinMax),
-
-        
-
-        // habilitar: and('NombreValido', 'apellidoValido', 'apellidoMaValido'),// 'numeroValido'),
-        // isDisabledBeneficiario: not('habilitar'),
-
         //--------------------
         //  Validacion Nuevo
         //--------------------
@@ -119,9 +80,7 @@ export default Controller.extend({
 
         apellidoVal3: match('form.Apellido2', Validar.texto),
         maxMinApellido3: match('form.Apellido2' , Validar.textoMinMax),
-        apellidoValido3: and('apellidoVal3', 'maxMinApellido3'),
-
-        //numeroVal2: match('form.Tipo_NroDocumento',Validar.TextNum),
+        apellidoValido3: and('apellidoVal3', 'maxMinApellido3'),        
 
         habilitar: and('NombreValido2','apellidoValido2', 'apellidoValido3'),
         isDisabledBeneficiario: not('habilitar'),
@@ -129,18 +88,11 @@ export default Controller.extend({
     clearFields(){
         this.set("nombreContacto",null);             
     },
-
-    //actions: {  } 
+    
 
     actions:{
 
-        // reload: function()
-        //  {
-        //       this.get('model').reload();
-        //      }
-
-        validateFieldsBeneEdit(){
-            console.log("Validate Fields Ingreso");
+        validateFieldsBeneEdit(){           
             if(this.get("formeditar.Nombres") == -1){
                 this.set("mensajeErrorNombre", Validar.mensajeTexto);
                 this.set("formValidBeneficiario",false);
@@ -152,17 +104,11 @@ export default Controller.extend({
             if(this.get("formeditar.Apellido2ApellidoMat") == -1){
                 this.set("mensajeError", Validar.mensajeTexto);
                 this.set("formValidBeneficiario",false);
-            }   
-            // if(this.get("formeditar.Tipo_NroDocumento") == -1){
-            //     this.set("mensajeErrorNumeros", Validar.mensajeTexto);
-            //     this.set("formValidBeneficiario",false);
-            // }                        
+            }                                  
         },
 
-        validateFieldsBeneNuevo(){
-            console.log("Validate Fields Ingreso" , this.get("form.Nombres"));
-            if(this.get("form.Nombres") == ''){
-                console.log("Validate Fields Ingreso Nombre");
+        validateFieldsBeneNuevo(){           
+            if(this.get("form.Nombres") == ''){               
                 this.set("mensajeErrorNombre", "Porfavor Ingrese un nombre valido");
                 this.set("formValidBeneficiarioNuevo",false);
             }
@@ -175,28 +121,17 @@ export default Controller.extend({
                 this.set("mensajeError","Ingrese un apellido Valido" );
                 this.set("formValidBeneficiarioNuevo",false);
             }   
-            // if(this.get("form.Tipo_NroDocumento") == ''){                
-            //     //this.set("formValidBeneficiarioNuevo",false);
-            //     this.set("mensajeErrorNumeros","Este no es un numero valido")
-            // }                        
         },
 
         onGuardar(){
             const formularioService = this.get("formeditar"); 
-
-            console.log("DATOS BENEFICIARIOS **** " , formularioService)
             var parentesco = null;
-            if(this.get("parentescoID") == undefined || this.get("parentescoID") == -1){
-                console.log("Estado parentesco ID = " , this.get("parentescoID"));
-                //console.log("Mi Estado Civil Actual ", formularioService.EstadoCivil);    
+            if(this.get("parentescoID") == undefined || this.get("parentescoID") == -1){               
                 parentesco = formularioService.parentescoID; 
             }
             else{
                 parentesco = this.get("parentescoID");
             }
-
-            console.log("**** FINADO  ****", this.get("CheckBoxEstado"));
-
 
             var fin = 1;
             if(this.get("CheckBoxEstado") == false){
@@ -207,13 +142,10 @@ export default Controller.extend({
             }
 
             var tipoDocumento ="";
-
             if(formularioService.Tipo_NroDocumento != null){
                 tipoDocumento = formularioService.Tipo_NroDocumento;
             }
-
-
-            console.log("Nombres De familiar: " + formularioService.Nombres);
+           
             var userData = {                                    
                 parentescoID: parentesco, 
                 Nombres : formularioService.Nombres,
@@ -222,89 +154,39 @@ export default Controller.extend({
                 Tipo_NroDocumento : tipoDocumento, // formularioService.Tipo_NroDocumento,
                 datosFamiliaresID: formularioService.datosFamiliaresID,
                 Finado : fin
-            };      
+            };                  
             
-            console.log("userData", userData);            
-            //alert(idioma , habla, lee, escribe);         
-            console.log("Ingresa al controlador principal");
             var resultTotal = {};
-            var servicioFormulario = this.get("servicioFormulario");
-            
-            console.log("Datos Declaracion",formularioService);
+            var servicioFormulario = this.get("servicioFormulario");            
+           
             servicioFormulario.updateFormulario(userData)
-            .then(resultado=>{                
-                console.log("controlador servicio", resultado);                 
-                alertify.success(resultado.mensaje); 
-                //this.get('beneficiario').reload();
-                //function() {
-                    //return this.get("model.beneficiario.length");
-                  //}.property("model.posts.[]");
-                
-                //EmberHandlebarsLoader.loadTemplates('beneficiario');
-                //this.destroyRecord();
-                //this.removeObserver();
-                //(exampleModalLabel).empty();
-                //(exampleModalLabel).remove();
-                // $(this).dialog("close");
-                //$(exampleModalLabel).Close();
-                //this.transitionToRoute('beneficiario');                 
-                //alert(resultado.mensaje); 
-                //setTimeout(location.reload(),1000);                   
-                //location.reload();  
-                //this.transitionToRoute('beneficiario'); 
-                //this.flashMessage('success', 'Content saved!');                
-                //alert(resultado.mensaje);
-                //location.reload();              
-                // alert(resultTotal.books.mensaje);                                                                
+            .then(resultado=>{                                             
+                alertify.success(resultado.mensaje);      
+                this.send("refreshRoute");                                                                           
             })
-            .catch(error=>{
-                // alert(resultTotal.books.mensaje);
+            .catch(error=>{                
                 alertify.error(resultado.mensaje);  
                 
             });
-        },  
-
-       
+        },         
 
         ///***** Nuevo 
 
         onGuardarNuevo(){
-            const formularioService = this.get("form"); 
-            console.log("DATOS BENEFICIARIOS **** " , formularioService)
-            // var parentesco = null;
-            // if(this.get("parentescoID") == undefined || this.get("parentescoID") == -1){
-            //     console.log("Estado parentesco ID = " , this.get("parentescoID"));                
-            //     parentesco = formularioService.parentescoID; 
-            // }
-            // else{
-            //     parentesco = this.get("parentescoID");
-            // }
-
-            console.log("**** FINADO  ****", this.get("CheckBoxEstado"));
-            // var fin = 1;
-            // if(formularioService.Finado == "NO"){
-            //     fin = 1;
-            // }
-            // else{
-            //     fin = 0;
-            // }
+            const formularioService = this.get("form");            
             var fin = 1;
             if(this.get("CheckBoxEstado") == false){
                 fin = 1;
             }
             else{
                 fin = 0;
-            }
-
-
-
+            }            
             var tipoDocumento ="";
 
             if(formularioService.Tipo_NroDocumento != null){
                 tipoDocumento = formularioService.Tipo_NroDocumento;
             }
-
-            console.log("Nombres De familiar: " + formularioService.Nombres);
+           
             var userData = {                                    
                 parentescoID: this.get("parentesco"), 
                 Nombres : formularioService.Nombres,
@@ -313,40 +195,19 @@ export default Controller.extend({
                 Tipo_NroDocumento : tipoDocumento,
                 datosFamiliaresID: formularioService.datosFamiliaresID,
                 Finado : fin
-            };      
-            
-            console.log("userData", userData);   
-            console.log("Ingresa al controlador principal");
+            };                  
+           
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
 
             this.set("formValidBeneficiarioNuevo",true);
-            this.send("validateFieldsBeneNuevo");  
-            
-            console.log("validateFieldssss", this.get("formValidBeneficiarioNuevo"));
+            this.send("validateFieldsBeneNuevo");              
 
-            if(this.get("formValidBeneficiarioNuevo") == true){
-                console.log("SU FORMULARIO ES CORRECTO NUEVO **** ");
-            }
-            else{
-                console.log("SU FORMULARIO NO ES CORRECTO  NUEVO ###### ");
-            }  
-
-            if(this.get("formValidBeneficiarioNuevo")){
-                console.log("Datos Declaracion",formularioService);
+            if(this.get("formValidBeneficiarioNuevo")){                
                 servicioFormulario.nuevoFormulario(userData)
-                .then(resultado=>{                
-                    console.log("controlador servicio", resultado);                 
-                    alertify.success(resultado.mensaje);
-                    
-                    // setTimeout(closeVentana(),1000);
-                    // (exampleModalLabel).empty();
-                    // (exampleModalLabel).remove();
-                    // // $(this).dialog("close");
-                    // (exampleModalLabel).Close();
-                    // //this.transitionToRoute('beneficiario');                 
-                    // //alert(resultado.mensaje);                    
-                    // location.reload();                                                                                          
+                .then(resultado=>{                                    
+                    alertify.success(resultado.mensaje);    
+                    this.send("refreshRoute");                                                                                
                 })
                 .catch(error=>{
                     alertify.error(resultado.mensaje);                 
@@ -355,19 +216,15 @@ export default Controller.extend({
             else{
                 alert("Debe llenar todo el formulario correctamente");
             }
-            
-            
         },  
         
-        parentescoSelected(value){
-            console.log("Ingresa parentesco" , value);
+        parentescoSelected(value){            
             this.set("parentesco",value);
         },
 
         finadoCheckBoxEstado() {
             const state = this.get('CheckBoxEstado'); // cbState is not updated when use 'change' event
-            this.set('CheckBoxEstado', !state );
-            console.log("Ingresa estado check Box",  state);
+            this.set('CheckBoxEstado', !state );            
         },
         idEditar(event){
 
@@ -387,29 +244,20 @@ export default Controller.extend({
             }
             else{
                 this.set('CheckBoxEstado', false );
-            }   
-            // console.log("GET DEL DOCUMENTO ", this.get("formeditar.Numero"));            
-           console.log("ACCION **" , event);
-           //console.log("ACCION **" , event.DocumentoPersonalID);
+            }               
         },
-        idEliminar(dato){
-            console.log("eliminar benefi" , dato);
-
-            var servicioFormulario = this.get("servicioFormulario");  
-            
+        idEliminar(dato){   
+            var servicioFormulario = this.get("servicioFormulario");              
             servicioFormulario.deleteFormulario(dato)
             .then(resultado=>{                
-                this.transitionToRoute('principal');                  
-                 //alert(resultado.mensaje);
+                this.transitionToRoute('/index');                                   
                  alertify.success(resultado.mensaje);    
-                 location.reload();                                                              
+                 this.send("refreshRoute");   
+                 //location.reload();                                                              
             })
-            .catch(error=>{
-                //alert(resultado.mensaje); 
-                alertify.error(resultado.mensaje);
-                
+            .catch(error=>{                
+                alertify.error(resultado.mensaje);                
             });
-
         }
     }   
     

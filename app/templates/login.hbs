@@ -1,0 +1,81 @@
+
+
+<!--==========================================
+                   Login
+===========================================-->
+{{!-- margin-top:10%; --}}
+<div class="container" style="width: 50%; margin-left: 25%;  background: #212529 " >
+{{!-- FORMULARIO  --}}
+<form style="padding: 5%; width: 100%;" class="container" novalidate="" action="/login" method="POST" id="myForm">
+    <div class="form-group">       
+            <div style="margin: 1em">
+                {{!-- <center>
+                    <img 
+                    srcset="{{rootURL}}assets/images/logoBoa3.png 300w,
+                        {{rootURL}}assets/images/logoBoa3.png 1024w,
+                        {{rootURL}}assets/images/logoBoa3.png 3840w"
+                    sizes=" (max-width: 600px) 300px,
+                            (max-width: 1980px) 844px,
+                        2000px"
+                    src="{{rootURL}}assets/images/logoBoa3.png" 
+                    alt="Logo BoA"/>
+                </center> --}}
+                
+                {{!-- <center><img src="{{rootURL}}assets/images/logoBoa3.png" srcset="{{rootURL}}assets/images/logoBoa3.png, {{rootURL}}assets/images/logoBoa3.png 1000w, {{rootURL}}assets/images/logoBoa3.png 2000w" sizes="(max-width: 400px) 300px, (max-width: 1200px) 1000px, 2000px" alt="Logo BoA"></center> --}}
+                <center><img alt="profile-image " class="img-responsive" src="{{rootURL}}assets/images/logoBoa3.png" style="width: 45%;"></center>                
+            </div>
+            <div style="margin: 1em">                
+                <center><img alt="profile-image " class="img-responsive" src="{{rootURL}}Content/img/ficha.png" style="width: 60%;"></center>
+            </div>
+        <label style="color:#FF6800;" class="form-control-label" for="inputSuccess1" >Ingrese su Usuario</label>
+        {{input required=true value=userName  autocomplete='off' placeholder="Usuario" class="form-control" key-down='clearKey' name="i1" id="inputSuccess1"                                    
+                                }} 
+        <div class="valid-feedback">ok</div>
+        <div class="invalid-feedback">Debe ingresar un usuario.</div>
+    </div>
+    <div class="form-group">
+        <label style="color:#FF6800;" class="form-control-label" for="inputSuccess2">Ingrese su Contraseña</label>
+          {{input  required=true  value=password type="password" placeholder="Password" autocomplete='off' class="form-control"  key-down='submitKey' name="i2" id="inputSuccess2"                            
+                            }} 
+        <div class="valid-feedback">Ok</div>
+        <div class="invalid-feedback">Debe ingresar una contraseña.</div>
+        <input type="checkbox" onclick="mostrarFunction()">Mostrar Contraseña
+    </div>    
+    <div class="form-group">
+        <p class="pull-left m-t-20"><a id="password2" href="http://sms.obairlines.bo/useradmin">He olvidado mi contraseña.</a></p>
+    </div>     
+    <br>    
+    <br>    
+    <div>
+       <center> <button type="submit" class="btn btn-secondary" {{action 'loginAction' allowedKeys="alt"}} id="btnSubmit">Inicio</button> </center>
+    </div>
+</form>
+
+</div>
+
+{{!-- VALIDACIONES  --}}
+<script>
+    function mostrarFunction() {
+        var x = document.getElementById("inputSuccess2");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    $("#btnSubmit").click(function(event) {
+
+    // Fetch form to apply custom Bootstrap validation
+    var form = $("#myForm")
+
+    if (form[0].checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    
+    form.addClass('was-validated');
+    // Perform ajax submit here...
+    
+});
+
+</script>

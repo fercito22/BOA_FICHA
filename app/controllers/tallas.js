@@ -5,8 +5,7 @@ import Validar from '../models/validaciones'
 import { and } from '@ember/object/computed';
 import Config from '../models/config'
 
-export default Controller.extend({
-    //servicioFormulario: inject("servicio-bachiller"),
+export default Controller.extend({    
     servicioFormulario: inject("servicio-tallas"),
     
     obj:  {                
@@ -60,85 +59,57 @@ export default Controller.extend({
                 codigoActual: this.get("fechaActual"),
             };                          
             
-            console.log("userData", userData);            
+            //console.log("userData", userData);            
             
-            var resultTotal = {};
-            var servicioFormulario = this.get("servicioFormulario");            
-            console.log("Datos Bachiller",formularioService);
+            
+            var servicioFormulario = this.get("servicioFormulario");                       
             servicioFormulario.updateFormulario(userData)
             .then(resultado=>{
-                console.log("controlador servicio");              
+               // console.log("controlador servicio");              
                 // alert(resultTotal.books.mensaje);                                                                
             })
             .catch(error=>{
-                // alert(resultTotal.books.mensaje); 
-                
+                // alert(resultTotal.books.mensaje);                 
             });
         },  
         gestionSelected(value){
             // document.getElementsByClassName('table')[0].innerHTML += '<tr><td><textarea name="Question" placeholder="Question" th:field="${questionAnswerSet.question}" id="question" style="resize: none; width: 100%;"></textarea></td><td><textarea name="Answer" placeholder="Answer" th:field="${questionAnswerSet.answer}" id="answer" style="resize: none; width: 100%;"></textarea></td></tr>';
             //document.getElementsByClassName('table')[0].innerHTML += '<tr><td>{{#each webapidataTallasDetalle as |item|}}          <h6>{{item.CantidadMovimiento}}</h6>          <h6>{{item.CodigoTran}}</h6>           <h6>{{item.fechaMov}}</h6>           {{render}}       {{/each}} </td></tr>';
             var servicioTallas = this.get("servicioFormulario");
-            console.log("Ingresa gestion" , value);
+          //  console.log("Ingresa gestion" , value);
             this.set("obj.CantidadMovimiento", "asdsadasd");  
-            Config.Variable = value;
-            //location.reload();  
-            //this.set('Config.Variable' , 'tttt');
-            console.log("Variable: " , Config.Variable);            
-            //var objetos ;
+            Config.Variable = value;            
             var objetos = new Object();
-            //this._super(controller, model);
-
-            // return servicioTallas.callDetalleTallas(value)
-            // .then(resultado=>{
-            //     resultTotal.detalleNuevo= resultado;
-            //     console.log("Perfil",resultTotal.detalleNuevo);
-            //     controller.set('webapidataTallasDetalle', resultTotal.detalleNuevo);
-            //     return resultTotal;
-            // })
 
             servicioTallas.callDetalleTallas(value)
             .then(resultado=>{
-                
+                var contador = 0;                
                 resultado.objeto.forEach(element => {
+                    contador++;
                     var str= element.CodigoTran ;
-                    element.CodigoTran  = str.replace("$$$",element.CantidadMovimiento);
+                    element.CodigoTran  = str.replace("$$$",element.CantidadMovimiento);                    
                     if(element.EsExtra == false){
                         element.EsExtra = "NO";
                     }
                     else{
                         element.EsExtra = "SI";
                     }
+                    this.send("refreshRoute");   
                 });
 
                 objetos = resultado.objeto;
 
-                this.set('objeto2' , resultado.objeto);
-                // console.log("obj.controlador servicio", resultado.objeto); 
-                
-                // this.set('obj.CantidadMovimiento' , 'hola');                
-                                       
-                // this.set('obj.CodTalla' , resultado.objeto.CodTalla);
-                // this.set('obj.CodigoTran' , resultado.objeto.CodigoTran);
-                // this.set('obj.EsExtra' , resultado.objeto.EsExtra);
-                // this.set('obj.fechaMov' , resultado.objeto.fechaMov);
-                // this.set('obj.prenda' , resultado.objeto.prenda);
-                // this.set('obj.usuario' , resultado.objeto.usuario);
-                //console.log("dato" , this.get('obj.CantidadMovimiento'));
-                
-
+                this.set('objeto2' , resultado.objeto);              
             })
             
             .catch(error=>{
-                // alert(resultTotal.books.mensaje); 
-                
+                // alert(resultTotal.books.mensaje);                 
             });   
-            console.log("objetos", this.get('objeto2')); 
-            
+           // console.log("objetos", this.get('objeto2'));             
         },
 
         onGuardar(){   
-            console.log("Ingresa al onGuardar Tallas");
+          //  console.log("Ingresa al onGuardar Tallas");
             // var resultTotal = {};
             // var servicioFormulario = this.get("servicioFormulario");
             // const formularioService = this.get("formp");             
@@ -176,10 +147,7 @@ export default Controller.extend({
         
         prendaSelected(data){            
             var servicioFormulario = this.get("servicioFormulario");
-            var res = data.split(",");
-            console.log("Dtaos SEleccionados: CodTalla ", data);
-            //console.log("Dtaos SEleccionados: CodTalla ", res[0]);
-            //console.log("Dtaos SEleccionados: Talla ", res[1]);
+            var res = data.split(",");          
             this.set("form.CodTalla", res[0]);
             this.set("form.Talla", res[1]);
             this.set("form.EmpleadoItemID", res[2]);
@@ -192,28 +160,17 @@ export default Controller.extend({
             
             console.log("USER DATA Tallas: ", userData);
             servicioFormulario.updateFormulario(userData)
-            .then(resultado=>{                
-                console.log("controlador servicio", resultado);                 
-                 this.transitionToRoute('tallas');                  
-                 //alert(resultado.mensaje);   
-                 alertify.success(resultado.mensaje);
-                 //alertify.alert('Ready!');              
-                //  alertify
-                //     .alert(resultado.mensaje, function(){
-                //         alertify.message('OK');
-                //     });
+            .then(resultado=>{                              
+                 //this.transitionToRoute('/tallas');                                    
+                 alertify.success(resultado.mensaje);                 
+                 this.send("refreshRoute");   
             })
             .catch(error=>{
                 // alert(resultTotal.books.mensaje);                 
             });
         },
       
-        onFechaIni(data){
-            //this.set("birthDateErrorMessage","");
-            //var da = $(this).find("option:selected").text();
-            console.log("Fecha Seleccionada.....",  da);
-            console.log("Fecha Seleccionada",  data);            
-           // this.set("FechaVencimiento",data);
+        onFechaIni(data){            
            this.set("fechainicio", moment(data).format('YYYY/MM/DD'));
         },
 
@@ -222,8 +179,5 @@ export default Controller.extend({
             fecha = fecha.getFullYear(),
             this.set("fechaActual", fecha );
         }
-      
-
-    }   
-    
+    }       
 });

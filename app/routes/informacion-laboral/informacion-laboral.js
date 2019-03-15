@@ -1,7 +1,16 @@
 import Route from '@ember/routing/route';
 import {inject} from '@ember/service';
+import Config from '../models/config';
 
 export default Route.extend({
+    beforeModel() {
+        if(Config.usuario_id == 0){
+            this.replaceWith('/application');
+        }
+        else{
+            this.replaceWith('informacion-laboral');
+        }
+      },
      
      servicioExpLaboral: inject("servicio-experiencia-laboral"),
      servicioVacaciones: inject("servicio-vacaciones"),    

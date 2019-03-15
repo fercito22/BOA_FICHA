@@ -11,7 +11,7 @@
     
    
 <!--==========================================
-                   Beneficiarios
+                   Declaracion Jurada
 ===========================================-->
 
     <div class="container">
@@ -22,7 +22,8 @@
         <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal2">
             {{fa-icon 'user-edit'}} Nuevo
         </button>
-        <br>
+        <br>  
+        <hr id="linea2">
 
         <div id="timeline-experience">
                 {{#each Declaracion as |item|}} 
@@ -70,7 +71,61 @@
         </div>
     </div>
 
+    <!--==========================================
+                   Beneficiarios
+===========================================-->
+
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Beneficiarios</h4>
+        </div>       
+        <br>
+
+        <div id="timeline-experience">
+                {{#each Beneficiario as |item|}} 
+                <!-- FIRST TIMELINE -->
+                <div class="timeline-block">
+                    <!-- Circulo con la primer Letra  -->
+                    {{!-- <div class="timeline-dot"><h6>Letra</h6></div> --}}
+                
+                    <!-- TIMELINE CONTENT -->
+                    <div class="card timeline-content">
+                        <div class="card-content">
+                           
+                            <!-- TIMELINE TITLE -->
+                            <h5 class="text-uppercase ">{{item.Nombres}} {{item.Apellido1}} {{item.Apellido2}}</h5>
+                            
+                            <hr id="linea2"> 
+                            <!-- TIMELINE TITLE INFO -->
+                            <div class="timeline-info"> 
+                                
+                                <h6>
+                                    Beneficiario: <small>{{item.Beneficiario}}</small>
+                                </h6>
+                                <h6>
+                                    Parentesco: <small>{{item.TipoParentesco}}</small>
+                                </h6>
+                                <h6>
+                                    Finado: <small>{{item.Finado}}</small>
+                                </h6>                                
+                                <h6>
+                                    N° Documento: <small>{{item.Tipo_NroDocumento}}</small>
+                                </h6>
+                            </div>                            
+                                                   
+                        </div>
+                    </div>
+                </div>
+                {{/each}} 
+                                             
+        </div>
+    </div>
+    <br>
+
     </div>  
+
+    
 
 
     <!-- Modal -->

@@ -29,10 +29,6 @@ export default Controller.extend({
     LugarDeNacimiento: -1,
     Direccion: -1,
     EstadoCivil: -1,
-
-    //recupera fechaactual
-    //vFrom: window.moment.utc().format('YYYY-MM-DD'),    
-
     servicioFormulario: inject("perfil-servicio"),
     
     //mes dia anio
@@ -41,7 +37,6 @@ export default Controller.extend({
     // Nombre1Val: match('formp.Nombre1', /^[a-zA-Z ]+$/),    
     // Apellido1Val: match('formp.Apellido1', /^[a-zA-Z ]+$/),  
     // estadoInvitado: not( 'Nombre1Val'),
-
     mensajeErrorTexto: '',
     mensajeErrorNumerosFijo: '',
     mensajeErrorNumerosCelular: '',
@@ -86,7 +81,7 @@ export default Controller.extend({
     actions:{
 
         validateFields(){
-            console.log("Validate Fields Ingreso");
+            //console.log("Validate Fields Ingreso");
             if(this.get("Nombre1") == -1){
                 this.set("mensajeErrorTexto", Validar.mensajeTexto);
                 //this.set("formValid",false);
@@ -104,7 +99,7 @@ export default Controller.extend({
                 //this.set("formValid",false);
             }
             if(this.get("FechaNacimiento") == -1){
-                console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
+                //console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
                 this.set("mensajeErrorFecha", Validar.mensajeFecha);
                 //this.set("formValid",false);
             }             
@@ -112,16 +107,16 @@ export default Controller.extend({
         },
     
         onGuardar(){
-            console.log("Ingresa al controlador principal PErfil");
+            //console.log("Ingresa al controlador principal PErfil");
             this.send("validateFields");
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
             const formularioService = this.get("formp"); 
             var estadoCivil = 1
-            console.log("Formulario dats ultimos ",formularioService);
+            //console.log("Formulario dats ultimos ",formularioService);
             if(this.get("estadoCivil") == undefined){
-                console.log("Estado Civil = " , this.get("estadoCivil"));
-                console.log("Mi Estado Civil Actual ", formularioService.EstadoCivil);    
+               // console.log("Estado Civil = " , this.get("estadoCivil"));
+               // console.log("Mi Estado Civil Actual ", formularioService.EstadoCivil);    
                 estadoCivil = formularioService.EstadoCivil; 
             }
             else{
@@ -142,9 +137,9 @@ export default Controller.extend({
             
             servicioFormulario.updateFormulario(userData)
             .then(resultado=>{                
-                console.log("controlador servicio", resultado);
+               // console.log("controlador servicio", resultado);
                  
-                 this.transitionToRoute('index'); 
+                 this.transitionToRoute('/index'); 
                  //this.flashMessage('success', 'Content saved!');
                  //alert(resultado.mensaje); 
                  alertify.success(resultado.mensaje); 
@@ -163,16 +158,16 @@ export default Controller.extend({
        
 
         estadoCivilSelected(value){
-            console.log("Ingresa Estado Civil" , value);
+            //console.log("Ingresa Estado Civil" , value);
             this.set("estadoCivil",value);
         }, 
         onFechaNac(data){            
             this.send("validateFields");            
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
+           // console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
+            //console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
             //FechaNacimiento
             this.set("FechaNacimiento",moment(data).format('YYYY/MM/DD'));
-            console.log("FECHA ACTUAL DE NACIMIENTO -***** " , this.get("FechaNacimiento"));
+            //console.log("FECHA ACTUAL DE NACIMIENTO -***** " , this.get("FechaNacimiento"));
         },
 
     }

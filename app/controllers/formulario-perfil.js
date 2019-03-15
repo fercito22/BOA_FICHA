@@ -30,9 +30,6 @@ export default Controller.extend({
     Direccion: -1,
     EstadoCivil: -1,
 
-    //recupera fechaactual
-    //vFrom: window.moment.utc().format('YYYY-MM-DD'),    
-
     servicioFormulario: inject("perfil-servicio"),
     
     //mes dia anio
@@ -80,13 +77,9 @@ export default Controller.extend({
     longitudDireccion: match('formp.Direccion', Validar.textoMinMax ),    
     DireccionValido: and('DireccionVal', 'longitudDireccion'),
 
-    
-    
-
     actions:{
 
-        validateFields(){
-            console.log("Validate Fields Ingreso");
+        validateFields(){           
             if(this.get("Nombre1") == -1){
                 this.set("mensajeErrorTexto", Validar.mensajeTexto);
                 //this.set("formValid",false);
@@ -104,24 +97,21 @@ export default Controller.extend({
                 //this.set("formValid",false);
             }
             if(this.get("FechaNacimiento") == -1){
-                console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
+                //console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
                 this.set("mensajeErrorFecha", Validar.mensajeFecha);
                 //this.set("formValid",false);
             }             
              
         },
     
-        onGuardar(){
-            console.log("Ingresa al controlador principal");
+        onGuardar(){           
             this.send("validateFields");
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
             const formularioService = this.get("formp"); 
             var estadoCivil = 1
-            console.log("Formulario dats ultimos ",formularioService);
-            if(this.get("estadoCivil") == undefined){
-                console.log("Estado Civil = " , this.get("estadoCivil"));
-                console.log("Mi Estado Civil Actual ", formularioService.EstadoCivil);    
+           
+            if(this.get("estadoCivil") == undefined){           
                 estadoCivil = formularioService.EstadoCivil; 
             }
             else{
@@ -142,36 +132,20 @@ export default Controller.extend({
             
             servicioFormulario.updateFormulario(userData)
             .then(resultado=>{                
-                console.log("controlador servicio", resultado);
-                 
-                 this.transitionToRoute('index'); 
-                 //this.flashMessage('success', 'Content saved!');
-                // alert(resultado.mensaje);  
+                 this.transitionToRoute('/'); 
                  alertify.success(resultado.mensaje);
-                 //this.transitionTo('posts');
-
-                //  _this.clearFields();
-                // _this.transitionToRoute("/");
             })
             .catch(error=>{
                 alertify.error(resultado.mensaje);
-                // alert(resultTotal.books.mensaje); 
-                
             });
         }, 
         estadoCivilSelected(value){
-            console.log("Ingresa Estado Civil" , value);
             this.set("estadoCivil",value);
         }, 
         onFechaNac(data){            
             this.send("validateFields");            
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
-            //FechaNacimiento
-            this.set("FechaNacimiento",moment(data).format('YYYY/MM/DD'));
-            console.log("FECHA ACTUAL DE NACIMIENTO -***** " , this.get("FechaNacimiento"));
-        },
-
+            this.set("FechaNacimiento",moment(data).format('YYYY/MM/DD'));           
+        }
     }
     
 });

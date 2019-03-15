@@ -11,7 +11,21 @@
                             <div id="profile" class="right">
                                 {{!-- <center><img alt="profile-image " class="img-responsive rounded-circle" src="img/erio.jpeg" style="width: 20%;"></center> --}}
                                 <center>
-                                    <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="http://{{webapidataFotografia}}">
+                                    {{#if  (is-eq fotografiaV true) }}
+                                        <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="http://{{webapidataFotografia}}">
+                                    {{/if}}
+                                    {{#if  (is-eq fotografiaV false) }}
+                                        {{!-- <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="/assets/images/images.jpg">     --}}
+                                        {{!-- <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="http://localhost/fichapersonal3{{direccionFoto}}">  Content/img   --}}
+                                        <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="{{direccionFoto}}">
+                                    {{/if}}
+                                    {{!-- {{#unless (is-eq Config.fotografiaV false)}}                                     
+                                        <img  alt="profile-image" class="img-responsive rounded-circle" style="width: 20%;" src="/img/images.jpg">    
+                                    {{/unless}}  --}}
+                                    
+                                    
+                                        
+                                    
                                     </center>
                                 
                                 <div class="slant"></div>
@@ -58,19 +72,22 @@
                                           </div>
                                         
 
-                                            <br><button  id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+                                            <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
                                                 {{!-- <br><button onclick={{action "editarPerfil"}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal"></button> --}}
                                                 {{fa-icon 'user-edit'}} 
                                             </button> <br>
 
-                                            {{partial 'idiomas'}}                                             
+                                            {{#if idiomasV}}
+                                                {{partial 'idiomas'}}
+                                            {{/if}}
+                                                                                         
                                             <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalidiomas">
                                                 {{fa-icon 'plus-square'}}
                                             </button> <br> 
 
 
                                             {{partial 'comunicacion'}}
-                                            <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalc">
+                                            <br><button onclick={{action "nuevoComunicacion"}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalc">
                                                 {{fa-icon 'plus-square'}}
                                             </button> 
                                             <br>

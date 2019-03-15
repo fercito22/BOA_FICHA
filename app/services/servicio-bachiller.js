@@ -28,11 +28,10 @@ export default Service.extend({
     },
     
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE Bachiller");
-        console.log(form);
+        // console.log("Ingreso al servicio UPDATE Bachiller");
+        //console.log("update ",form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
-               // tipo: 2,
                 empleadoID: Config.usuario_id ,                
                 NombreColegio: form.nombreColegio,
                 Lugar: form.lugar,
@@ -40,13 +39,13 @@ export default Service.extend({
                 UltimoCursoVencido: form.ultimoCursoVencido,
                 Identificador: 2
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                       
       
           var request = $.ajax({
             type: 'POST',            
             data: parametros,
-            url: Config.serverpath + '/api/GetIdiomas',
+            url: Config.serverpath + '/api/GetBachiller',
             //contentType:'application/json',
           });          
 

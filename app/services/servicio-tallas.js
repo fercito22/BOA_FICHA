@@ -28,8 +28,7 @@ export default Service.extend({
     },
 
     callDetalleTallas: function(form){        
-        return new RSVP.Promise(function(resolve, reject){
-            console.log("Ingresa servicio DEtalle" , form);
+        return new RSVP.Promise(function(resolve, reject){            
             var parametros = {
                 empleadoID: Config.usuario_id  ,
                 controlDotacionID: Config.Variable                          
@@ -73,16 +72,16 @@ export default Service.extend({
     },
     
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE Bachiller");
-        console.log(form);
+        // console.log("Ingreso al servicio UPDATE Bachiller");
+        // console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
                 EmpleadoItemID: form.EmpleadoItemID ,
                 codTalla: form.CodTalla,
                 Talla: form.Talla,
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                       
       
           var request = $.ajax({
             type: 'POST',            

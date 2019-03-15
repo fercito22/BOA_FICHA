@@ -3,7 +3,7 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Formulario Medico Cabecera</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edicion Medico Cabecera</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -22,7 +22,7 @@
                     class="form-control text-secondary border border-info "
                 }}                                     
           </div>   
-          <label hidden={{nombreMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>
+          <label hidden={{nombreMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoNombre}}</label>
           {{!-- <label hidden={{longitud2}} class="errorMessage mensaje-error">no hay nada</label> --}}
         </div>
 
@@ -37,7 +37,7 @@
                     class="form-control text-secondary border border-info "
                 }}
           </div>  
-          <label hidden={{direccionValido}} class="errorMessage mensaje-error">{{mensajeErrorDireccion}}</label>
+          <label hidden={{direccionValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoDireccion}}</label>
         </div>
 
         <div class="row">
@@ -53,7 +53,7 @@
                                 class="form-control text-secondary border border-info "
                             }}
                     </div>   
-                    <label hidden={{TelefonoMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorNumeros}}</label>              
+                    <label hidden={{TelefonoMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoTelefono}}</label>              
                 </div> 
             </div>
 
@@ -69,7 +69,7 @@
                                 class="form-control text-secondary border border-info "
                             }}
                     </div> 
-                    <label hidden={{NroCelularValido}} class="errorMessage mensaje-error">{{mensajeErrorNumerosCelular}}</label>
+                    <label hidden={{NroCelularValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoCelular}}</label>
                 </div> 
             </div>
         </div>   
@@ -79,14 +79,14 @@
           <p>Alergias</p>
           <div class="input-group-prepend">
               <div class="input-group-text"><i class="fa fa-file-medical text-info"></i></div>              
-                <select  id="sel2" onchange={{action 'alergiasSelected' value="target.value"}} >
-                    {{!-- <option disabled selected> -- Alergias -- </option> --}}
+                <select  onchange={{action 'alergiasSelected' value="target.value"}} >
+                    <option disabled selected> -- Alergias -- </option>
                     {{#each AlergiasMedicas as |itemAlergia|}}
                         <option value={{itemAlergia.Name}}  selected={{is-eq itemAlergia.Name formmedico.Name}} >{{itemAlergia.Name}}</option>
                     {{/each}}
                 </select>
           </div>      
-          {{!-- <label hidden={{alergiasMedicasValido}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>            --}}
+          {{!-- <label hidden={{alergiasMedicasValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoNombre}}</label>            --}}
         </div> 
 
         <div class="form-group">          
@@ -109,7 +109,8 @@
                     <p>RH Sanguineo</p>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-gratipay text-info"></i></div>              
-                            <select  id="sel2" onchange={{action 'factorSanguineoSelected' value="target.value"}} >
+                            <select   onchange={{action 'factorSanguineoSelected' value="target.value"}} >
+                                <option disabled selected> -- RH -- </option>
                                 {{#each CombosFactorSanguineo as |itemSanguineo|}}
                                     <option value={{itemSanguineo.Name}}  selected={{is-eq itemSanguineo.Name formmedico.GrupoSanquineo}} >{{itemSanguineo.Name}}</option>
                                 {{/each}}
@@ -123,7 +124,8 @@
                     <p>Factor Sanguineo</p>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-gratipay text-info"></i></div>               
-                            <select  id="sel2" onchange={{action 'rhSanguineoSelected' value="target.value"}} >
+                            <select   onchange={{action 'rhSanguineoSelected' value="target.value"}} >
+                                <option disabled selected> -- Factor -- </option>
                                 {{#each rhSanguineoCombo as |itemRH|}}
                                     <option value={{itemRH.Label}}  selected={{is-eq itemRH.Label formmedico.RH_Sanguineo}} >{{itemRH.Label}}</option>
                                 {{/each}}
@@ -141,7 +143,8 @@
         {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
             Regresar
         {{/link-to}} --}}
-        <button type="button" class="btn btn-primary" disabled={{isDisabledMedico}} data-dismiss="modal" {{action 'onGuardarMedico'}}>Guardar</button>
+        {{!-- <button type="button" class="btn btn-primary" disabled={{isDisabledMedico}} data-dismiss="modal" {{action 'onGuardarMedico'}}>Guardar</button> --}}
+        <button type="button" class="btn btn-primary"  data-dismiss="modal"  {{action 'onGuardarMedico'}}>Guardar</button>
       </div>
     </div>
   </div>

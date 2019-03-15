@@ -7,9 +7,22 @@
 
     <div class="container">
         <!-- SECTION TITLE -->
+        
         <div class="section-title">
             <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Formacion Academica</h4>
         </div>
+        
+        {{!-- <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalAgregar">
+            {{fa-icon 'user-edit'}} Agregar Titulo
+        </button> --}}
+
+        <div class="section-title">
+            <button onclick={{action "nuevoTitulo"}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalAgregar">
+                {{fa-icon 'user-edit'}} Nuevo
+            </button>
+        </div>
+        <br>  
+        <hr id="linea2">
 
         <div id="timeline-experience">
                 {{#each webapidataF as |item|}} 
@@ -46,9 +59,13 @@
                             {{!-- <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-4">
                                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                             </a> --}}
-                            <button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal2">
-                                {{fa-icon 'user-edit'}} Editar
+
+                            <button onclick={{action "idEditarTitulo" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModaleditarTitulo">
+                                {{fa-icon 'user-edit'}}
                             </button>
+                            <button onclick={{action "idEliminar" item}} id="botonEditar" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" >
+                                {{fa-icon 'trash'}}
+                            </button>  
                         </div>
                     </div>
                 </div>
@@ -57,3 +74,15 @@
     </div>
 
 
+<div class="modal fade" id="exampleModaleditarTitulo" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitulo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'formulario-formacionedit'}}
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelAgregar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+         {{partial 'agregar-titulo'}}
+    </div>
+</div>

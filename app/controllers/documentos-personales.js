@@ -14,14 +14,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend( {
     servicioFormulario: inject("servicio-documentos-personales"),
 
-//   Numero: false,
-//   validations: {   
-//         Numero: {
-//         length: { minimum: 5, maximum: 20}
-//         }
-//     },
-    
-
     form:  {                                
         DocumentoID: '',
         Numero: '',
@@ -34,6 +26,17 @@ export default Ember.Controller.extend( {
         Identificador: '',  
     },
     formeditar:  {                                
+        DocumentoID: '',
+        Numero: '',
+        FechaEmision: '',
+        FechaVencimiento: '',
+        Observacion: '',
+        ConAlerta: '',
+        Referencia: '',
+        DocumentoPersonalID: '',    
+        Identificador: '',  
+    },
+    formNuevo:  {                                
         DocumentoID: '',
         Numero: '',
         FechaEmision: '',
@@ -60,9 +63,7 @@ export default Ember.Controller.extend( {
         visibleVacuna: false,
 
         CheckBoxEstado: false,
-
         formValid: false,
-
         vFrom: '11-8-2018', 
 
         mensajeErrorTexto: '',
@@ -94,19 +95,22 @@ export default Ember.Controller.extend( {
         FechaFinValido: match('FechaVencimiento', Validar.fecAMD),
         observacionval: match('formeditar.Observacion', Validar.texto),
 
-        habilitar: and('NumeroValido' ,  'FechaIniValido', 'FechaFinValido' , 'selectValidoDoc' ),
-        isDisabled: not('habilitar'),        
+        habilitar: and('NumeroValido' ,  'FechaIniValido',  'selectValidoDoc' ),
+        isDisabled: not('habilitar'),
         
-
-    // // //http://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=fechas
-    // validarFechaIni: match('FechaEmision', /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/),
-    // //FechaIniErrorMessage: not( 'validarFechaIni' ),    
-    // validarFechaFin: match('FechaVencimiento', /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/),
-    // //FechaFinErrorMessage: not( 'validarFechaFin' ),
-
-    // //validarObservacion: match('formeditar.Observacion', Validar.texto),
+        documentosV: true,
 
     clearFields(){
+       
+        this.set("form.DocumentoID",''); 
+        this.set("form.Numero", ''); 
+        this.set("form.FechaEmision",'null'); 
+        this.set("form.FechaVencimiento",'null'); 
+        this.set("form.Observacion",'null'); 
+        this.set("form.ConAlerta",'null'); 
+        this.set("form.Referencia",'null'); 
+        this.set("form.DocumentoPersonalID",'null'); 
+        
         this.set("mensajeErrorTexto","");                
         this.set("mensajeErrorObservacion","");
         this.set("mensajeErrorFecFin","");
@@ -116,59 +120,46 @@ export default Ember.Controller.extend( {
     },
 
     actions:{
-        validateFields(){
-            console.log("Ingreso al validador" , this.get("Numero") );
-            
-            // if(this.get("Nombre1") == -1){
-            //     this.set("mensajeErrorTexto", Validar.mensajeTexto);
-            //     //this.set("formValid",false);
-            // }
+        // clearFieldsPerfil(){
+        //     this.set("mensajeErrorTexto",'');                
+        // this.set("mensajeErrorObservacion",'');
+        // this.set("mensajeErrorFecFin",'');
+        // this.set("mensajeErrorFecIni",'');
+        // this.set("mensajeErrorSelectDoc",'');
+        // this.set("mensajeErrorSelectRef",''); 
+
+        // this.set("form.DocumentoID",""); 
+        // this.set("form.Numero",""); 
+        // this.set("form.FechaEmision",""); 
+        // this.set("form.FechaVencimiento",""); 
+        // this.set("form.Observacion",""); 
+        // this.set("form.ConAlerta",""); 
+        // this.set("form.Referencia",""); 
+        // this.set("form.DocumentoPersonalID",""); 
+        // },
+        validateFields(){          
 
             if(this.get("Numero") == -1){
-                console.log("Validate Fields Ingreso");
-                //this.set("mensajeErrorTexto2","No es valido el numero");
                 this.set("formValid",false);
                 this.set("mensajeErrorTexto",Validar.mensajeNumeros);               
-            }
-            // console.log("Numero del editar #####",this.get("Numero"));
-            // if(this.get("formeditar.Numero") == ""){
-            //     console.log("Validate Fields Ingreso numero 2");
-            //     this.set("mensajeErrorTexto","No es valido el numero");
-            //     this.set("formValid",false);
-            // }
+            }           
            
             if(this.get("FechaVencimiento") == -1){
-                //this.set("FechaFinErrorMessage","No es valido la fecha fin");
                 this.set("formValid",false);
                 this.set("mensajeErrorFecFin",Validar.mensajeFecha);                  
             }    
             
             if(this.get("FechaEmision") == -1){
-                console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
-                //this.set("mensajeErrorFechaEmnicion", Validar.mensajeFecha);
                 this.set("formValid",false);
                 this.set("mensajeErrorFecIni",Validar.mensajeFecha);                
             }
-            console.log("*** *** observacionval *** ****", this.get("observacionval"));
-            console.log("*** *** observacionval *** ****", this.get("Observacion"));
-            // if( this.get("Observacion" ) ==  -1 ){
-            //     if(this.get("observacionval") == false){
-            //         //this.get("observacionval") == false &&
-            //         console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));
-            //         //this.set("mensajeErrorFechaEmnicion", Validar.mensajeFecha);
-            //         this.set("formValid",false);
-            //         this.set("mensajeErrorObservacion",Validar.mensajeTexto);
-            //     }                
-            // }
-
-            if(this.get("selectValidoDoc") == false){
-                console.log("FECHA NACIMIENTO ---- ", this.get("FechaNacimiento"));                
+         
+            if(this.get("selectValidoDoc") == false){               
                 this.set("formValid",false);
                 this.set("mensajeErrorSelectDoc",Validar.mensajeSelectable);                
-            }
+            }            
             
-            
-                this.set("mensajeErrorSelectRef",Validar.mensajeSelectable);
+            this.set("mensajeErrorSelectRef",Validar.mensajeSelectable);
             this.set("selectValidoDoc", true);
         },
 
@@ -180,12 +171,10 @@ export default Ember.Controller.extend( {
 
             if(this.get("CheckBoxEstado") == !false)
             {
-                FechaIndefinida = (anio+"/"+mes+"/"+dia);
-                console.log("FECHA IDEFINIDA", FechaIndefinida)
+                FechaIndefinida = (anio+"/"+mes+"/"+dia);            
             }
             else{
-                FechaIndefinida = this.get("FechaVencimiento")
-                console.log("FECHA IGUAL: ",this.get("FechaVencimiento"));
+                FechaIndefinida = this.get("FechaVencimiento")                
             }           
 
             const formularioService = this.get("form"); 
@@ -194,61 +183,88 @@ export default Ember.Controller.extend( {
             this.set("FechaVencimiento", FechaIndefinida);            
 
             this.set("formValid",true);
-            this.send("validateFields");       
-
-            console.log("validateFieldssss", this.get("formValid"));
-
-            if(this.get("formValid") == true){
-                console.log("SU FORMULARIO ES CORRECTO NUEVO **** ");
-            }
-            else{
-                console.log("SU FORMULARIO NO ES CORRECTO  NUEVO ###### ");
-            }   
-
-            console.log("REFERENCIA POR DEFECTO **" , this.get("Referencia"));       
+            this.send("validateFields");  
             
-            if(this.get("Referencia") == undefined || this.get("Referencia") == -1){                
-                this.set("Referencia", 1)
-                console.log("REFERENCIA POR DEFECTO **" , this.get("Referencia"));
+
+            // if(this.get("formValid") == true){
+            //    // console.log("SU FORMULARIO ES CORRECTO NUEVO **** ");
+            // }
+            // else{
+            //    // console.log("SU FORMULARIO NO ES CORRECTO  NUEVO ###### ");
+            // }   
+            var ref = 0;
+            if(this.get("referencia") == undefined || this.get("referencia") == -1){                
+                ref = 0;
             }
             else{
-                this.set("Referencia", this.get("referencia")) ;
-            }         
+                ref = this.get("referencia");
+            }
+            var obs = ' ';
+            if(this.get("Observacuion") == '' || this.get("Observacuion") == null){                
+                obs = ' ';
+            }
+            else{
+                obs = this.get("form.Observacion");
+            }
+            
+            console.log("Observacuion ", this.get("form.Observacion"));         
             
             var userData = {
                 DocumentoID: this.get("tipoDocumento"),
                 Numero: this.get("Numero"),
-                Referencia: this.get("Referencia"),
+                Referencia: ref,
                 FechaEmision: this.get("FechaEmision"),
                 FechaVencimiento: FechaIndefinida, 
-                Observacion: this.get("form.Observacion"),            
+                Observacion: obs,            
             };                          
-            
-            console.log("userData", userData);        
-            console.log("Ingresa al controlador principal Documentos Personales");
+            console.log("USER DATA : = REFERENCIA ", userData);
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
             this.send("validateFields");
+         
+            //  this.set("form.DocumentoID",'');            
+            //  this.set("form.Numero",'');            
+            //  this.set("form.FechaEmision",'');            
+            //  this.set("form.FechaVencimiento",'');            
+            //  this.set("form.Observacion",'');            
+            //  this.set("form.ConAlerta",'');            
+            //  this.set("form.Referencia",'');            
+            //  this.set("form.DocumentoPersonalID",'');                 
+             
+            // this.set("FechaEmision", '');
+            // this.set("FechaVencimiento", '');            
+            // this.set("Numero",''); 
+            // this.set("referencia",'');             
+            // ref = 0; 
+            // this.set("FechaEmision",''); 
+            // FechaIndefinida = '';
+            // obs = '';
+            // this.set("selectValidoRef", false);            
+            // this.set("formeditar.referencia",'');  
+
+
             console.log("Datos Documentos Personales FORM",formularioService);
 
             if(this.get("formValid")){
-                console.log("validateFields", this.get("validateFields"))                
-
                 servicioFormulario.updateFormulario(userData)
-                .then(resultado=>{    
-                    _this.clearFields();            
+                .then(resultado=>{                               
                     console.log("controlador servicio Resultado", resultado);
-                    alertify.success(resultado.mensaje);              
-                        if(!resultado.Error){
-                            _this.clearFields();
-                            _this.transitionToRoute("/");
-                        }         
-                    // alert(resultTotal.books.mensaje);                                                                
+                    alertify.success(resultado.mensaje);
+                    //_this.refresh("/formulario-documentos");
+                    //this.refresh();
+                    //_this.clearFieldsPerfil();
+                    //_this.send("clearFieldsPerfil");                    
+                    //_this.clearFields();
+                    //formulario-docmentos.relo
+                    this.send("refreshRoute");                 
+                        // if(!resultado.Error){
+                        //     _this.clearFields();
+                        //     _this.transitionToRoute("/documentos-personales");
+                        // }                             
                 })
                 .catch(error=>{
-                    alertify.error(resultado.mensaje);
-                    // alert(resultTotal.books.mensaje); 
-                    
+                    alertify.error(resultado.mensaje); 
+                                      
                 });
             }
             else{
@@ -256,41 +272,40 @@ export default Ember.Controller.extend( {
             }
         },  
 
-        onGuardarEdicion(){
-            console.log("Ingreso al Contolador de Guardar y editar");
+        onGuardarEdicion(){           
             var FechaIndefinida = new Date();            
             var dia = FechaIndefinida.getDate();
             var mes = FechaIndefinida.getMonth()+1;// +1 porque los meses empiezan en 0
             var anio = FechaIndefinida.getFullYear() + 100;       
+            // if(this.get("CheckBoxEstado") == !false)
+            // {
+            //     FechaIndefinida = (anio+"/"+mes+"/"+dia);
+            //     //console.log("FECHA IDEFINIDA", FechaIndefinida)
+            // }
+            // else{
+            //     FechaIndefinida = this.get("FechaVencimiento")
+            //     //console.log("FECHA IGUAL: ",this.get("FechaVencimiento"));
+            // }
             
-            console.log("GET DEL DOCUMENTO ", this.get("formeditar.Numero"));
+            // console.log("GET DEL Referencia ", this.get("formeditar.Referencia"));
 
-            if(this.get("CheckBoxEstado") == !false)
-            {
-                FechaIndefinida = (anio+"/"+mes+"/"+dia);
-                console.log("FECHA IDEFINIDA", FechaIndefinida)
-            }
-            else{
-                FechaIndefinida = this.get("FechaVencimiento")
-                console.log("FECHA IGUAL: ",this.get("FechaVencimiento"));
-            }
-            
-            if(this.get("formValid")){
-                console.log("SU FORMULARIO ES CORRECTO **** ");
-            }
-            else{
-                console.log("SU FORMULARIO NO ES CORRECTO ###### ");
-            }                   
-
-            console.log("GET DEL DOCUMENTO ", this.get("formeditar.Numero"));
-            console.log("GET DEL Referencia ", this.get("formeditar.Referencia"));
-
-            console.log("**** FECHA FIN **** ", this.get("formeditar.FechaVencimiento"));
+            // //console.log("**** FECHA FIN **** ", this.get("formeditar.FechaVencimiento"));
             if(this.get("FechaVencimiento") == undefined || this.get("FechaVencimiento") == "-1"){
                 this.set("FechaVencimiento" , this.get("formeditar.FechaVencimiento")) ;
             }
             if(this.get("FechaEmision") == undefined || this.get("FechaEmision") == "-1"){
                 this.set("FechaEmision" , this.get("formeditar.FechaEmision")) ;
+            }
+            if(this.get("formeditar.Observacion") == null ){
+                this.set("formeditar.Observacion", '');
+            }
+
+            var ref = 0;
+            if(this.get("referencia") == undefined || this.get("referencia") == -1){                
+                ref = this.get("formeditar.Referencia");
+            }
+            else{
+                ref = this.get("referencia");
             }
             
             var userData = {                
@@ -298,136 +313,95 @@ export default Ember.Controller.extend( {
                 Numero : this.get("formeditar.Numero"),
                 FechaEmision : this.get("FechaEmision"),
                 FechaVencimiento : this.get("FechaVencimiento"),
-                Referencia : this.get("formeditar.Referencia"),
+                Referencia : ref, //this.get("formeditar.Referencia"),
                 Observacion : this.get("formeditar.Observacion"),
-                DocumentoPersonalID: this.get("formeditar.DocumentoPersonalID")
-                
+                DocumentoPersonalID: this.get("formeditar.DocumentoPersonalID")                
             };                          
             
-            console.log("userData", userData);                            
-            console.log("Ingresa al controlador principal Documentos Personales");            
-            var servicioFormulario = this.get("servicioFormulario");            
-            
+            console.log("userData", userData);                                        
+            var servicioFormulario = this.get("servicioFormulario");        
             servicioFormulario.callDocumentosPersonalesEditar(userData)
-            .then(resultado=>{    
-                _this.clearFields();            
-                console.log("controlador servicio Resultado", resultado);              
+            .then(resultado=>{                    
                 alertify.success(resultado.mensaje);
-                    if(!resultado.Error){
-                        _this.clearFields();
-                        _this.transitionToRoute("/");
-                    }         
-                // alert(resultTotal.books.mensaje);                                                                
+                this.send("refreshRoute");   
             })
             .catch(error=>{
                 alertify.error(resultado.mensaje);
-                // alert(resultTotal.books.mensaje); 
-                
             });
         },  
 
 
         tipoDocumentoSelected(value){
-            console.log("Ingresa tipoDocumento" , value);
-            //this.set("mensajeErrorSelectDoc" , "" );
-            
+            console.log("value tipoDocumentoSelected ", value);
             this.set("selectValidoDoc", true);
-            //mensajeErrorSelectDoc
-            
             this.set("tipoDocumento",value);
             switch(value) {
-                //console.log("Valor value: ", value);
                 case '10':
-                        console.log("Valor value: ", value);
-                        console.log("Ingreso al documento carnet identidad ");
                         this.set("visibleCiudad" , true);
                         this.set("visibleLicencia" , false);                        
                         this.set("visiblePaises" , false);
                         this.set("visibleVacuna" , false);
                     break;
                 case '12':
-                        console.log("Valor value: ", value);
-                        console.log("Ingreso al documento Licencia  ");
                         this.set("visibleLicencia" , true);                        
                         this.set("visibleCiudad" , false);
                         this.set("visiblePaises" , false);
                         this.set("visibleVacuna" , false);
                     break;
-                case '9':
-                        console.log("Valor value: ", value);
-                        console.log("Ingreso al documento Vacunas  ");
+                case '9':                       
                         this.set("visibleVacuna" , true);
                         this.set("visiblePaises" , false);
                         this.set("visibleLicencia" , false);
                         this.set("visibleCiudad" , false);                        
                         
                     break;
-                case '5':
-                        console.log("Valor value: ", value);
-                        console.log("Ingreso al documento Visa Residente  ");
+                case '5':                        
                         this.set("visiblePaises" , true);
                         this.set("visibleLicencia" , false);
                         this.set("visibleCiudad" , false);                        
                         this.set("visibleVacuna" , false);
                     break;
                 case '6':
-                        console.log("Valor value: ", value);
-                        console.log("Ingreso al documento Visa Tripulante   ");
                         this.set("visiblePaises" , true);
                         this.set("visibleLicencia" , false);
                         this.set("visibleCiudad" , false);                        
                         this.set("visibleVacuna" , false);
                 break;
-                    case '22':
-                    console.log("Valor value: ", value);
-                    console.log("Ingreso al documento Visa Turista  ");
+                    case '22':                    
                     this.set("visiblePaises" , true);
                     this.set("visibleCiudad" , false);
                 break;
-                default:
-                    console.log("No selecciono ningun documento");
+                default:                    
                     this.set("visibleLicencia" , false);
                     this.set("visibleCiudad" , false);
                     this.set("visiblePaises" , false);
                     this.set("visibleVacuna" , false);
             }
         },
-        referenciaSelected(value){            
+        referenciaSelected(value){      
+            this.set("isDisabled", false);
+            console.log("Seleccion = ",value);
             this.set("selectValidoRef", true);
-            console.log("Ingresa referencia" , value);
             this.set("referencia",value);
-            this.set("formeditar.referencia",value);
-            console.log("Mi refe: ", this.get("referencia"));
+            this.set("formeditar.referencia",value);            
         },
 
         indefinidoCheckBoxEstado() {
             const state = this.get('CheckBoxEstado'); // cbState is not updated when use 'change' event
-            this.set('CheckBoxEstado', !state );
-            console.log("Ingresa estado check Box",  state);
+            this.set('CheckBoxEstado', !state );            
         },       
         
         onFechaIni(data){
-            //_this.clearFields();
-            //this.send("clearFields");
             this.send("validateFields");            
-            //this.set("birthDateErrorMessage","");
-            console.log("Fecha Seleccionada Inicio",   moment(data).format('YYYY/MM/DD'));
-            //this.set("FechaEmision",moment(data).format('DD/MM/YYYY'));
-            console.log(this.get("FechaEmision"));
             this.set("FechaEmision", moment(data).format('YYYY/MM/DD'));
         },
         onFechaFin(data){
-            //_this.clearFields();
             this.send("validateFields");
-            //this.set("birthDateErrorMessage","");
-            console.log("Fecha Seleccionada Fin",  moment(data).format('YYYY/MM/DD'));
             this.set("FechaVencimiento",moment(data).format('YYYY/MM/DD'));
         },
-        signUp(event){
-            
+        signUp(event){            
             var servicioFormulario = this.get("servicioFormulario");
             servicioFormulario.callDocumentosPersonalesEditar(event.DocumentoPersonalID);
-            console.log(event.DocumentoID );
 
             this.set("formeditar.DocumentoID", event.DocumentoID);
             this.set("formeditar.FechaEmision", event.FechaEmision);
@@ -436,14 +410,10 @@ export default Ember.Controller.extend( {
             this.set("formeditar.Referencia", event.Referencia);
             this.set("formeditar.Numero", event.NumeroDocumento);
             this.set("formeditar.DocumentoPersonalID", event.DocumentoPersonalID);
-            
-            console.log("GET DEL DOCUMENTO ", this.get("formeditar.Numero"));            
-           console.log("ACCION **" , event);
-           console.log("ACCION **" , event.DocumentoPersonalID);
         },
 
-        idEditar(event){            
-
+        idEditar(event){  
+            console.log("Referencia --- " , event.Referencia)          ;
             this.set("formeditar.DocumentoID", event.DocumentoID);
             this.set("formeditar.FechaEmision", event.FechaEmision);
             this.set("formeditar.FechaVencimiento", event.FechaVencimiento);
@@ -451,35 +421,93 @@ export default Ember.Controller.extend( {
             this.set("formeditar.Referencia", event.Referencia);
             this.set("formeditar.Numero", event.NumeroDocumento);
             this.set("formeditar.DocumentoPersonalID", event.DocumentoPersonalID);
+           var dato = event.DocumentoID.toString();
+            switch(dato) {                
+                case '10':
+                console.log("Ingreso al switch 10");
+                        this.set("visibleCiudad" , true);
+                        this.set("visibleLicencia" , false);                        
+                        this.set("visiblePaises" , false);
+                        this.set("visibleVacuna" , false);
+                    break;
+                case '12':
+                console.log("Ingreso al switch 12");
+                        this.set("visibleLicencia" , true);                        
+                        this.set("visibleCiudad" , false);
+                        this.set("visiblePaises" , false);
+                        this.set("visibleVacuna" , false);
+                    break;
+                case '9':                       
+                console.log("Ingreso al switch 9");
+                        this.set("visibleVacuna" , true);
+                        this.set("visiblePaises" , false);
+                        this.set("visibleLicencia" , false);
+                        this.set("visibleCiudad" , false);                        
+                        
+                    break;
+                case '5':   
+                console.log("Ingreso al switch 5");                     
+                        this.set("visiblePaises" , true);
+                        this.set("visibleLicencia" , false);
+                        this.set("visibleCiudad" , false);                        
+                        this.set("visibleVacuna" , false);
+                    break;
+                case '6':
+                console.log("Ingreso al switch 6");
+                        this.set("visiblePaises" , true);
+                        this.set("visibleLicencia" , false);
+                        this.set("visibleCiudad" , false);                        
+                        this.set("visibleVacuna" , false);
+                break;
+                    case '22':                    
+                    this.set("visiblePaises" , true);
+                    this.set("visibleCiudad" , false);
+                break;
+                default:                    
+                console.log("Ingreso al switch defaul");
+                    this.set("visibleLicencia" , false);
+                    this.set("visibleCiudad" , false);
+                    this.set("visiblePaises" , false);
+                    this.set("visibleVacuna" , false);
+            }  
+             //visibleCiudad
+             console.log("MI ID DEL FOR ES : ", event.DocumentoID);
+             console.log("visibleCiudad ", this.get("visibleVacuna"));         
+        },
+        
+        nuevoDocu(){
             
-            // if(event.Finado == "SI"){                
-            //     this.set('CheckBoxEstado', true );
-            // }
-            // else{
-            //     this.set('CheckBoxEstado', false );
-            // }   
-            // console.log("GET DEL DOCUMENTO ", this.get("formeditar.Numero"));            
-           console.log("ACCION **" , event);
-           //console.log("ACCION **" , event.DocumentoPersonalID);
+            this.set("NumeroValido",true);
+            this.set("FechaIniValido",true);
+            this.set("FechaFinValido",true);
+            document.getElementById("miForm").reset();
+            //this.clearFields();
+            
+            //document.getElementById("exampleModalLabel").reset();
+            console.log("Nuevo Formulario");
+//            this.store.unloadAll('PARTICULAR MAODEL NAME');
+            this.set("form.DocumentoID",-1); 
+            this.set("form.Numero", ''); 
+            this.set("form.FechaEmision",''); 
+            this.set("form.FechaVencimiento",''); //2019/01/16'); 
+            this.set("form.Observacion",''); 
+            this.set("form.ConAlerta",''); 
+            this.set("form.Referencia",''); 
+            this.set("form.DocumentoPersonalID",0); 
+
         },
 
-        idEliminar(dato){
-            console.log("eliminar Documento Personal" , dato);
+        idEliminar(dato){           
             var servicioFormulario = this.get("servicioFormulario");
             servicioFormulario.deleteFormulario(dato)
-            .then(resultado=>{                
-                //this.transitionToRoute('principal');                  
-                 alert(resultado.mensaje);    
-                 location.reload();                                                              
+            .then(resultado=>{     
+                alertify.success(resultado.mensaje);
+                this.send("refreshRoute");    
             })
             .catch(error=>{
-                alert(resultado.mensaje); 
-                
+                alertify.error(resultado.mensaje);
             });
-        }
-
-        
-    },
-   
+        }        
+    },   
     
 });

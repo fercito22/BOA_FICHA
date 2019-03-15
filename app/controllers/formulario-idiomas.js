@@ -47,73 +47,39 @@ export default Controller.extend({
     },
 
     actions:{
-        onGuardar(){
-            
-            //if(this.get("formValid")){
-                // var usersService = this.get("usersService");
-                // var language = this.get("language");
-                var userData = {
-                    //FirstName : this.get("name"),                    
+        onGuardar(){            
+                var userData = {                    
                     idioma: this.get("selectedIdioma"),                    
                     habla: this.get("nivelHabla"),
                     lee: this.get("nivelLee"),
                     escribe: this.get("nivelEscribe")
                 };
             
-            //console.log("Datos",value);
-            // var idioma = this.get("selectedIdioma"); 
-            // var habla = this.get("nivelHabla");
-            // var lee = this.get("nivelLee");
-            // var escribe = this.get("nivelEscribe");
-            // if(idioma == null || idioma == undefined){
-            //     console.log(idioma , habla, lee, escribe);
-            //     idioma = a;
-            // }
-            console.log("userData", userData);
-            
-            //alert(idioma , habla, lee, escribe);         
-            console.log("Ingresa al controlador principal");
+            //console.log("userData", userData);            
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
-            const formularioService = this.get("formi"); 
-            console.log("Datos",formularioService);
+            const formularioService = this.get("formi");            
             servicioFormulario.updateFormulario(userData)
-            .then(resultado=>{
-                console.log("controlador servicio");    
-                alertify.success(resultado.mensaje);          
-                // alert(resultTotal.books.mensaje);                                                                
+            .then(resultado=>{                
+                alertify.success(resultado.mensaje);                          
             })
             .catch(error=>{
                 alertify.error(resultado.mensaje);
-                // alert(resultTotal.books.mensaje); 
-                
             });
         },  
-        idiomaSelected(value){
-            //console.log('selected state: ' + state);
-            let selectedRow = this.get('formi');
-            console.log('dayRow before: ' + selectedRow.value);
-            // this.get('dayRow').set('state', state);
-            // console.log('dayRow after: ' + selectedRow.state);
-
-            console.log("Ingresa selectable" , value);
+        idiomaSelected(value){            
+            //let selectedRow = this.get('formi');
             this.set("selectedIdioma",value);
         },
-        nivelSelectedHabla(value){
-            console.log("Ingresa nivel-habla" , value);
+        nivelSelectedHabla(value){            
             this.set("nivelHabla",value);
         },
-        nivelSelectedLee(value){
-            console.log("Ingresa selectable-nivel-lee" , value);
+        nivelSelectedLee(value){          
             this.set("nivelLee",value);
         },
         nivelSelectedEscribe(value){
-            console.log("Ingresa selectable-nivel-escribe" , value);
             this.set("nivelEscribe",value);
         }
-
-    }
-
-   
+    }   
     
 });

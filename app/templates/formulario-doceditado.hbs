@@ -4,7 +4,7 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel2">Formulario Perfil Editable</h5>
+        <h5 class="modal-title" id="exampleModalLabel2">Documento Editable</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -30,7 +30,7 @@
                         <select  id="sel2" onchange={{action 'referenciaSelected' value="target.value"}} >
                         <option disabled selected> -- Seleccione un Departamento -- </option>
                         {{#each DepartamentosBolivia as |itemDepartamento|}}
-                            <option value={{itemDepartamento.Id}}  >{{itemDepartamento.Nombre}}</option>
+                            <option value={{itemDepartamento.Id}} selected={{is-eq2 itemDepartamento.Id  formeditar.Referencia }} >{{itemDepartamento.Nombre}}</option>
                         {{/each}}
                     </select>
                 </div>      
@@ -46,8 +46,7 @@
                     <select  id="sel3" onchange={{action 'referenciaSelected' value="target.value"}} >
                         <option disabled selected> -- Seleccione tipo Licencia -- </option>
                         {{#each TipoLicencia as |itemLicencia|}}
-
-                            <option value={{itemLicencia.Id}}   >{{itemLicencia.Nombre}}</option>
+                            <option value={{itemLicencia.Id}}  selected={{is-eq2 itemLicencia.Id  formeditar.Referencia }} >{{itemLicencia.Nombre}}</option>
                         {{/each}}
                     </select>
                     <label hidden={{selectValidoRef}} class="errorMessage mensaje-error">{{mensajeErrorSelectRef}}</label>               
@@ -63,7 +62,7 @@
                     <select  id="sel4" onchange={{action 'referenciaSelected' value="target.value"}} >
                         <option disabled selected> -- Seleccione un pais -- </option>
                         {{#each ListaPaises as |itemPais|}}
-                            <option value={{itemPais.paisID}}  selected={{is-eq itemPais.paisID 1}} >{{itemPais.nombrePais}}</option>
+                            <option value={{itemPais.paisID}}  selected={{is-eq2 itemPais.paisID  formeditar.Referencia }} >{{itemPais.nombrePais}}</option>
                         {{/each}}
                     </select>
             </div>       
@@ -80,15 +79,16 @@
                             <option disabled selected> -- Seleccione la vacuna -- </option>
                             {{#each CombosVacunas as |itemVacuna|}}
                                 {{!-- selected={{is-eq itemVacuna.Name form.Name}} --}}
-                                <option value={{itemVacuna.Name}}   >{{itemVacuna.Nombre}}</option>
+                                <option value={{itemVacuna.tipoVacunaID}} selected={{is-eq2 itemVacuna.tipoVacunaID  formeditar.Referencia }}  >{{itemVacuna.Nombre}}</option>
                             {{/each}}
                         </select>
                 </div>   
                 <label hidden={{selectValidoRef}} class="errorMessage mensaje-error">{{mensajeErrorSelectRef}}</label>                           
             </div>
-        {{/if}}    
-          
-          <div class="form-group">
+        {{/if}}
+
+        {{#unless  (is-eq formeditar.DocumentoID 9) }} 
+             <div class="form-group">
               <p>Numero</p>
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>
@@ -102,7 +102,24 @@
                         }} 
                 </div>                           
                 <label hidden={{NumeroValido2}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>   
-          </div>
+          </div>                                                                 
+        {{/unless}}    
+          
+          {{!-- <div class="form-group">
+              <p>Numero</p>
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-id-card text-info"></i></div>
+                        {{input
+                            value=formeditar.Numero
+                            placeholder="Numero"
+                            autocomplete='off'
+                            required=true
+                            tabIndex=5
+                            class="form-control text-secondary border border-info  is-valid"
+                        }} 
+                </div>                           
+                <label hidden={{NumeroValido2}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>   
+          </div> --}}
            
           <div class="form-group">
               <p>Fecha Emision</p>

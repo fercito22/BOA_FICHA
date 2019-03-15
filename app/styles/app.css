@@ -5,3 +5,13 @@
  .mensaje-error{
     color: red;
 }
+
+#PunteroAqui:hover{ color: brown}
+#PunteroAqui{
+	/* width:16px; 
+	height:16px;  */
+	overflow:hidden; 
+    position:absolute; 
+    color: green;
+
+	}

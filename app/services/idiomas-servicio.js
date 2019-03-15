@@ -26,11 +26,10 @@ export default Service.extend({
     },
     
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE IDIOMAS");
-        console.log(form);
+        //console.log("Ingreso al servicio UPDATE IDIOMAS");
+        //console.log(form);
         return new RSVP.Promise(function(resolve,reject){
-            var parametros = {
-               // tipo: 2,
+            var parametros = {               
                 empleadoID: Config.usuario_id ,                
                 idiomaID: form.idioma,
                 Lee: form.lee,
@@ -38,8 +37,8 @@ export default Service.extend({
                 Escribe: form.escribe,
                 Identificador: 2
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                       
       
           var request = $.ajax({
             type: 'POST',            
@@ -58,11 +57,10 @@ export default Service.extend({
     },
 
     deleteFormulario:function(form){
-        console.log("Ingreso al servicio Elimina IDIOMAS");
-        console.log(form);
+        // console.log("Ingreso al servicio Elimina IDIOMAS");
+        // console.log(form);
         return new RSVP.Promise(function(resolve,reject){
-            var parametros = {
-                // tipo: 2,
+            var parametros = {                
                  empleadoID: Config.usuario_id ,                
                  idiomaID: form.idiomaID,
                  Lee: form.lee,
@@ -70,9 +68,8 @@ export default Service.extend({
                  Escribe: form.escribe,
                  Identificador: 3
             };
-           console.log("PARAMETROS SERVICIO Eliminado");
-           console.log(parametros);                       
-      
+        //    console.log("PARAMETROS SERVICIO Eliminado");
+        //    console.log(parametros);                             
           var request = $.ajax({
             type: 'POST',            
             data: parametros,
@@ -88,7 +85,4 @@ export default Service.extend({
         });        
      });
     } 
-
-
-
 });

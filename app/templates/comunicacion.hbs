@@ -41,7 +41,8 @@
                                 {{#unless (is-eq item.tipoComunicacionID 7)}} 
                                     <div class="col-md-6">                                              
                                         <span class="title">{{item.ComunicacionNombre}}: <span {{action "funcionDobleClick" on="doubleClick" }} id="negrita">{{item.Valor}}</span></span>
-                                        <button  hidden={{isDisabledComunicacion}} onclick={{action "editarComunicacion" item}} id="botonEditar" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" >
+                                        {{!-- <button  hidden={{isDisabledComunicacion}} onclick={{action "editarComunicacion" item}} id="botonEditar" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" > --}}
+                                        <button  hidden={{isDisabledComunicacion}} onclick={{action "editarComunicacion" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModalceditar">
                                             {{fa-icon 'edit'}}
                                         </button> 
                                         {{!-- <button onclick={{action "borrarIdioma" idioma}} id="botonEditar" >

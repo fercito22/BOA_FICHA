@@ -7,11 +7,25 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('principal', function() {
-    this.route('principal');
-    
-    this.route('idiomas');
-  });
+  // this.route('principal', function() {
+  //   this.route('principal');
+
+  //   this.route('idiomas');
+  // });
+
+  this.route('idiomas', { path: '/idiomas' });
+  this.route('principal', { path: '/principal' });
+  this.route('educacion', { path: '/educacion' });
+  this.route('login', { path: '/login' });
+  this.route('perfil', { path: '/perfil' });
+
+
+  //this.route('index');
+  //index
+
+
+  this.route('idiomas');
+  this.route('principal');
   this.route('formulario-idiomas');
   this.route('contactenos');
   this.route('educacion', function() {
@@ -46,6 +60,8 @@ Router.map(function() {
   this.route('formacion');
   this.route('beneficiario');
   this.route('tallas');
+  this.route('login');
+  this.route('about');
 });
 
 export default Router;

@@ -1,29 +1,17 @@
 
-// import Route from '@ember/routing/route';
-
-// export default Route.extend({
-//     beforeModel() {
-//         this.replaceWith('principal');
-//       }   
-// });
-
-
-// import Route from '@ember/routing/route';
-
-// export default Route.extend({
-//     beforeModel() {
-//         this.replaceWith('principal');
-//       }
-// });
-
-
 import Route from '@ember/routing/route';
-//import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 import {inject} from '@ember/service';
+import Config from '../models/config';
 
 export default Route.extend({
     beforeModel() {
-        this.replaceWith('principal');
+        if(Config.usuario_id == 0){
+            this.replaceWith('application');
+        }
+        else{            
+            this.set('estadoSecion', true );   
+            this.replaceWith('principal');
+        }
       },
       valuesService: inject("perfil-servicio"),
       servicioIdiomas: inject("idiomas-servicio"),
@@ -39,8 +27,8 @@ export default Route.extend({
       servicioDeclaracion: inject("servicio-declaracion"),
       servicioFotografia: inject("servicio-fotografia"), 
       
-      servicioCombo: inject("combos"),   
-     
+      servicioCombo: inject("combos"),
+      fotoV : true,    
    
     model(){
              
@@ -48,41 +36,43 @@ export default Route.extend({
         var servicioIdiomas = this.get("servicioIdiomas");
         var servicioContacto = this.get("servicioContacto");
         var servicioMedico = this.get("servicioMedico");
-       var servicioBachiller = this.get("servicioBachiller");
-       var servicioFormacionAcademica = this.get("servicioFormacionAcademica");
-       var servicioExpLaboral = this.get("servicioExpLaboral");
-       var servicioVacaciones = this.get("servicioVacaciones");
-       var servicioBeneficiarios = this.get("servicioBeneficiarios");
-       var servicioEntrenamiento = this.get("servicioEntrenamiento");
-       var servicioMemorandum = this.get("servicioMemorandum");
-       var servicioDeclaracion = this.get("servicioDeclaracion");
-       var servicioFotografia = this.get("servicioFotografia");
-
-       var servicioCombo = this.get("servicioCombo");
+        var servicioBachiller = this.get("servicioBachiller");
+        var servicioFormacionAcademica = this.get("servicioFormacionAcademica");
+        var servicioExpLaboral = this.get("servicioExpLaboral");
+        var servicioVacaciones = this.get("servicioVacaciones");
+        var servicioBeneficiarios = this.get("servicioBeneficiarios");
+        var servicioEntrenamiento = this.get("servicioEntrenamiento");
+        var servicioMemorandum = this.get("servicioMemorandum");
+        var servicioDeclaracion = this.get("servicioDeclaracion");
+        var servicioFotografia = this.get("servicioFotografia");
+        var servicioCombo = this.get("servicioCombo");
        
         var resultTotal = {};
-       // console.log("Ingresa");
-      
-
         return valuesService.callPerfil()
             .then(resultado=>{
                 resultTotal.resultPerfil= resultado;
-                console.log("Perfil",resultTotal.resultPerfil);
+                //console.log("Perfil",resultTotal.resultPerfil);
                 return resultTotal;
             })
             .then(resultTotal=>{
                     return servicioIdiomas.callIdiomas()
                     .then(resultado=>{
-                        resultTotal.resultIdioma= resultado;
-                        console.log("IDIOMAS ",resultTotal.resultIdioma);
-                        return resultTotal;
+                        //console.log("IDIOMAS ",resultado);  
+                        if(resultado.length == 0){                            
+                            this.set('idiomasV',  false);                               
+                        }
+                        else{
+                            resultTotal.resultIdioma= resultado;
+                            //console.log("IDIOMAS ",resultTotal.resultIdioma);                                               
+                        } 
+                        return resultTotal; 
                     })
                 })
                 .then(resultTotal=>{
                     return servicioContacto.callContactoEmergencia()
                     .then(resultado=>{
                         resultTotal.resultEmergencia= resultado;
-                        console.log(resultTotal.resultEmergencia);
+                        //console.log("EMERGENCIA",resultTotal.resultEmergencia);
                         return resultTotal;
                     })
                 })
@@ -90,8 +80,8 @@ export default Route.extend({
                     return servicioMedico.callMedicoCabecera()
                     .then(resultado=>{
                         resultTotal.resultCabecera= resultado;
-                        console.log("Cabecera");
-                        console.log(resultTotal.resultCabecera);
+                        // console.log("Cabecera");
+                        // console.log(resultTotal.resultCabecera);
                         return resultTotal;
                     })
                 })
@@ -99,26 +89,31 @@ export default Route.extend({
                     return servicioBachiller.callBachiller()
                     .then(resultado=>{
                         resultTotal.resultBachiller= resultado;
-                        console.log("BACHILER");
-                        console.log(resultTotal.resultBachiller);
+                        // console.log("BACHILER");
+                        // console.log(resultTotal.resultBachiller);
                         return resultTotal;
                     })
                 })    
                 .then(resultTotal=>{
                     return servicioFormacionAcademica.callFormacionAcademica()
                     .then(resultado=>{
-                        resultTotal.resultFormacion= resultado;
-                        console.log("Formacion");
-                        console.log(resultTotal.resultFormacion);
-                        return resultTotal;
+                        if(resultado.length == 0){                            
+                            this.set('formacionV',  false);                              
+                        }
+                        else{
+                            resultTotal.resultFormacion= resultado;
+                            // console.log("Formacion");
+                            // console.log(resultTotal.resultFormacion);
+                        }
+                        return resultTotal;                                             
                     })
                 })
                 .then(resultTotal=>{
                     return servicioExpLaboral.callExperienciaLaboral()
                     .then(resultado=>{
                         resultTotal.resultLaboral= resultado;
-                        console.log("Experiencia Laboral");
-                        console.log(resultTotal.resultLaboral);
+                        // console.log("Experiencia Laboral");
+                        // console.log(resultTotal.resultLaboral);
                         return resultTotal;
                     })
                 })
@@ -126,8 +121,8 @@ export default Route.extend({
                     return servicioVacaciones.callVacaciones()
                     .then(resultado=>{
                         resultTotal.resultVacaciones= resultado;
-                        console.log("Vacaciones");
-                        console.log(resultTotal.resultVacaciones);
+                        // console.log("Vacaciones");
+                        // console.log(resultTotal.resultVacaciones);
                         return resultTotal;
                     })
                 })
@@ -135,8 +130,8 @@ export default Route.extend({
                     return servicioBeneficiarios.callBeneficiarios()
                     .then(resultado=>{
                         resultTotal.resultBeneficiarios= resultado;
-                        console.log("Beneficiarios");
-                        console.log(resultTotal.resultBeneficiarios);
+                        // console.log("Beneficiarios");
+                        // console.log(resultTotal.resultBeneficiarios);
                         return resultTotal;
                     })
                 })
@@ -144,8 +139,8 @@ export default Route.extend({
                     return servicioEntrenamiento.callCursosEntrenamiento()
                     .then(resultado=>{
                         resultTotal.resultEntrenamiento= resultado;
-                        console.log("Entrenamiento");
-                        console.log(resultTotal.resultEntrenamiento);
+                        // console.log("Entrenamiento");
+                        // console.log(resultTotal.resultEntrenamiento);
                         return resultTotal;
                     })
                 })
@@ -153,8 +148,8 @@ export default Route.extend({
                     return servicioMemorandum.callMemorandum()
                     .then(resultado=>{
                         resultTotal.resultMemo= resultado;
-                        console.log("MEmo");
-                        console.log(resultTotal.resultMemo);
+                        // console.log("MEmo");
+                        // console.log(resultTotal.resultMemo);
                         return resultTotal;
                     })
                 })
@@ -162,26 +157,27 @@ export default Route.extend({
                     return servicioDeclaracion.getDeclaracion()
                     .then(resultado=>{
                         resultTotal.resultDeclaracion= resultado;
-                        console.log("Declaracion");
-                        console.log(resultTotal.resultDeclaracion);
+                        // console.log("Declaracion");
+                        // console.log(resultTotal.resultDeclaracion);
                         return resultTotal;
                     })
                 })
                 .then(resultTotal=>{
                 return servicioFotografia.callFotografia()
                 .then(resultado=>{
-                    console.log("Fotografia", resultado);
-                    //resultTotal.resultFotografias= JSON.parse(resultado);                        
-                    //var json = JSON.parse(resultado);
-                    console.log("Mi Fotografia " , resultado.datos[0].url_image);
-                    //console.log("Fotografia 2 ", resultado );
-                    //console.log(resultTotal.resultFotografias.datos[0].url_image);                        
-                    // console.log(resultTotal.resultFotografias);
-                    //var url = resultTotal.resultFotografias.datos;
-                    var url = resultado.datos[0].url_image;
-                    console.log( url);
-                    resultTotal.resultFotografias = url;     
-                    console.log(resultTotal.resultFotografias);                   
+                    if(resultado.datos.length == 0){                        
+                        resultTotal.resultFotografias = 'img/images.jpg';
+                        //console.log("***"+ resultTotal.resultFotografias +"****");
+                        this.set('fotoV' , false);                        
+                    }
+                    else{                        
+                        //console.log("Fotografia", resultado);                        
+                        //console.log("Mi Fotografia " , resultado.datos[0].url_image);                        
+                        var url = resultado.datos[0].url_image;
+                        //console.log( url);
+                        resultTotal.resultFotografias = url;     
+                        //console.log(resultTotal.resultFotografias);  
+                    }                                     
                     return resultTotal;
                 })
             })
@@ -189,7 +185,7 @@ export default Route.extend({
                 return servicioCombo.callEstadoCivil()
                 .then(resultado=>{
                     resultTotal.EstadoCivil= resultado;
-                    console.log("Estado Civil Combo: ", resultTotal.EstadoCivil);
+                    //console.log("Estado Civil Combo: ", resultTotal.EstadoCivil);
                     return resultTotal;
                 })
               }) 
@@ -197,7 +193,7 @@ export default Route.extend({
                 return servicioCombo.callCombosParentesco()
                 .then(resultado=>{
                     resultTotal.resultCombosParentesco= resultado;
-                    console.log("Tipo Colegio",resultTotal.resultCombosParentesco);
+                    //console.log("Tipo Colegio",resultTotal.resultCombosParentesco);
                     return resultTotal;
                 })
               })
@@ -205,7 +201,7 @@ export default Route.extend({
                 return servicioCombo.callCombosAlergiasMedicas()
                 .then(resultado=>{
                     resultTotal.AlergiasMedicas= resultado;
-                    console.log("Alergias Medicas",resultTotal.AlergiasMedicas);
+                    //console.log("Alergias Medicas",resultTotal.AlergiasMedicas);
                     return resultTotal;
                 })
               })
@@ -213,7 +209,7 @@ export default Route.extend({
                 return servicioCombo.callFactorSanguineo()
                 .then(resultado=>{
                     resultTotal.FactorSanguineo= resultado;
-                    console.log("Factor Sanguineo",resultTotal.FactorSanguineo);
+                    //console.log("Factor Sanguineo",resultTotal.FactorSanguineo);
                     return resultTotal;
                 })
               })
@@ -221,7 +217,7 @@ export default Route.extend({
                 return servicioCombo.callCombosIdiomas()
                 .then(resultado=>{
                     resultTotal.resultIdiomaCombo= resultado;
-                    console.log("COMBO IDIOMAS $$", resultTotal.resultIdiomaCombo);
+                    //console.log("COMBO IDIOMAS $$", resultTotal.resultIdiomaCombo);
                     return resultTotal;
                 })
               }) 
@@ -229,44 +225,34 @@ export default Route.extend({
                 return servicioCombo.callComboComunicacion()
                 .then(resultado=>{
                     resultTotal.resultComunicacionCombo= resultado;
-                    console.log("COMBO COMUNICACION ", resultTotal.resultComunicacionCombo);
+                    //console.log("COMBO COMUNICACION ", resultTotal.resultComunicacionCombo);
                     return resultTotal;
                 })
               })
-                               
-                
             .catch(()=>{
                 return resultTotal;
             }); 
     },   
     
     // asignamos el modelo al controlador
-    setupController(controller , model ){    
-
-        console.log("Ingreso formulario perfil ruta");
-        
-        //  console.log(model);
+    setupController(controller , model ){           
         if(model.resultPerfil[0].LugarDeNacimiento == null){
             var Ciudad = "";
             var Pais = "";
         }
         else{
             var Ciudad = model.resultPerfil[0].LugarDeNacimiento.split('/')[0];
-            var Pais = model.resultPerfil[0].LugarDeNacimiento.split('/')[1];
-            console.log(Ciudad ,Pais);
+            var Pais = model.resultPerfil[0].LugarDeNacimiento.split('/')[1];            
         }        
        
-          this._super(controller, model);
-         this.controller.set('formp.Nombre1',  model.resultPerfil[0].Nombre1);
+        this._super(controller, model);
+        this.controller.set('formp.Nombre1',  model.resultPerfil[0].Nombre1);
         this.controller.set('formp.Apellido1',  model.resultPerfil[0].Apellido1);
         this.controller.set('formp.Apellido2',  model.resultPerfil[0].Apellido2);
-        this.controller.set("formp.FechaNacimiento",moment(model.resultPerfil[0].FechaNacimiento).format('YYYY/MM/DD'));
-        ///this.controller.set("formp.FechaVencimiento",model.resultPerfil[0].FechaNacimiento);
-        console.log("Fecha naciimento #**",model.resultPerfil[0].FechaNacimiento);
-        console.log("Fecha naciimento #**2",moment(model.resultPerfil[0].FechaNacimiento).format('YYYY/MM/DD'));
-
+        this.controller.set("formp.FechaNacimiento",moment(model.resultPerfil[0].FechaNacimiento).format('YYYY/MM/DD'));        
+        // console.log("Fecha naciimento #**",model.resultPerfil[0].FechaNacimiento);
+        // console.log("Fecha naciimento #**2",moment(model.resultPerfil[0].FechaNacimiento).format('YYYY/MM/DD'));
         this.controller.set("vFrom",model.resultPerfil[0].FechaNacimiento);  
-
         this.controller.set('formp.Nacionalidad',  model.resultPerfil[0].Nacionalidad);
         this.controller.set('formp.CiudadNacimiento', Ciudad);
         this.controller.set('formp.LugarDeNacimiento', Pais);        
@@ -281,7 +267,7 @@ export default Route.extend({
         this.controller.set('formcont.TelefonoTrabajo',  model.resultEmergencia[0].TelefonoTrabajo);
         this.controller.set('formcont.TelefonoDomicilio',  model.resultEmergencia[0].TelefonoDomicilio);
         this.controller.set('formcont.NroCelular',  model.resultEmergencia[0].NroCelular);
-        //controller.set('ContactoEmergencia',model.ContactoEmergencia);
+        
         controller.set('CombosParentesco',model.resultCombosParentesco);
 
         //********** MEDICO CABECERA */
@@ -299,15 +285,19 @@ export default Route.extend({
         //this.controller.set('formcomu.Valor',  model.resultPerfil[0].Valor);
 
         //*** Idiomas */
-        this.controller.set('formidiomas.idiomaID',  model.resultIdioma[0].idiomaID);
-        this.controller.set('formidiomas.nivelHabla',  model.resultIdioma[0].Habla);
-        this.controller.set('formidiomas.nivelLee',  model.resultIdioma[0].Lee);
-        this.controller.set('formidiomas.nivelEscribe',  model.resultIdioma[0].Escribe);
+        if(this.get('idiomasV') == true){
+            this.controller.set('formidiomas.idiomaID',  model.resultIdioma[0].idiomaID);
+            this.controller.set('formidiomas.nivelHabla',  model.resultIdioma[0].Habla);
+            this.controller.set('formidiomas.nivelLee',  model.resultIdioma[0].Lee);
+            this.controller.set('formidiomas.nivelEscribe',  model.resultIdioma[0].Escribe);
+        }
+        
 
         controller.set('webapidataComboIdioma',model.resultIdiomaCombo);
         controller.set('webapidataComunicacion',model.resultComunicacionCombo);
-       
-        //console.log("Ingresa controller" , controller.set('webapidata',model.resultA));           
+
+        controller.set('fotografiaV',this.get('fotoV'));
+        
         controller.set('webapidata',model.resultPerfil);
         controller.set('webapidataIdiomas',model.resultIdioma);
         controller.set('webapidataC',model.resultEmergencia);

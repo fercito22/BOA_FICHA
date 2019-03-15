@@ -1,0 +1,47 @@
+{{!-- FORMULARIO  --}}
+<form class="container" novalidate="" action="#" method="POST" id="myForm">
+    <div class="form-group">
+        <label class="form-control-label" for="inputSuccess1">Ingrese su Nombre</label>
+        <input type="text" class="form-control" name="i1" id="inputSuccess1" required>
+        <div class="valid-feedback">MUY BIEN FERNANDO</div>
+        <div class="invalid-feedback">FERNANDO DEBES INGRESAR ALGO</div>
+    </div>
+    <div class="form-group">
+        <label class="form-control-label" for="inputSuccess2">Ingrese su apellido</label>
+        <input type="text" class="form-control" name="i2" required id="inputSuccess2">
+        <div class="valid-feedback">BIEN FERNANDO PUSISTE BIEN LOS DATOS</div>
+        <div class="invalid-feedback">FERNANDO REVISA PORFAVOR LOS DATOS</div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-secondary" id="btnSubmit">Validar</button>
+    </div>
+</form>
+<hr>
+
+
+{{!-- VALIDACIONES  --}}
+<script>
+    $("#btnSubmit").click(function(event) {
+
+    // Fetch form to apply custom Bootstrap validation
+    var form = $("#myForm")
+
+    if (form[0].checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    
+    form.addClass('was-validated');
+    // Perform ajax submit here...
+    
+});
+
+</script>
+
+
+
+
+
+
+
+

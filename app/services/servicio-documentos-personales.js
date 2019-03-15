@@ -9,10 +9,10 @@ export default Service.extend({
     callDocumentosPersonales: function(){
         return new RSVP.Promise(function(resolve, reject){
             var parametros = {
-                id: Config.usuario_id                             
+                id: Config.usuario_id
            };
             var request = $.ajax({
-                type: "GET",                
+                type: "GET",
                 data: parametros,
                 url: Config.serverpath + '/api/GetDocumentos/',
                 contentType:'application/json',
@@ -28,12 +28,11 @@ export default Service.extend({
     },
 
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE Contacto Emergencia");
-        console.log(form);
+         console.log("Ingreso al servicio Nuevo Contacto Emergencia");
+         console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
-               // tipo: 2,
-                empleadoID: Config.usuario_id ,                
+                empleadoID: Config.usuario_id ,
                 DocumentoID: form.DocumentoID,
                 Numero: form.Numero,
                 FechaEmision: form.FechaEmision,
@@ -41,34 +40,33 @@ export default Service.extend({
                 Observacion: form.Observacion,
                 ConAlerta: 1,
                 Estado: "V",
-                Referencia: form.Referencia,                
+                Referencia: form.Referencia,
                 Identificador: 0
-        
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
-      
+            console.log("PARAMETROS SERVICIO");
+            console.log(parametros);
+
           var request = $.ajax({
-            type: 'POST',            
+            type: 'POST',
             data: parametros,
             url: Config.serverpath + '/api/GetDocumentos',
             //contentType:'application/json',
-          });          
+          });
 
         request.done(function (response){
             resolve(response);
         });
         request.fail(function (response){
             reject(response);
-        });        
+        });
      });
     },
 
     callDocumentosPersonalesEditar: function(formeditar){
         return new RSVP.Promise(function(resolve, reject){
-            console.log("Ingreso al callDocumentosPersonalesEditar : ", formeditar);
-            console.log("**** USUARIO *****", Config.usuario_id);
-            console.log("**** DocumentoID *****", formeditar.DocumentoID);
+             console.log("Ingreso al callDocumentosPersonalesEditar : ", formeditar);
+            // console.log("**** USUARIO *****", Config.usuario_id);
+            // console.log("**** DocumentoID *****", formeditar.DocumentoID);
             var parametros = {
                 empleadoID: Config.usuario_id,
                 DocumentoID: formeditar.DocumentoID,
@@ -80,76 +78,61 @@ export default Service.extend({
                 Estado: 1,
                 Referencia:formeditar.Referencia,
                 Identificador: 1
-                
-                // DocumentoPersonalID: formeditar.DocumentoPersonalID,
-
-
-                // empleadoID: Config.usuario_id ,                
-                // DocumentoID: form.NombreMedico,
-                // Numero: form.TelefonoMedico,
-                // FechaEmision: form.NroCelularMedico,
-                // FechaVencimiento: form.AlergiasMedicas,
-                // Observacion: form.Medicamentos,
-                // ConAlerta: form.DireccionMedico,
-                // Referencia: form.GrupoSanquineo,                
-                // Identificador: 2
            };
-           console.log("Parametros Editar ", parametros);
+           //console.log("Parametros Editar ", parametros);
             var request = $.ajax({
-                type: "POST",                
+                type: "POST",
                 data: parametros,
                 url: Config.serverpath + '/api/GetDocumentos/',
                 //contentType:'application/json',
             });
 
-            request.done(function (response){
+            request.done(function (response){             
                 resolve(response);
             });
-            request.fail(function (response){
+            request.fail(function (response){                
                 reject(response);
             });
         });
     },
 
     deleteFormulario:function(form){
-        console.log("Ingreso al servicio ELIMINAR Documento ");
-        console.log(form);
+        // console.log("Ingreso al servicio ELIMINAR Documento ");
+        // console.log(form);
         return new RSVP.Promise(function(resolve,reject){
-            var parametros = {
-               // tipo: 2,
-                empleadoID: Config.usuario_id ,                
+            var parametros = {               
+                empleadoID: Config.usuario_id ,
                 DocumentoID: form.DocumentoID,
                 Numero: form.TelefonoMedico,
                 FechaEmision: form.NroCelularMedico,
                 FechaVencimiento: form.AlergiasMedicas,
                 Observacion: form.Medicamentos,
                 ConAlerta: form.DireccionMedico,
-                Referencia: form.GrupoSanquineo,                
+                Referencia: form.GrupoSanquineo,
                 Identificador: 3
-        
            };
            console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
-      
-        //   var request = $.ajax({
-        //     type: 'POST',            
-        //     data: parametros,
-        //     url: Config.serverpath + '/api/GetIdiomas',
-        //     //contentType:'application/json',
-        //   });          
+           console.log(parametros);
 
-        // request.done(function (response){
-        //     resolve(response);
-        // });
-        // request.fail(function (response){
-        //     reject(response);
-        // });        
+          var request = $.ajax({
+            type: 'POST',
+            data: parametros,
+            url: Config.serverpath + '/api/GetDocumentos',
+            //contentType:'application/json',
+          });
+
+        request.done(function (response){
+            resolve(response);
+        });
+        request.fail(function (response){
+            reject(response);
+        });
      });
     }
-    
 
 
 
 
-    
+
+
 });

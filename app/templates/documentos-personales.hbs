@@ -22,9 +22,11 @@
             <h4 class="text-uppercase text-center"><i class="title-icon fa fa-suitcase"></i>Documentos Personales</h4>
         </div>
 
-        <br><button id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
+        <br><button onclick={{action "nuevoDocu"}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal">
             {{fa-icon 'user-edit'}} Nuevo
-        </button> <br>
+        </button> 
+        <br>  
+        <hr id="linea2">
 
         <div id="timeline-experience">
                 {{#each webapidataDocumentos as |item|}} 
@@ -42,9 +44,68 @@
                                 <h6>
                                     Tipo Documento: <small>{{item.TipoDocumento}}</small>
                                 </h6>
+                                
+                                {{#if  (is-eq item.DocumentoID 10) }}    
+                                        <h6>
+                                            Referencia: <small>{{item.Referencia}}</small>
+                                        </h6>           
+                                {{/if}}
+
+                                {{#if  (is-eq item.DocumentoID 12) }}                                     
+                                    {{#each TipoLicencia as |itemLicencia|}}
+                                    {{!-- <p>ingreso {{itemLicencia.Id}} {{item.Referencia}}</p> --}}
+                                        {{#if  (is-eq itemLicencia.Id item.Referencia) }}  
+                                            <h6>
+                                                Referencia: <small>{{item.Referencia}}</small>
+                                            </h6> 
+                                        {{/if}}
+                                    {{/each}}                                                    
+                                {{/if}}
+
+                                {{#if  (is-eq item.DocumentoID 5) }}                                     
+                                    {{#each ListaPaises as |itemPais|}}
+                                        {{!-- <p>ingreso {{itemPais.paisID}} {{item.Referencia}}</p> --}}
+                                        {{#if  (is-eq2 itemPais.paisID item.Referencia) }}  
+                                            <h6>
+                                                Referencia: <small>{{itemPais.nombrePais}}</small>
+                                            </h6> 
+                                        {{/if}}                                        
+                                    {{/each}}                                                    
+                                {{/if}}
+                                {{#if  (is-eq item.DocumentoID 6) }}                                     
+                                    {{#each ListaPaises as |itemPais|}}
+                                        {{!-- <p>ingreso {{itemPais.paisID}} {{item.Referencia}}</p> --}}
+                                        {{#if  (is-eq2 itemPais.paisID item.Referencia) }}  
+                                            <h6>
+                                                Referencia: <small>{{itemPais.nombrePais}}</small>
+                                            </h6> 
+                                        {{/if}}                                        
+                                    {{/each}}                                                    
+                                {{/if}}
+                                {{#if  (is-eq item.DocumentoID 22) }}                                     
+                                    {{#each ListaPaises as |itemPais|}}
+                                        {{!-- <p>ingreso {{itemPais.paisID}} {{item.Referencia}}</p> --}}
+                                        {{#if  (is-eq2 itemPais.paisID item.Referencia) }}  
+                                            <h6>
+                                                Referencia: <small>{{itemPais.nombrePais}}</small>
+                                            </h6> 
+                                        {{/if}}                                        
+                                    {{/each}}                                                    
+                                {{/if}}
+
+                                {{!-- {{#if  (is-eq item.DocumentoID 9) }} 
+                                    {{#each CombosVacunas as |itemVacuna|}}
+                                         {{#if  (is-eq2 itemVacuna.tipoVacunaID item.Referencia)}}  
+                                            <h6>
+                                                Referencia: <small>{{itemVacuna.Nombre}}</small>
+                                            </h6> 
+                                        {{/if}}  
+                                    {{/each}}                                                                  
+                                {{/if}} --}}
                                 <h6>
                                     Documeto: <small>{{item.NumeroDocumento}}</small>
                                 </h6>
+                                
                                 <h6>
                                     Fecha Emisor: <small>{{item.FechaEmision}}</small>
                                 </h6>
@@ -65,7 +126,7 @@
                                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                             </a> --}}
                             <button onclick={{action "idEditar" item}} id="botonEditar" type="button" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" data-toggle="modal" data-target="#exampleModal2">
-                                {{fa-icon 'user-edit'}} Editar                                
+                                {{fa-icon 'user-edit'}}                                
                             </button>
                             <button onclick={{action "idEliminar" item}} id="botonEditar" style="float:right; margin-right: 1%; margin-block-start: -1%; " class="btn" >
                                 {{fa-icon 'trash'}}
@@ -76,6 +137,7 @@
                 {{/each}}                              
         </div>
     </div>
+    <br>
 
 
 
@@ -98,3 +160,16 @@
          {{partial 'formulario-doceditado'}}
     </div>
 </div>
+
+
+{{!-- 
+<script>
+    jQuery(document).ready(function(){
+ 
+	jQuery('#exampleModal').on('hidden.bs.modal', function (e) {
+	    jQuery(this).removeData('bs.modal');
+	    jQuery(this).find('.modal-content').empty();
+	})
+ 
+    })
+</script> --}}

@@ -30,7 +30,6 @@ export default Service.extend({
         console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
-               // tipo: 2,
                 empleadoID: Config.usuario_id ,                
                 idiomaID: form.idioma,
                 Lee: form.lee,
@@ -39,8 +38,7 @@ export default Service.extend({
                 Identificador: 1
            };
            console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
-      
+           console.log(parametros);                             
           var request = $.ajax({
             type: 'POST',            
             data: parametros,

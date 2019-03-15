@@ -27,15 +27,12 @@ export default Service.extend({
     },
     
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE declaracion");
-        console.log(form);
+        // console.log("Ingreso al servicio UPDATE declaracion");
+        // console.log(form);
         var tipo = 0;
         if(form.datosFamiliaresID == null){
             tipo = 0;
         }
-        // else(
-        //     tipo =2 
-        // )
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {    
                empleadoID: Config.usuario_id,            
@@ -44,15 +41,13 @@ export default Service.extend({
                Nombres: form.Nombres,
                Apellido1: form.Apellido1,
                Apellido2: form.Apellido2,
-               Tipo_NroDocumento: form.Tipo_NroDocumento,
-               //Beneficiario: form.Beneficiario,
+               Tipo_NroDocumento: form.Tipo_NroDocumento,               
                Estado: 1,                
                Finado: form.Finado,                 
                Identificador: 2    
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
-      
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                             
           var request = $.ajax({
             type: 'POST',            
             data: parametros,
@@ -71,15 +66,13 @@ export default Service.extend({
 
 
     nuevoFormulario:function(form){
-        console.log("Ingreso al servicio NUEVA DECLARACION *");
-        console.log(form);
+        // console.log("Ingreso al servicio NUEVA DECLARACION *");
+        // console.log(form);
         var tipo = 0;
         if(form.datosFamiliaresID == null){
             tipo = 0;
         }
-        // else(
-        //     tipo =2 
-        // )
+        
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {    
                empleadoID: Config.usuario_id,            
@@ -88,14 +81,13 @@ export default Service.extend({
                Nombres: form.Nombres,
                Apellido1: form.Apellido1,
                Apellido2: form.Apellido2,
-               Tipo_NroDocumento: form.Tipo_NroDocumento,
-               //Beneficiario: form.Beneficiario,
+               Tipo_NroDocumento: form.Tipo_NroDocumento,               
                Estado: 1,                
                Finado: form.Finado,                 
                Identificador: 2    
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                       
       
           var request = $.ajax({
             type: 'POST',            
@@ -114,9 +106,8 @@ export default Service.extend({
     },
 
     deleteFormulario:function(form){
-        console.log("Ingreso al servicio ELIMINAR declaracion");
-        console.log(form);
-       
+        // console.log("Ingreso al servicio ELIMINAR declaracion");
+        // console.log(form);       
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {    
                empleadoID: Config.usuario_id,            
@@ -125,14 +116,13 @@ export default Service.extend({
                Nombres: form.Nombres,
                Apellido1: form.Apellido1,
                Apellido2: form.Apellido2,
-               Tipo_NroDocumento: form.Tipo_NroDocumento,
-               //Beneficiario: form.Beneficiario,
+               Tipo_NroDocumento: form.Tipo_NroDocumento,               
                Estado: 1,                
                Finado: form.Finado,                 
                Identificador: 3    
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                       
       
           var request = $.ajax({
             type: 'POST',            

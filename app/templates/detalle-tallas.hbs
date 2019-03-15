@@ -1,16 +1,16 @@
 {{!-- style="width: 800px; border:2px solid red " --}}
-<div >
+
     
-<div class="modal-dialog" role="document" style="background: #2F4765; width:800px; ">
+<div class="modal-dialog" role="document" >
     <div class="modal-content">
-      <div class="modal-header" style="background: #2F4765">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: white">Detalle Tallas</h5>
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalLabel" >Detalle Tallas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style="background: #EEEEEE">
-        <form style="background: whitesmoke; margin: 2%" >
+      <div class="modal-body" >
+        
             <h5 class="text-uppercase ">Gestion</h5>
             <select  class="form-control" id="sel3" onchange={{action 'gestionSelected' value="target.value"}} >
                 {{#each ComboTallasDetalle as |item|}} 
@@ -18,24 +18,59 @@
                 {{/each}}                            
             </select>
             <hr id="linea2"> 
-
-            {{#each objeto2 as |item|}} 
-                <h5 style="margin: 2%"  class="text-uppercase ">{{item.CodigoTran}}</h5>
-                <hr id="linea2">
+            {{#each objeto2 as |item|}}                
+                
                 <div class=" " >
                     <div class="card-content">
-                        <div class="timeline-info" style="margin: 4%">                              
-                            <h6>                        
-                                <span class="title">EsExtra: <span id="negrita">{{item.EsExtra}}</span></span>
-                            </h6>                    
-                            <h6>
-                                <span class="title">Fecha Dotacion: <span id="negrita">{{item.fechaMov}}</span></span>                        
-                            </h6>
-                            {{!-- <h6>
-                                <span class="title">Nombre de Prenda: <span id="negrita">{{item.prenda}}</span></span>
-                            </h6>                --}}
-                            <br>
-                        </div> 
+
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="heading{{item.usuario}}">
+                                    {{!-- <div  class="section-title">
+                                        <h5  class="text-uppercase text-center" ><i class="title-icon"></i>{{item.CodigoTran}}</h5>
+                                    </div>  --}}
+                                    
+                                    {{!-- <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{item.usuario}}" aria-expanded="false" aria-controls="collapse{{item.usuario}}">
+                                            <h5 style="margin: 2% "  class="text-uppercase modal-title">{{item.CodigoTran}}</h5>                                                                                
+                                        </button>
+                                    </h5> --}}
+                                    <div>
+                                        <span class="text"><i class="far fa-smile"></i>
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{item.usuario}}" aria-expanded="false" aria-controls="collapse{{item.usuario}}">
+                                                    <h5 style="margin: 2% "  class="text-uppercase modal-title">{{item.CodigoTran}}</h5>                                                                                
+                                                </button>
+                                            </h5>
+                                        </span>
+                                        <span class="icon"><i class="far fa-smile"></i>
+                                            <div  class="section-title">
+                                                <h5  class="text-uppercase text-center" ><i class="title-icon"></i>{{item.CodigoTran}}
+                                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{item.usuario}}" aria-expanded="false" aria-controls="collapse{{item.usuario}}">
+                                                        <i>{{fa-icon 'arrow-down' }}</i>
+                                                    </button>
+                                                </h5>                                                
+                                            </div>                                            
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div id="collapse{{item.usuario}}" class="collapse show" aria-labelledby="heading{{item.usuario}}" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="timeline-info" style="margin: 4%">                              
+                                        <h6>                        
+                                            <span class="title">EsExtra: <span id="negrita">{{item.EsExtra}}</span></span>
+                                        </h6>                    
+                                        <h6>
+                                            <span class="title">Fecha Dotacion: <span id="negrita">{{item.fechaMov}}</span></span>                        
+                                        </h6>                                                      
+                                        <br>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>  
+                        </div>         
+                        
                     </div>                    
                 </div> 
                 
@@ -48,7 +83,7 @@
             {{/each}} 
 
         
-      </form>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -58,10 +93,22 @@
         {{!-- <button type="button" disabled={{isDisabledBeneficiario}} class="btn btn-primary" {{action 'onGuardar'}}>Guardar</button> --}}
       </div>
     </div>
-  </div>
-
-
-</div>
+ </div>
 
 
 
+
+
+<style>  
+    span.icon {
+    height: 32px;
+    }
+    @media (min-width: 641px) {
+        span.icon {display:none}
+        span.text {display:inline-block}
+    }
+    @media (max-width: 640px) {
+        span.icon {display:inline-block}
+        span.text {display:none}
+    }
+</style>

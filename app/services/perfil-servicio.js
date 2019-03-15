@@ -27,48 +27,33 @@ export default Service.extend({
         });
     },
     updateFormulario:function(form){
-        console.log("Ingreso al servicio UPDATE");
-        console.log(form);
+         console.log("Ingreso al servicio UPDATE");
+         console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {
                 tipo: 2,
                 empleadoID: Config.usuario_id ,                
-                Nombre1: form.Nombre1,
-                Apellido1: form.Apellido1,
-                Apellido2: form.Apellido2,
+                Nombre1: form.Nombre1.toUpperCase(),
+                Apellido1: form.Apellido1.toUpperCase(),
+                Apellido2: form.Apellido2.toUpperCase(),
                 FechaNacimiento: form.FechaNacimiento,
-                Nacionalidad: form.Nacionalidad,
-                LugarDeNacimiento: form.LugarDeNacimiento,  
-                CiudadNacimiento: form.CiudadNacimiento,                              
+                Nacionalidad: form.Nacionalidad.toUpperCase(),
+                LugarDeNacimiento: form.LugarDeNacimiento.toUpperCase(),  
+                CiudadNacimiento: form.CiudadNacimiento.toUpperCase(),                              
                 Direccion: form.Direccion,
                 EstadoCivil: form.EstadoCivil
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);            
-           console.log(Config.serverpath );
-      
+            // console.log("PARAMETROS SERVICIO");
+            // console.log(parametros);            
+        //    console.log(Config.serverpath );      
           var request = $.ajax({
             type: 'POST',            
-            data: parametros,
-        //     data: {
-        //         tipo: 2,
-        //         empleadoID: Config.usuario_id ,                
-        //         Nombre1: form.Nombre1,
-        //         Apellido1: form.Apellido1,
-        //         // Apellido2: form.Apellido2,
-        //         FechaNacimiento: form.FechaNacimiento,
-        //         Nacionalidad: form.Nacionalidad,
-        //         LugarDeNacimiento: form.LugarDeNacimiento,  
-        //         CiudadNacimiento: form.CiudadNacimiento,                              
-        //         Direccion: form.Direccion,
-        //         EstadoCivil: 1
-        //    } ,
+            data: parametros,        
             url: Config.serverpath + '/api/GetPerfilCom',
             //contentType:'application/json',
           });          
 
-        request.done(function (response){
-            console.log(response);
+        request.done(function (response){            
             resolve(response);
         });
         request.fail(function (response){
@@ -79,17 +64,17 @@ export default Service.extend({
 }   ,
 
     updateFormularioComunicacion:function(form){
-        console.log("Ingreso al servicio UPDATE COMUNICACION ");
-        console.log(form);
+        // console.log("Ingreso al servicio UPDATE COMUNICACION ");
+        // console.log(form);
         return new RSVP.Promise(function(resolve,reject){
             var parametros = {                
                 empleadoID: Config.usuario_id ,                
                 tipoComunicacionID: form.tipoComunicacionID,
                 Valor: form.Valor
         };
-        console.log("PARAMETROS SERVICIO");
-        console.log(parametros);            
-        console.log(Config.serverpath );
+        // console.log("PARAMETROS SERVICIO");
+        // console.log(parametros);            
+        // console.log(Config.serverpath );
     
         var request = $.ajax({
             type: 'POST',            
@@ -98,8 +83,7 @@ export default Service.extend({
             //contentType:'application/json',
         });          
 
-        request.done(function (response){
-            console.log(response);
+        request.done(function (response){            
             resolve(response);
         });
         request.fail(function (response){
@@ -111,13 +95,12 @@ export default Service.extend({
     
 
     updateFormularioMedico:function(form){
-        console.log("Ingreso al servicio UPDATE Contacto Emergencia");
-        console.log(form);
+        // console.log("Ingreso al servicio UPDATE Contacto Emergencia");
+        // console.log(form);
         return new RSVP.Promise(function(resolve,reject){
-            var parametros = {
-               // tipo: 2,
+            var parametros = {               
                 empleadoID: Config.usuario_id ,                
-                NombreMedico: form.NombreMedico,
+                NombreMedico: form.NombreMedico.toUpperCase(),
                 TelefonoMedico: form.TelefonoMedico,
                 NroCelularMedico: form.NroCelularMedico,
                 AlergiasMedicas: form.AlergiasMedicas,
@@ -127,9 +110,8 @@ export default Service.extend({
                 RH_Sanguineo: form.RH_Sanguineo,
                 Identificador: 2
            };
-           console.log("PARAMETROS SERVICIO");
-           console.log(parametros);                       
-      
+        //    console.log("PARAMETROS SERVICIO");
+        //    console.log(parametros);                             
           var request = $.ajax({
             type: 'POST',            
             data: parametros,
