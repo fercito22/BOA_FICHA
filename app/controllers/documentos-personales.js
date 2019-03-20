@@ -8,6 +8,7 @@ import { match, not } from '@ember/object/computed';
 
 import Validar from '../models/validaciones'
 import { and } from '@ember/object/computed';
+import { or } from '@ember/object/computed';
 
 import Ember from 'ember';
   
@@ -84,6 +85,11 @@ export default Ember.Controller.extend( {
         Referencia: -1,  
         DocumentoPersonalID: -1,  
         Identificador: -1,
+
+        // Nueva validacion
+        selectValidoDoc: false,    
+        validateFieldsDocumentoN: true,
+        validacionFechaCorrecta:true, 
     
         NumeroValido: match('form.Numero',Validar.TextNum),        
         FechaIniValido: match('FechaEmision', Validar.fecAMD),
@@ -95,13 +101,21 @@ export default Ember.Controller.extend( {
         FechaFinValido: match('FechaVencimiento', Validar.fecAMD),
         observacionval: match('formeditar.Observacion', Validar.texto),
 
-        habilitar: and('NumeroValido' ,  'FechaIniValido',  'selectValidoDoc' ),
+        habilitar2: or('CheckBoxEstado','FechaFinValido'),
+        habilitar: and('NumeroValido' , 'FechaIniValido',  'selectValidoDoc', 'habilitar2' ),
+        
         isDisabled: not('habilitar'),
         
-        documentosV: true,
+        documentosV: true,          
+          
+        //  -----   Mensajes Formulario Nuevos
+        mensajeNumero: '',
+        mensajeFechaEmision: '',
+        mensajeFechaVencimiento: '',        
+        mensajeDocumento: '',   
 
-    clearFields(){
-       
+    clearFields(){ 
+
         this.set("form.DocumentoID",''); 
         this.set("form.Numero", ''); 
         this.set("form.FechaEmision",'null'); 
@@ -119,25 +133,26 @@ export default Ember.Controller.extend( {
         this.set("mensajeErrorSelectRef","");  
     },
 
-    actions:{
-        // clearFieldsPerfil(){
-        //     this.set("mensajeErrorTexto",'');                
-        // this.set("mensajeErrorObservacion",'');
-        // this.set("mensajeErrorFecFin",'');
-        // this.set("mensajeErrorFecIni",'');
-        // this.set("mensajeErrorSelectDoc",'');
-        // this.set("mensajeErrorSelectRef",''); 
+    actions:{ 
+        clearFieldsDocumento(){ 
+            this.set("form.DocumentoID",''); 
+            this.set("form.Numero", '');             
+            this.set("FechaEmision",null);    
+            this.set("FechaVencimiento",null); 
 
-        // this.set("form.DocumentoID",""); 
-        // this.set("form.Numero",""); 
-        // this.set("form.FechaEmision",""); 
-        // this.set("form.FechaVencimiento",""); 
-        // this.set("form.Observacion",""); 
-        // this.set("form.ConAlerta",""); 
-        // this.set("form.Referencia",""); 
-        // this.set("form.DocumentoPersonalID",""); 
-        // },
-        validateFields(){          
+            this.set("mensajeErrorTexto","");                
+            this.set("mensajeErrorObservacion","");
+            this.set("mensajeErrorFecFin","");
+            this.set("mensajeErrorFecIni","");
+            this.set("mensajeErrorSelectDoc","");
+            this.set("mensajeErrorSelectRef","");  
+        },     
+        validateFields(){  
+            
+            console.log("Numero",this.get("NumeroValido2"));
+            console.log("FechaIniValido",this.get("FechaIniValido"));
+            console.log("FechaFinValido",this.get("FechaFinValido"));
+            console.log("observacionval",this.get("observacionval"));
 
             if(this.get("Numero") == -1){
                 this.set("formValid",false);
@@ -163,7 +178,36 @@ export default Ember.Controller.extend( {
             this.set("selectValidoDoc", true);
         },
 
-        onGuardar(){
+        validateFieldsNuevo(){
+
+            console.log("Numero",this.get("NumeroValido2"));
+            console.log("FechaIniValido",this.get("FechaIniValido"));
+            console.log("FechaFinValido",this.get("FechaFinValido"));
+            console.log("observacionval",this.get("observacionval"));   
+
+            
+            console.log("Validar selectValidoDoc:", this.get("selectValidoDoc"));            
+            if(this.get("habilitar") != true || this.get("selectValidoDoc") != true){
+                this.set("mensajeErrorTexto",Validar.mensajeNumeros);               
+                this.set("mensajeErrorFecFin",Validar.mensajeFecha);                
+                this.set("mensajeErrorFecIni",Validar.mensajeFecha);                            
+                this.set("mensajeErrorSelectDoc",Validar.mensajeSelectable);                
+                this.set("formValid",false);
+                this.set("mensajeErrorSelectRef",Validar.mensajeSelectable);
+                //this.set("selectValidoDoc", true);
+
+                // if(this.get("validacionFechaCorrecta") != true){                         
+                //     this.set("validateFieldsTituloN", false);
+                //     this.set("mensajeFormulario", "Fechas no validas la fecha inicio debe ser Menor a la fecha Fin.");
+                // }
+            }
+            else{
+                this.set("mensajeFormulario", "ok.");
+            }            
+            //console.log("validateFieldsTituloN: ", this.get("validateFieldsTituloN"));
+         },
+
+        onGuardarDocumentoNuevo(){
             var FechaIndefinida = new Date();            
             var dia = FechaIndefinida.getDate();
             var mes = FechaIndefinida.getMonth()+1;// +1 porque los meses empiezan en 0
@@ -183,7 +227,7 @@ export default Ember.Controller.extend( {
             this.set("FechaVencimiento", FechaIndefinida);            
 
             this.set("formValid",true);
-            this.send("validateFields");  
+            
             
 
             // if(this.get("formValid") == true){
@@ -220,56 +264,36 @@ export default Ember.Controller.extend( {
             console.log("USER DATA : = REFERENCIA ", userData);
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
-            this.send("validateFields");
-         
-            //  this.set("form.DocumentoID",'');            
-            //  this.set("form.Numero",'');            
-            //  this.set("form.FechaEmision",'');            
-            //  this.set("form.FechaVencimiento",'');            
-            //  this.set("form.Observacion",'');            
-            //  this.set("form.ConAlerta",'');            
-            //  this.set("form.Referencia",'');            
-            //  this.set("form.DocumentoPersonalID",'');                 
-             
-            // this.set("FechaEmision", '');
-            // this.set("FechaVencimiento", '');            
-            // this.set("Numero",''); 
-            // this.set("referencia",'');             
-            // ref = 0; 
-            // this.set("FechaEmision",''); 
-            // FechaIndefinida = '';
-            // obs = '';
-            // this.set("selectValidoRef", false);            
-            // this.set("formeditar.referencia",'');  
-
+            //this.send("validateFields"); 
+            this.send("validateFieldsNuevo");   
 
             console.log("Datos Documentos Personales FORM",formularioService);
 
-            if(this.get("formValid")){
-                servicioFormulario.updateFormulario(userData)
-                .then(resultado=>{                               
-                    console.log("controlador servicio Resultado", resultado);
-                    alertify.success(resultado.mensaje);
-                    //_this.refresh("/formulario-documentos");
-                    //this.refresh();
-                    //_this.clearFieldsPerfil();
-                    //_this.send("clearFieldsPerfil");                    
-                    //_this.clearFields();
-                    //formulario-docmentos.relo
-                    this.send("refreshRoute");                 
-                        // if(!resultado.Error){
-                        //     _this.clearFields();
-                        //     _this.transitionToRoute("/documentos-personales");
-                        // }                             
-                })
-                .catch(error=>{
-                    alertify.error(resultado.mensaje); 
+            // if(this.get("formValid")){
+            //     servicioFormulario.updateFormulario(userData)
+            //     .then(resultado=>{                               
+            //         console.log("controlador servicio Resultado", resultado);
+            //         alertify.success(resultado.mensaje);
+            //         //_this.refresh("/formulario-documentos");
+            //         //this.refresh();
+            //         //_this.clearFieldsPerfil();
+            //         //_this.send("clearFieldsPerfil");                    
+            //         //_this.clearFields();
+            //         //formulario-docmentos.relo
+            //         this.send("refreshRoute");                 
+            //             // if(!resultado.Error){
+            //             //     _this.clearFields();
+            //             //     _this.transitionToRoute("/documentos-personales");
+            //             // }                             
+            //     })
+            //     .catch(error=>{
+            //         alertify.error(resultado.mensaje); 
                                       
-                });
-            }
-            else{
-                alert("Debe llenar todos los campos correctamente");
-            }
+            //     });
+            // }
+            // else{
+            //     alert("Debe llenar todos los campos correctamente");
+            // }
         },  
 
         onGuardarEdicion(){           
@@ -388,15 +412,19 @@ export default Ember.Controller.extend( {
 
         indefinidoCheckBoxEstado() {
             const state = this.get('CheckBoxEstado'); // cbState is not updated when use 'change' event
-            this.set('CheckBoxEstado', !state );            
+            this.set('CheckBoxEstado', !state );    
+            this.set("FechaVencimiento",null);         
         },       
         
         onFechaIni(data){
-            this.send("validateFields");            
+            //this.send("validateFields"); 
+            this.send("validateFieldsNuevo"); 
+
             this.set("FechaEmision", moment(data).format('YYYY/MM/DD'));
         },
         onFechaFin(data){
-            this.send("validateFields");
+            //this.send("validateFields");
+            this.send("validateFieldsNuevo");
             this.set("FechaVencimiento",moment(data).format('YYYY/MM/DD'));
         },
         signUp(event){            
@@ -477,9 +505,12 @@ export default Ember.Controller.extend( {
         
         nuevoDocu(){
             
-            this.set("NumeroValido",true);
-            this.set("FechaIniValido",true);
-            this.set("FechaFinValido",true);
+            this.send("clearFieldsDocumento");
+            
+            // this.set("NumeroValido",true);
+            // this.set("FechaIniValido",true);
+            // this.set("FechaFinValido",true);
+            
             document.getElementById("miForm").reset();
             //this.clearFields();
             

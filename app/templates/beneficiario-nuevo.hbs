@@ -22,6 +22,7 @@
                     {{/each}}
                 </select>                
           </div>                 
+          <label hidden={{selectParentesco}} class="errorMessage mensaje-error is-valid">{{mensajeParentesco}}</label>
         </div>
 
         <div class="form-group">          
@@ -35,7 +36,7 @@
                         class="form-control text-secondary border border-info "
                     }}                         
             </div>         
-            <label hidden={{NombreValido2}} class="errorMessage mensaje-error is-valid">{{mensajeErrorNombre}}</label>        
+            <label hidden={{nombresBeneficiario}} class="errorMessage mensaje-error is-valid">{{mensajeNombre}}</label>        
         </div>
 
         <div class="row"> 
@@ -51,7 +52,7 @@
                                 class="form-control text-secondary border border-info "
                             }}                             
                     </div>     
-                    <label hidden={{apellidoValido2}} class="errorMessage mensaje-error is-valid">{{mensajeErrorApellidoPat}}</label>            
+                    <label hidden={{apellidoPaternoBeneficiario}} class="errorMessage mensaje-error is-valid">{{mensajeApellidoPaterno}}</label>            
                 </div>
             </div>           
 
@@ -67,7 +68,7 @@
                                 class="form-control text-secondary border border-info "
                             }}                             
                     </div>     
-                    <label hidden={{apellidoValido3}} class="errorMessage mensaje-error is-valid">{{mensajeErrorApellidoMat}}</label>
+                    <label hidden={{apellidoMaternoBeneficiario}} class="errorMessage mensaje-error is-valid">{{mensajeApellidoMaterno}}</label>
                 </div>
             </div>            
         </div>        
@@ -83,7 +84,7 @@
                     class="form-control text-secondary border border-info "
                 }}                   
           </div>  
-          <label hidden={{numeroVal2}} class="errorMessage mensaje-error is-valid">{{mensajeErrorNumeros}}</label>   
+          <label hidden={{carnetBeneficiario}} class="errorMessage mensaje-error is-valid">{{mensajeCarnet}}</label>   
           {{!-- <label hidden={{numeroVal2}} class="errorMessage mensaje-error is-valid">{{mensajeErrorNumeros}}</label>             --}}
         </div>
 
@@ -102,7 +103,12 @@
         {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
             Regresar
         {{/link-to}} --}}
-        <button type="button" disabled={{isDisabledBeneficiario}} class="btn btn-primary" data-dismiss="modal" {{action 'onGuardarNuevo'}}>Guardar</button>
+        {{!-- disabled={{isDisabledBeneficiario}} --}}
+        {{!-- data-dismiss="modal" --}}
+        {{!-- <button type="button"  class="btn btn-primary"  {{action 'onGuardarNuevo'}}>Guardar</button> --}}
+
+        <button hidden={{isDisabledBeneficiario}} data-dismiss="modal" type="button" class="btn btn-primary"  disabled={{isDisabledBeneficiario}}   {{action 'onGuardarNuevo'}}>Guardar</button>
+        <button hidden={{ValidacionBeneficiario}} type="button" class="btn btn-danger"   {{action 'onGuardarNuevo'}}>Guardar</button>
       </div>
     </div>
   </div>

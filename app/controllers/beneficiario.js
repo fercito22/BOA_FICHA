@@ -3,6 +3,7 @@ import {inject} from '@ember/service';
 
 import { match, not } from '@ember/object/computed';
 import Validar from '../models/validaciones'
+import Mensaje from '../models/mensajes-validacion'
 import { and } from '@ember/object/computed';
 
 export default Controller.extend({
@@ -53,44 +54,114 @@ export default Controller.extend({
         // isValid: match('emailAddress', /^.+@.+\..+$/),
         // sDisabled: not('isValid'),
 
-        mensajeErrorNombre: 'Porfavor Ingrese un nombre valido',
-        mensajeErrorApellidoPat: 'Ingrese un apellido Valido',
-        mensajeErrorApellidoMat: 'Ingrese un apellido Valido',
-        mensajeErrorNumeros: '',
+        // mensajeErrorNombre: 'Porfavor Ingrese un nombre valido',
+        // mensajeErrorApellidoPat: 'Ingrese un apellido Valido',
+        // mensajeErrorApellidoMat: '',
+        // mensajeErrorNumeros: '',
 
-        NombreValido: match('formeditar.Nombres',Validar.textoMinMax),
-        apellidoValido: match('formeditar.Apellido1', Validar.textoMinMax),
-        apellidoMaValido: match('formeditar.Apellido2', Validar.textoMinMax),
-        numeroValido: match('formeditar.Tipo_NroDocumento', Validar.carnet),
+        // NombreValido: match('formeditar.Nombres',Validar.textoMinMax),
+        // apellidoValido: match('formeditar.Apellido1', Validar.textoMinMax),
+        // //apellidoMaValido: match('formeditar.Apellido2', Validar.textoMinMax),
+        // numeroValido: match('formeditar.Tipo_NroDocumento', Validar.carnet),
 
-        habilitarEdit: and('NombreValido', 'apellidoValido', 'apellidoMaValido'),// 'numeroValido'),
-        isDisabledBeneficiarioEdit: not('habilitarEdit'),
+        // habilitarEdit: and('NombreValido', 'apellidoValido'),// 'apellidoMaValido'),// 'numeroValido'),
+        // isDisabledBeneficiarioEdit: not('habilitarEdit'),
         
         //--------------------
         //  Validacion Nuevo
         //--------------------
 
-        nombresVal2: match('form.Nombres', Validar.texto),
-        maxMinnombre2: match('form.Nombres' , Validar.textoMinMax),
-        NombreValido2: and('form', 'maxMinnombre2'),
+        // nombresVal2: match('form.Nombres', Validar.texto),
+        // maxMinnombre2: match('form.Nombres' , Validar.textoMinMax),
+        // NombreValido2: and('form', 'maxMinnombre2'),
 
-        apellidoVal2: match('form.Apellido1', Validar.texto),
-        maxMinApellido2: match('form.Apellido1' , Validar.textoMinMax),
-        apellidoValido2: and('apellidoVal2', 'maxMinApellido2'),
+        // apellidoVal2: match('form.Apellido1', Validar.texto),
+        // maxMinApellido2: match('form.Apellido1' , Validar.textoMinMax),
+        // apellidoValido2: and('apellidoVal2', 'maxMinApellido2'),
 
-        apellidoVal3: match('form.Apellido2', Validar.texto),
-        maxMinApellido3: match('form.Apellido2' , Validar.textoMinMax),
-        apellidoValido3: and('apellidoVal3', 'maxMinApellido3'),        
+        // apellidoVal3: match('form.Apellido2', Validar.texto),
+        // maxMinApellido3: match('form.Apellido2' , Validar.textoMinMax),
+        // apellidoValido3: and('apellidoVal3', 'maxMinApellido3'),        
 
-        habilitar: and('NombreValido2','apellidoValido2', 'apellidoValido3'),
-        isDisabledBeneficiario: not('habilitar'),
+        // habilitar: and('NombreValido2','apellidoValido2', 'apellidoValido3'),
+        // isDisabledBeneficiario: not('habilitar'),
 
-    clearFields(){
-        this.set("nombreContacto",null);             
-    },
+        // //  --------    Validacion Nueva --------
+        // nombresTitulo: match('form.Nombres', Validar.textoMinMax),        
+        // NombreValidoTitulo: and('nombresTitulo'),
+
+
+        //  ----------- Nuevas Validaciones ----------
+         //  --  formac  Modificar
+    //  --  formaN  Nuevo
+    //  -----   Formulario Nuevos Validacion
+    selectParentesco: false,    
+    validateFieldsBeneficiario: true,      
+    nombresBeneficiario: match('form.Nombres', Validar.textoMinMax),        
+    apellidoPaternoBeneficiario: match('form.Apellido1', Validar.textoMinMax),   
+    apellidoMaternoBeneficiario: match('form.Apellido2', Validar.textoMinMax),   
+    //carnetBeneficiario: match('form.Tipo_NroDocumento', Validar.TextNum),   
+    ValidacionBeneficiario: and('nombresBeneficiario' , 'apellidoPaternoBeneficiario', 'selectParentesco'),
+     //'apellidoMaternoBeneficiario'
+    isDisabledBeneficiario: not('ValidacionBeneficiario'),
+    //  -----   Mensajes Formulario Nuevos
+    mensajeNombre: '',
+    mensajeApellidoPaterno: '',
+    mensajeApellidoMaterno: '',
+    mensajeCarnet: '',
+    mensajeParentesco: '',
+
+    mensajeFormulario: '',
+
+
+    // clearFields(){
+    //     this.set("nombreContacto",null);             
+    // },
     
 
     actions:{
+
+        clearFields(){
+          //  this.set("ValidacionBeneficiario",false);
+            this.set("selectParentesco",false);
+            
+
+            console.log("Limpiar Formulario");;
+            this.set("mensajeNombre", '');
+            this.set("mensajeApellidoPaterno", '');
+            this.set("mensajeApellidoMaterno", '');
+           // this.set("mensajeCarnet", '');
+            this.set("parentescoID", '');
+            this.set("form.Nombres",null);    
+            this.set("form.Apellido1",null);
+            this.set("form.Apellido2",null);    
+            this.set("form.Tipo_NroDocumento",null);      
+            this.set("form.parentescoID",null);      
+        },        
+
+        validateFieldsBeneficiarioNuevo(){
+            console.log("ValidacionBeneficiario: ", this.get("ValidacionBeneficiario"));
+
+            console.log("nombresBeneficiario: ", this.get("nombresBeneficiario"));
+            console.log("apellidoPaternoBeneficiario: ", this.get("apellidoPaternoBeneficiario"));
+           // console.log("apellidoMaternoBeneficiario: ", this.get("apellidoMaternoBeneficiario"));
+            //console.log("carnetBeneficiario: ", this.get("carnetBeneficiario"));
+
+            
+            console.log("Validar Parentesco:", this.get("selectParentesco"));            
+            if(this.get("ValidacionBeneficiario") != true || this.get("selectParentesco") != true){
+                this.set("mensajeNombre", Mensaje.mensajeNombre);
+                this.set("mensajeApellidoPaterno", Mensaje.mensajeApellido);
+               // this.set("mensajeApellidoMaterno", Mensaje.mensajeApellido);
+                //this.set("mensajeCarnet", Mensaje.mensajeCarnet);                
+                this.set("mensajeFormulario", Mensaje.mensajeFormularioInvalido);
+                this.set("mensajeParentesco", Mensaje.mensajeSelectable);
+                this.set("validateFieldsBeneficiario", false);
+            }
+            else{
+                this.set("mensajeFormulario", "ok.");
+            }                        
+         },
 
         validateFieldsBeneEdit(){           
             if(this.get("formeditar.Nombres") == -1){
@@ -120,10 +191,16 @@ export default Controller.extend({
             if(this.get("form.Apellido2ApellidoMat") == ''){
                 this.set("mensajeError","Ingrese un apellido Valido" );
                 this.set("formValidBeneficiarioNuevo",false);
-            }   
+            }
+
+            // console.log("NombreValidoTitulo: ", this.get("NombreValidoTitulo"));
+            // if(this.get("NombreValidoTitulo") != true){
+            //     this.set("mensajeErrorNombre", Validar.mensajeTexto);
+            // }
+            
         },
 
-        onGuardar(){
+        onGuardarBeneficiarioEditar(){
             const formularioService = this.get("formeditar"); 
             var parentesco = null;
             if(this.get("parentescoID") == undefined || this.get("parentescoID") == -1){               
@@ -170,7 +247,7 @@ export default Controller.extend({
             });
         },         
 
-        ///***** Nuevo 
+        ///***** Nuevo Beneficiario
 
         onGuardarNuevo(){
             const formularioService = this.get("form");            
@@ -201,9 +278,17 @@ export default Controller.extend({
             var servicioFormulario = this.get("servicioFormulario");
 
             this.set("formValidBeneficiarioNuevo",true);
-            this.send("validateFieldsBeneNuevo");              
+            this.send("validateFieldsBeneNuevo");    
 
-            if(this.get("formValidBeneficiarioNuevo")){                
+            this.send("validateFieldsBeneficiarioNuevo");    
+            // if(this.get("validateFieldsBeneficiario") == true){
+            //     alertify.success("Mensaje ok");
+            // }
+            // else{
+            //     alertify.success("Mensaje Error");
+            // }
+
+            if(this.get("validateFieldsBeneficiario")){                
                 servicioFormulario.nuevoFormulario(userData)
                 .then(resultado=>{                                    
                     alertify.success(resultado.mensaje);    
@@ -220,14 +305,42 @@ export default Controller.extend({
         
         parentescoSelected(value){            
             this.set("parentesco",value);
+            this.set("selectParentesco",true);
         },
 
         finadoCheckBoxEstado() {
             const state = this.get('CheckBoxEstado'); // cbState is not updated when use 'change' event
             this.set('CheckBoxEstado', !state );            
         },
-        idEditar(event){
 
+        nuevoTitulo(){
+            this.send("clearFields"); 
+            this.set("mensajeParentesco", '');
+            this.set("form.Nombres",'');    
+            this.set("form.Apellido1",'');
+            this.set("form.Apellido2",'');    
+            this.set("form.Tipo_NroDocumento",'');      
+            this.set("form.parentescoID",'');     
+            
+
+            // document.getElementById("miFormTituloID").reset();            
+            // console.log("Nuevo Titulo");
+
+            // this.set('selectFechaIni', false);
+            // this.set('selectFechaFin', false);
+            // //this.set("formac.nivelAcademicoID", null);
+            // this.set("formaN.titulo", '');
+            // this.set("formaN.institucion", '');
+            // this.set("formaN.fechainicio", '');
+            // this.set("formaN.fechafin", '');    
+            // //this.set("formac.educacionSuperiorID", null);
+
+            // console.log('titulo => ',this.get('formac.titulo'));
+        },
+
+
+        idEditar(event){
+                      
             this.set("formeditar.parentescoID", event.parentescoID);
             this.set("formeditar.FechaEmision", event.FechaEmision);
             this.set("formeditar.Nombres", event.Nombres);

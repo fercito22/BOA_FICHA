@@ -23,7 +23,8 @@
                         <option value={{itemNivel.nivelAcademicoID}} selected={{is-eq itemNivel.nivelAcademicoID formac.nivelAcademicoID}}>{{itemNivel.Nivel}}</option>
                     {{/each}}
                 </select>                   
-          </div>                 
+          </div>      
+          <label hidden={{selectGradoE}} class="errorMessage mensaje-error is-valid">{{mensajeGrado}}</label>           
         </div>
 
         <div class="form-group">          
@@ -37,7 +38,7 @@
                     class="form-control text-secondary border border-info "
                 }}                 
           </div>             
-          {{!-- <label hidden={{tituloVal}} class="errorMessage mensaje-error is-valid">Porfavor Ingrese un nombre valido</label> --}}
+          <label hidden={{nombresTituloE}} class="errorMessage mensaje-error is-valid">{{mensajeNombreTitulo}}</label>
         </div>
 
         <div class="form-group">          
@@ -49,9 +50,9 @@
                     placeholder="Institucion"
                     autocomplete='off'
                     class="form-control text-secondary border border-info "
-                }} 
-                <label hidden={{institucionVal}} class="errorMessage mensaje-error is-valid">{{mensajeErrorTexto}}</label>                  
-          </div>                 
+                }}                 
+          </div>   
+          <label hidden={{nombresinstitucionE}} class="errorMessage mensaje-error is-valid">{{mensajeNombreInstituto}}</label>              
         </div>
 
         <div class="row">
@@ -74,7 +75,7 @@
                                 placeholder="Fecha Ini" 
                             }}                                      
                     </div>     
-                    <label hidden={{fechainicioVal}} class="errorMessage mensaje-error">{{mensajeErrorTexto}}</label>
+                    <label hidden={{fechainicioTituloE}} class="errorMessage mensaje-error">{{mensajeFechaInicio}}</label>
                 </div>
             </div>         
 
@@ -94,7 +95,7 @@
                             {{!-- {{pikaday-input value=formac.fechafin format="YYYY/MM/DD" onSelection=(action 'onFechaFin') class="form-control text-secondary border border-info " placeholder="Fecha Emision" }} --}}
                     </div>                      
                 </div>
-                <label hidden={{fechainicioVal}} class="errorMessage mensaje-error is-valid">{{mensajeErrorTexto}}</label>                                
+                <label hidden={{fechafinTituloE}} class="errorMessage mensaje-error is-valid">{{mensajeFechaFin}}</label>                                
             </div>
         </div>              
 
@@ -107,7 +108,8 @@
         {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
             Regresar
         {{/link-to}} --}}
-        <button type="button" class="btn btn-primary" disabled={{isDisabledFormacion}}  data-dismiss="modal" {{action 'onGuardarTituloEditar'}}>Guardar</button>
+        <button hidden={{isDisabledTituloE}} type="button" class="btn btn-primary" disabled={{isDisabledTituloE}}  data-dismiss="modal" {{action 'onGuardarTituloEditar'}}>Guardar</button>
+        <button hidden={{ValidacionTituloE}} type="button" class="btn btn-danger" {{action 'onGuardarTituloEditar'}}>Guardar</button>
       </div>
     </div>
   </div>

@@ -132,7 +132,7 @@
                                 {{pikaday-input format="YYYY/MM/DD"  onSelection=(action 'onFechaFin' ) class="form-control text-secondary border border-info " placeholder="Valido Hasta" }}
                             </div>
 
-                            <label hidden={{FechaFinValido}} class="errorMessage mensaje-error ">{{mensajeErrorFecFin}}</label>
+                            {{!-- <label hidden={{FechaFinValido}} class="errorMessage mensaje-error ">{{mensajeErrorFecFin}}</label> --}}
                     </div>
                     {{/unless}} 
 
@@ -143,7 +143,8 @@
                                 {{input type="checkbox" checked=CheckBoxEstado change=(action "indefinidoCheckBoxEstado")}}
                         </div>
                     </div>
-              </div>  
+              </div> 
+              <label hidden={{habilitar2}} class="errorMessage mensaje-error ">{{mensajeErrorFecFin}}</label> 
           </div> 
 
           <div class="form-group">
@@ -182,7 +183,12 @@
             {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
                 Regresar
             {{/link-to}} --}}
-            <button type="button" class="btn btn-primary" disabled={{isDisabled}} data-dismiss="modal" {{action 'onGuardar'}}>Guardar</button>
+
+            {{!-- data-dismiss="modal"  --}}
+            {{!-- <button type="button" class="btn btn-primary" disabled={{isDisabled}} {{action 'onGuardarDocumentoNuevo'}}>Guardar</button> --}}
+
+            <button hidden={{isDisabled}} data-dismiss="modal"   type="button" class="btn btn-primary"  disabled={{isDisabled}}   {{action 'onGuardarDocumentoNuevo'}}>Guardar</button>
+            <button hidden={{habilitar}} type="button" class="btn btn-danger"   {{action 'onGuardarDocumentoNuevo'}}>Guardar</button>
             
             {{!-- <input type="reset" value="Borrar todo" /> --}}
         </div>

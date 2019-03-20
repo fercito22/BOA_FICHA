@@ -45,7 +45,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
                             {{input
-                                value=formeditar.Apellido2
+                                value=formeditar.Apellido1
                                 placeholder="Apellido Paterno"
                                 autocomplete='off'
                                 class="form-control text-secondary border border-info "
@@ -61,7 +61,7 @@
                     <div class="input-group-prepend">
                         {{!-- <div class="input-group-text"><i class="fa fa-user text-info"></i></div>               --}}
                             {{input
-                                value=formeditar.Apellido1
+                                value=formeditar.Apellido2
                                 placeholder="Apellido Materno"
                                 autocomplete='off'
                                 class="form-control text-secondary border border-info "
@@ -101,7 +101,7 @@
         {{!-- {{#link-to 'index' tagName="button" class="btn btn-secondary"}}
             Regresar
         {{/link-to}} --}}
-        <button type="button" disabled={{isDisabledBeneficiarioEdit}} class="btn btn-primary" {{action 'onGuardar' }} data-dismiss="modal">Guardar</button>
+        <button type="button" disabled={{isDisabledBeneficiarioEdit}} class="btn btn-primary" {{action 'onGuardarBeneficiarioEditar' }} data-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>
