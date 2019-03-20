@@ -265,9 +265,15 @@ export default Ember.Controller.extend( {
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
             //this.send("validateFields"); 
-            this.send("validateFieldsNuevo");   //aaa
+            this.send("validateFieldsNuevo");   
 
             console.log("Datos Documentos Personales FORM",formularioService);
+            if(this.get("formValid")){
+                alertify.success("ok");
+            }
+            else{
+                alertify.success("Error");
+            }
 
             // if(this.get("formValid")){
             //     servicioFormulario.updateFormulario(userData)
@@ -413,7 +419,8 @@ export default Ember.Controller.extend( {
         indefinidoCheckBoxEstado() {
             const state = this.get('CheckBoxEstado'); // cbState is not updated when use 'change' event
             this.set('CheckBoxEstado', !state );    
-            this.set("FechaVencimiento",null);         
+            this.set("FechaVencimiento",null);  
+            this.send("validarFechas");       
         },       
         
         onFechaIni(data){
@@ -422,10 +429,20 @@ export default Ember.Controller.extend( {
 
             this.set("FechaEmision", moment(data).format('YYYY/MM/DD'));
         },
-        onFechaFin(data){
-            //this.send("validateFields");
+        onFechaFin(data){            
             this.send("validateFieldsNuevo");
             this.set("FechaVencimiento",moment(data).format('YYYY/MM/DD'));
+            this.send("validarFechas");
+        },
+        validarFechas(){                        
+            if(this.get("FechaEmision") < this.get("FechaVencimiento") || this.get("CheckBoxEstado") == true){
+                this.set("validacionFechaCorrecta",true);
+                alertify.success("Fecha Correcta");                
+            }
+            else{
+                alertify.error("Fecha Inicio Debe ser Menor ala Fecha Fin.");
+                this.set("validacionFechaCorrecta",false);                   
+            }                        
         },
         signUp(event){            
             var servicioFormulario = this.get("servicioFormulario");
