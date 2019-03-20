@@ -265,7 +265,7 @@ export default Ember.Controller.extend( {
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
             //this.send("validateFields"); 
-            this.send("validateFieldsNuevo");   
+            this.send("validateFieldsNuevo");   //aaa
 
             console.log("Datos Documentos Personales FORM",formularioService);
 
