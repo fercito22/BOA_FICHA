@@ -30,13 +30,16 @@ body.fixed-nav {
   width: 50px;
   height: 50px;
   text-align: center;
-  color: white;
+  /* Color flechita */
+  color: purple;
   background: rgba(52, 58, 64, 0.5);
   line-height: 45px; }
   .scroll-to-top:focus, .scroll-to-top:hover {
     color: white; }
+    /* Boton de la Derecha para regresar al principio */
   .scroll-to-top:hover {
-    background: #343a40; }
+    background: green; }
+    /* background: #343a40; } */
   .scroll-to-top i {
     font-weight: 800; }
 
@@ -166,14 +169,14 @@ body.fixed-nav {
       padding: 0; }
       #mainNav.fixed-top .sidenav-toggler > .nav-item > .nav-link {
         padding: 1em; } }
-
+/* Desplega el menu ala Izquierda */
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
-  background-color: #212529; }
+  background-color: #292126; }
   #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
-    color: #adb5bd; }
+    color: #bdadaf; }
 
 #mainNav.fixed-top.navbar-light .sidenav-toggler {
-  background-color: #dee2e6; }
+  background-color: #e6dee2; }
   #mainNav.fixed-top.navbar-light .sidenav-toggler a i {
     color: rgba(0, 0, 0, 0.5); }
 
@@ -256,7 +259,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
     color: #adb5bd; }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
-  color: #adb5bd; }
+  color: #bdadb6; }
 
 @media (min-width: 992px) {
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {

@@ -443,7 +443,10 @@ export default Ember.Controller.extend( {
                 alertify.error("Fecha Inicio Debe ser Menor ala Fecha Fin.");
                 this.set("validacionFechaCorrecta",false);                   
             }                        
-        },
+        },   
+
+
+
         signUp(event){            
             var servicioFormulario = this.get("servicioFormulario");
             servicioFormulario.callDocumentosPersonalesEditar(event.DocumentoPersonalID);

@@ -39,10 +39,32 @@
     background: #EEEEEE;
 
 }
-#selec {
+/* #selec {
     background: #f5a300 ;
     color: #ffffff;
+  } */
+  /* #selec:hover {
+    background: #e9118f ;
+    color: #ffffff;
   }
+
+  #selec:active {
+      padding-left: 50px;
+    background-color: blue;
+}
+
+#selec:visited {
+    background: yellowgreen;
+} */
+.active:link{
+    font-size:16px;
+    font-weight:700;
+    padding-left:30px;
+    background-color: #2F4765;
+}
+.active:hover,.active:visited{font-size:12px}
+
+
 /* #linea{    
     border-radius: 0%;
     width: 30%;

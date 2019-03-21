@@ -4,6 +4,7 @@ import { match, not } from '@ember/object/computed';
 import Validar from '../models/validaciones'
 import Mensaje from '../models/mensajes-validacion'
 import { and } from '@ember/object/computed';
+import { or } from '@ember/object/computed';
 import Ember from 'ember';
 
 export default Ember.Controller.extend( {
@@ -104,7 +105,8 @@ export default Ember.Controller.extend( {
     nombresTitulo: match('formaN.titulo', Validar.textoMinMax),        
     nombresinstitucion: match('formaN.institucion', Validar.textoMinMax),   
     fechainicioTitulo: match('fechainicio', Validar.fecAMD),   
-    fechafinTitulo: match('fechafin', Validar.fecAMD),   
+    fechafinTitulo: match('fechafin', Validar.fecAMD),
+    //fechaCorrecta: or('validacionFechaCorrecta','fechafinTitulo'),
     ValidacionTitulo: and('nombresTitulo' , 'nombresinstitucion', 'fechainicioTitulo', 'fechafinTitulo', 'validacionFechaCorrecta', 'selectGrado'),
     isDisabledTitulo: not('ValidacionTitulo'),
     //  -----   Mensajes Formulario Nuevos
@@ -155,9 +157,12 @@ export default Ember.Controller.extend( {
                 this.set("validateFieldsTituloN", false);
                 this.set("mensajeFormulario", Mensaje.mensajeFormularioInvalido);
                 this.set("mensajeGrado", Mensaje.mensajeSelectable);
-                if(this.get("validacionFechaCorrecta") != true){                         
+                if(this.get("validacionFechaCorrecta") != true){
+                    console.log("Fechas Incorrectas");                         
                     this.set("validateFieldsTituloN", false);
                     this.set("mensajeFormulario", "Fechas no validas la fecha inicio debe ser Menor a la fecha Fin.");
+                    //this.set("mensajeFechaFin", "La fecha fin debe ser mayor ala inicial.");
+                    this.set("mensajeFechaFin", Mensaje.mensajeFecha);
                 }
             }
             else{
@@ -186,6 +191,7 @@ export default Ember.Controller.extend( {
                 if(this.get("validacionFechaCorrectaE") != true){                         
                     this.set("validateFieldsTituloE", false);
                     this.set("mensajeFormulario", "Fechas no validas la fecha inicio debe ser Menor a la fecha Fin.");
+                    
                 }
             }
             else{
@@ -445,13 +451,14 @@ export default Ember.Controller.extend( {
             if(this.get("fechainicio") < this.get("fechafin")){
                 this.set("validacionFechaCorrecta",true);
                 alertify.success("Fecha Correcta");
-                
             }
             else{
                 alertify.error("Fecha Inicio Debe ser Menor ala Fecha Fin.");
                 this.set("validacionFechaCorrecta",false);   
                 // this.set("fechainicioTitulo",false);
                 // this.set("fechafinTitulo",false);
+                // this.set("mensajeFechaInicio", Mensaje.mensajeFecha);
+                // this.set("mensajeFechaFin", Mensaje.mensajeFecha);
             }                        
         },
         idEliminar(dato){           
