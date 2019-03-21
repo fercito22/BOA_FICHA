@@ -20,7 +20,7 @@ module.exports = function(defaults) {
     }
   });
   //no olvidar
-  app.import(app.bowerDirectory + '/assets/Bootstrap/css/bootstrap.min.css');
+  //app.import(app.bowerDirectory + '/assets/Bootstrap/css/bootstrap.min.css');
 
    //app.import(app.bowerDirectory + '/assets/font-awesome/css/font-awesome.min.css');
 
