@@ -150,6 +150,7 @@ export default Controller.extend({
             
             console.log("Validar Parentesco:", this.get("selectParentesco"));            
             if(this.get("ValidacionBeneficiario") != true || this.get("selectParentesco") != true){
+                console.log("INGRESO");
                 this.set("mensajeNombre", Mensaje.mensajeNombre);
                 this.set("mensajeApellidoPaterno", Mensaje.mensajeApellido);
                // this.set("mensajeApellidoMaterno", Mensaje.mensajeApellido);
@@ -178,27 +179,27 @@ export default Controller.extend({
             }                                  
         },
 
-        validateFieldsBeneNuevo(){           
-            if(this.get("form.Nombres") == ''){               
-                this.set("mensajeErrorNombre", "Porfavor Ingrese un nombre valido");
-                this.set("formValidBeneficiarioNuevo",false);
-            }
+        // validateFieldsBeneNuevo(){           
+        //     if(this.get("form.Nombres") == ''){               
+        //         this.set("mensajeErrorNombre", "Porfavor Ingrese un nombre valido");
+        //         this.set("formValidBeneficiarioNuevo",false);
+        //     }
 
-            if(this.get("form.Apellido1") == ''){
-                this.set("mensajeErrorApellidoPat", "Ingrese un apellido Valido");
-                this.set("formValidBeneficiarioNuevo",false);
-            }
-            if(this.get("form.Apellido2ApellidoMat") == ''){
-                this.set("mensajeError","Ingrese un apellido Valido" );
-                this.set("formValidBeneficiarioNuevo",false);
-            }
+        //     if(this.get("form.Apellido1") == ''){
+        //         this.set("mensajeErrorApellidoPat", "Ingrese un apellido Valido");
+        //         this.set("formValidBeneficiarioNuevo",false);
+        //     }
+        //     if(this.get("form.Apellido2ApellidoMat") == ''){
+        //         this.set("mensajeError","Ingrese un apellido Valido" );
+        //         this.set("formValidBeneficiarioNuevo",false);
+        //     }
 
-            // console.log("NombreValidoTitulo: ", this.get("NombreValidoTitulo"));
-            // if(this.get("NombreValidoTitulo") != true){
-            //     this.set("mensajeErrorNombre", Validar.mensajeTexto);
-            // }
+        //     // console.log("NombreValidoTitulo: ", this.get("NombreValidoTitulo"));
+        //     // if(this.get("NombreValidoTitulo") != true){
+        //     //     this.set("mensajeErrorNombre", Validar.mensajeTexto);
+        //     // }
             
-        },
+        // },
 
         onGuardarBeneficiarioEditar(){
             const formularioService = this.get("formeditar"); 
@@ -277,9 +278,11 @@ export default Controller.extend({
             var resultTotal = {};
             var servicioFormulario = this.get("servicioFormulario");
 
-            this.set("formValidBeneficiarioNuevo",true);
-            this.send("validateFieldsBeneNuevo");    
+           // this.set("formValidBeneficiarioNuevo",true);
+           // this.send("validateFieldsBeneNuevo");    
 
+
+            this.set("validateFieldsBeneficiario",true);
             this.send("validateFieldsBeneficiarioNuevo");    
             // if(this.get("validateFieldsBeneficiario") == true){
             //     alertify.success("Mensaje ok");
@@ -288,7 +291,12 @@ export default Controller.extend({
             //     alertify.success("Mensaje Error");
             // }
 
-            if(this.get("validateFieldsBeneficiario")){                
+            console.log("ValidacionBeneficiario:********** ", this.get("validateFieldsBeneficiario"));
+
+            console.log("Validacion BENEFICIARIO: ", this.get("validateFieldsBeneficiario"))
+
+            if(this.get("validateFieldsBeneficiario")){
+                console.log("INGRESO VAlidacion Guardar nuevvo");                
                 servicioFormulario.nuevoFormulario(userData)
                 .then(resultado=>{                                    
                     alertify.success(resultado.mensaje);    
@@ -299,7 +307,7 @@ export default Controller.extend({
                 });
             }
             else{
-                alert("Debe llenar todo el formulario correctamente");
+                alertify.error("Debe llenar todo el <strong>FORMULARIO</strong> correctamente");
             }
         },  
         
