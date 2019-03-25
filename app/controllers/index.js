@@ -294,26 +294,35 @@ export default Controller.extend({
             
             this.set("formValidPerfil",true);
             this.send("validateFields");
+            var lugar = formularioService.LugarDeNacimiento;
+            if(formularioService.LugarDeNacimiento == undefined){
+                lugar = "";
+            }
+            var ap2 = formularioService.Apellido2;
+            if(formularioService.Apellido2 == null){
+                ap2 = "";
+            }
             
                     
             var userData = {                    
                 Nombre1: formularioService.Nombre1,
                 Apellido1 : formularioService.Apellido1,
-                Apellido2: formularioService.Apellido2,
+                Apellido2: ap2,
                 FechaNacimiento: formularioService.FechaNacimiento,
                 Nacionalidad: formularioService.Nacionalidad,
                 CiudadNacimiento: formularioService.CiudadNacimiento,
-                LugarDeNacimiento: formularioService.LugarDeNacimiento,
+                LugarDeNacimiento: lugar,
                 Direccion: formularioService.Direccion,
                 EstadoCivil: Civil
             }; 
 
 
-             //console.log("userData : " , userData);
+             console.log("userData Formulario PErfil : " , userData);
             // console.log("Formulario : " , formularioService);
-            if(this.get("formValidPerfil")){
+            if(this.get("formValidPerfil") == true){
                 servicioFormulario.updateFormulario(userData)
-                .then(resultado=>{                    
+                .then(resultado=>{
+                    console.log("Ingreso actualizacion ", resultado);
                     alertify.success(resultado.mensaje);  
                     this.send("clearFieldsPerfil"); 
                     this.send("refreshRoute");                                     

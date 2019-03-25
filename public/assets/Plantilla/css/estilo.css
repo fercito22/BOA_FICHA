@@ -56,10 +56,10 @@
 #selec:visited {
     background: yellowgreen;
 } */
-.active:link{
+#selec .active:link{
     font-size:16px;
     font-weight:700;
-    padding-left:30px;
+    padding-left:30px;    
     background-color: #2F4765;
 }
 .active:hover,.active:visited{font-size:12px}

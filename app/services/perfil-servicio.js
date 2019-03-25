@@ -43,8 +43,8 @@ export default Service.extend({
                 Direccion: form.Direccion,
                 EstadoCivil: form.EstadoCivil
            };
-            // console.log("PARAMETROS SERVICIO");
-            // console.log(parametros);            
+            console.log("PARAMETROS SERVICIO");
+            console.log(parametros);            
         //    console.log(Config.serverpath );      
           var request = $.ajax({
             type: 'POST',            
