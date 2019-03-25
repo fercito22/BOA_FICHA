@@ -303,8 +303,8 @@ export default Route.extend({
                 this.controller.set('formp.Nombre1',  "");
                 this.controller.set('formp.Apellido1', "");
                 this.controller.set('formp.Apellido2',  "");
-                this.controller.set("formp.FechaNacimiento", "");            
-    
+                this.controller.set("formp.FechaNacimiento", "");
+                
                 this.controller.set("vFrom","");  
     
                 this.controller.set('formp.Nacionalidad',  "");
