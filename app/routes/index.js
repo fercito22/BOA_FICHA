@@ -278,8 +278,14 @@ export default Route.extend({
 
             if(this.get("perfilV") == true ){
                 console.log("Ingresa", model.resultPerfil[0]);
-                var Ciudad = model.resultPerfil[0].LugarDeNacimiento.split('/')[0];
-                var Pais = model.resultPerfil[0].LugarDeNacimiento.split('/')[1];
+                if(model.resultPerfil[0].LugarDeNacimiento == null){
+                    var Ciudad = "";
+                    var Pais = "";
+                }                
+                else{
+                    var Ciudad = model.resultPerfil[0].LugarDeNacimiento.split('/')[0];
+                    var Pais = model.resultPerfil[0].LugarDeNacimiento.split('/')[1];
+                }
 
                 this._super(controller, model);
                 this.controller.set('formp.Nombre1',  model.resultPerfil[0].Nombre1);
@@ -304,7 +310,7 @@ export default Route.extend({
                 this.controller.set('formp.Apellido1', "");
                 this.controller.set('formp.Apellido2',  "");
                 this.controller.set("formp.FechaNacimiento", "");
-                
+
                 this.controller.set("vFrom","");  
     
                 this.controller.set('formp.Nacionalidad',  "");
