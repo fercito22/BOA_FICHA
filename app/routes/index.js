@@ -43,6 +43,7 @@ export default Route.extend({
       servicioCombo: inject("combos"),
       fotoV : true,     
       contactoV:true,
+      perfilV:true,
    
     model(){
 
@@ -66,7 +67,16 @@ export default Route.extend({
             return valuesService.callPerfil()
                 .then(resultado=>{
                     resultTotal.resultPerfil= resultado;
-                    //console.log("Perfil",resultTotal.resultPerfil);
+                    console.log("Perfil Datos: ",resultTotal.resultPerfil);
+                    if(resultado.length == 0){                                                          
+                        this.set('perfilV',  false);     
+                        console.log("No hay datos");                          
+                    }
+                    else{
+                        resultTotal.resultPerfil = resultado;
+                        console.log("SI hay datos");
+                        //console.log("IDIOMAS ",resultTotal.resultIdioma);                                               
+                    } 
                     return resultTotal;
                 })
                 .then(resultTotal=>{
@@ -265,30 +275,56 @@ export default Route.extend({
     setupController(controller , model ){
         
         if(Config.usuario_id != 0){
-            
-            if(model.resultPerfil[0].LugarDeNacimiento == null){
-                var Ciudad = "";
-                var Pais = "";
-            }
-            else{
+
+            if(this.get("perfilV") == true ){
+                console.log("Ingresa", model.resultPerfil[0]);
                 var Ciudad = model.resultPerfil[0].LugarDeNacimiento.split('/')[0];
                 var Pais = model.resultPerfil[0].LugarDeNacimiento.split('/')[1];
-            // console.log(Ciudad ,Pais);
-            }        
+
+                this._super(controller, model);
+                this.controller.set('formp.Nombre1',  model.resultPerfil[0].Nombre1);
+                this.controller.set('formp.Apellido1',  model.resultPerfil[0].Apellido1);
+                this.controller.set('formp.Apellido2',  model.resultPerfil[0].Apellido2);
+                this.controller.set("formp.FechaNacimiento",moment(model.resultPerfil[0].FechaNacimiento).format('YYYY/MM/DD'));            
+    
+                this.controller.set("vFrom",model.resultPerfil[0].FechaNacimiento);  
+    
+                this.controller.set('formp.Nacionalidad',  model.resultPerfil[0].Nacionalidad);
+                this.controller.set('formp.CiudadNacimiento', Ciudad);
+                this.controller.set('formp.LugarDeNacimiento', Pais);        
+                this.controller.set('formp.Direccion',  model.resultPerfil[0].Direccion);
+                this.controller.set('formp.EstadoCivil',  model.resultPerfil[0].EstadoCivil);
+            }
+            else{
+                console.log("Si ingreso");
+                var Ciudad = "";
+                var Pais = "";
+                this._super(controller, model);
+                this.controller.set('formp.Nombre1',  "");
+                this.controller.set('formp.Apellido1', "");
+                this.controller.set('formp.Apellido2',  "");
+                this.controller.set("formp.FechaNacimiento", "");            
+    
+                this.controller.set("vFrom","");  
+    
+                this.controller.set('formp.Nacionalidad',  "");
+                this.controller.set('formp.CiudadNacimiento', "");
+                this.controller.set('formp.LugarDeNacimiento', "");        
+                this.controller.set('formp.Direccion',  "");
+                this.controller.set('formp.EstadoCivil',  "");
+            }
+            // console.log("Lugar de nacimiento: " , model.resultPerfil[0]);
+            // if(model.resultPerfil[0].LugarDeNacimiento == null || model.resultPerfil[0].LugarDeNacimiento.length == undefined ){
+            //     var Ciudad = "";
+            //     var Pais = "";
+            // }
+            // else{
+            //     var Ciudad = model.resultPerfil[0].LugarDeNacimiento.split('/')[0];
+            //     var Pais = model.resultPerfil[0].LugarDeNacimiento.split('/')[1];
+            // // console.log(Ciudad ,Pais);
+            // }        
        
-            this._super(controller, model);
-            this.controller.set('formp.Nombre1',  model.resultPerfil[0].Nombre1);
-            this.controller.set('formp.Apellido1',  model.resultPerfil[0].Apellido1);
-            this.controller.set('formp.Apellido2',  model.resultPerfil[0].Apellido2);
-            this.controller.set("formp.FechaNacimiento",moment(model.resultPerfil[0].FechaNacimiento).format('YYYY/MM/DD'));            
-
-            this.controller.set("vFrom",model.resultPerfil[0].FechaNacimiento);  
-
-            this.controller.set('formp.Nacionalidad',  model.resultPerfil[0].Nacionalidad);
-            this.controller.set('formp.CiudadNacimiento', Ciudad);
-            this.controller.set('formp.LugarDeNacimiento', Pais);        
-            this.controller.set('formp.Direccion',  model.resultPerfil[0].Direccion);
-            this.controller.set('formp.EstadoCivil',  model.resultPerfil[0].EstadoCivil);
+           
 
             /// ******** Contacto Emergencia
             if(this.get('contactoV') == true){
