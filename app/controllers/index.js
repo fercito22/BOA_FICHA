@@ -2,7 +2,9 @@ import Controller from '@ember/controller';
 import {inject} from '@ember/service';
 import { match, not } from '@ember/object/computed';
 import Validar from '../models/validaciones'
+import Mensaje from '../models/mensajes-validacion'
 import { and } from '@ember/object/computed';
+import { or } from '@ember/object/computed';
 import { getOwner } from '@ember/application';
 
 export default Controller.extend({
@@ -159,6 +161,7 @@ export default Controller.extend({
     mensajeErrorTextoCelular: '',
     mensajeErrorTextoMedicamento: '',
     mensajeErrorTextoDireccion: '',
+    //mensajeErrorTextoCondicionado: '',
     nombreMedicoVal: match('formmedico.NombreMedico', Validar.textoMinMax),
     telefonoMedicoVal: match('formmedico.TelefonoMedico', Validar.numerosMinMax),
     celularMedicoVal: match('formmedico.NroCelularMedico', Validar.numerosMinMax),    
@@ -167,10 +170,13 @@ export default Controller.extend({
     grupoSanguineoMedicoVal: match('formmedico.GrupoSanquineo', Validar.textoMinMax),
     rhSanguineoMedicoVal: match('formmedico.RH_Sanguineo', Validar.textoMinMax),
 
-    habilitarMedico: and('nombreMedicoVal', 'telefonoMedicoVal' , 'celularMedicoVal',
-                 'medicamentosMedicoVal', 'direccionMedicoVal' ),
+    validarTelefono: or('telefonoMedicoVal', 'celularMedicoVal'),
+
+    habilitarMedico: and('nombreMedicoVal', 'validarTelefono' ),
+                  //'direccionMedicoVal' , ) , //'direccionMedicoVal'),
     isDisabledMedico: not('habilitarMedico'),    
-    isDisabled: not('FechaNacimientoVal'),
+    isDisabled: not('FechaNacimientoVal'),  
+
 
     actions:{
 
@@ -255,20 +261,61 @@ export default Controller.extend({
             if(this.get("formmedico.formmedico.mensajeErrorTextoCelular") == null){
                 this.set("mensajeErrorTextoCelular", Validar.mensajeNumeros);
                 this.set("formValidMedico",false);
-            }            
-            // if(this.get("formmedico.AlergiasMedicas") == null){
-            //     this.set("mensajeErrorTextoNombre", Validar.mensajeTexto);
-            //     this.set("formValidMedico",false);
-            // }
-            // if(this.get("formmedico.Medicamentos") == null){                
-            //     this.set("mensajeErrorTextoMedicamento", Validar.mensajeTexto);
-            //     this.set("formValidMedico",false);
-            // }                         
-            // if(this.get("formmedico.DireccionMedico") == null){                
-            //     this.set("mensajeErrorTextoDireccion", Validar.mensajeDireccion);
-            //     this.set("formValidMedico",false);
-            // }                          
+            }                     
         },
+
+        validateFieldsMedico2(){  
+            console.log("habilitarMedico: ", this.get("habilitarMedico"));    
+            console.log("nombreMedicoVal: ", this.get("nombreMedicoVal"));
+            console.log("telefonoMedicoVal: ", this.get("telefonoMedicoVal"));
+            console.log("celularMedicoVal: ", this.get("celularMedicoVal"));
+            console.log("medicamentosMedicoVal: ", this.get("medicamentosMedicoVal"));
+            console.log("grupoSanguineoMedicoVal: ", this.get("grupoSanguineoMedicoVal"));
+
+            if(this.get("validarTelefono") != true){
+                
+            }            
+            
+            if(this.get("habilitarMedico") != true ){
+                console.log("Validar Frmulario MEDICO");
+                this.set("formValidMedico", false);
+                this.set("mensajeErrorTextoNombre", Mensaje.mensajeNombre);
+                this.set("mensajeErrorTextoTelefono", Mensaje.mensajeNumeros);
+                this.set("mensajeErrorTextoCelular", Mensaje.mensajeNumeros);                
+               // this.set("mensajeErrorTextoDireccion", Mensaje.mensajeDireccion);
+                
+                //this.set("grupoSanguineoMedicoVal", Mensaje.mensajeNombre);
+                //this.set("mensajeFechaFin", Mensaje.mensajeFecha);
+
+                // this.set("formValidMedico",false);
+                // this.set("mensajeFormulario", Mensaje.mensajeFormularioInvalido);
+                // this.set("mensajeGrado", Mensaje.mensajeSelectable);    
+                
+                // if(this.get("telefonoMedicoVal" != true)){
+                    
+                //     this.set("num1", false);
+                //     this.set("mensajeErrorTextoTelefono", "pruebaws ffffffff");
+                // }
+                // if(this.get("celularMedicoVal" != true)){
+                //     this.set("num2", false);
+                //     this.set("mensajeErrorTextoCelular", "pruebaws cccccc");
+                // }
+            }
+            else{
+                //validarTelefono: or('telefonoMedicoVal', 'celularMedicoVal'),
+                // if(this.get("telefonoMedicoVal" != true)){
+                    
+                //     this.set("validarTelefono", false);
+                //     this.set("mensajeErrorTextoTelefono", "pruebaws ffffffff");
+                // }
+                // if(this.get("celularMedicoVal" != true)){
+                //     this.set("validarTelefono", false);
+                //     this.set("mensajeErrorTextoCelular", "pruebaws cccccc");
+                // }
+                //this.set("mensajeFormulario", "ok.");
+            }            
+            
+         },
 
         clicked(){
             var value = this.get("visible");
@@ -365,7 +412,9 @@ export default Controller.extend({
             });
         }, 
 
-
+        //  -------------------------------------------------------------
+        //  --------- Guarda Datos Formulario Medicos -------------------
+        //  -------------------------------------------------------------
         onGuardarMedico(){     
             var servicioFormularioMedico = this.get("servicioFormularioMedico");      
             const formularioService = this.get("formmedico");            
@@ -429,6 +478,7 @@ export default Controller.extend({
                 RH_Sanguineo: rhSan,
                 //Identificador: this.get("formmedico.Identificador"),     
             };
+           
 
             console.log("USER dATA", userData);
               
@@ -438,19 +488,44 @@ export default Controller.extend({
                 console.log("ingresa formulario");
            }
 
-             servicioFormularioMedico.updateFormulario(userData)
-            .then(resultado=>{                
-                this.transitionToRoute('/'); 
-                alertify.success(resultado.mensaje);
-                this.send("clearFieldsPerfil");
-                this.send("refreshRoute");
-                 //this.flashMessage('success', 'Content saved!');
-                 //alert(resultado.mensaje);                                                                
-            })
-            .catch(error=>{
-                //alert(resultado.mensaje); 
-                alertify.error(resultado.mensaje);                
-            });
+           this.set("formValidMedico",true);
+           this.send("validateFieldsMedico2");
+
+            //if()
+            //validarTelefono: or('telefonoMedicoVal', 'celularMedicoVal'),
+            // alertify.success("Fijo: " + this.get("telefonoMedicoVal"));
+            // alertify.success("Celular: " + this.get("celularMedicoVal"));
+            // var TelefonoMedicow = this.get("formmedico.TelefonoMedico");
+            // if (typeof TelefonoMedicow === 'number')
+            // {
+            //     alertify.success("SUper Ingreso");
+            // }
+            //TelefonoMedico
+            //NroCelularMedico: this.get("formmedico.NroCelularMedico") 
+            //var Telefonos = 
+           //   -----   Validacion de Medico Cabecera
+           if(this.get("formValidMedico") == true){
+                console.log("Formulario Correcto");
+                alertify.success("Formulario Correcto");
+           }
+           else{
+               alertify.error("Formulario incorrecto error de datos.");
+               console.log("Formulario incorrecto error de datos.")
+           }
+
+            //  servicioFormularioMedico.updateFormulario(userData)
+            // .then(resultado=>{                
+            //     this.transitionToRoute('/'); 
+            //     alertify.success(resultado.mensaje);
+            //     this.send("clearFieldsPerfil");
+            //     this.send("refreshRoute");
+            //      //this.flashMessage('success', 'Content saved!');
+            //      //alert(resultado.mensaje);                                                                
+            // })
+            // .catch(error=>{
+            //     //alert(resultado.mensaje); 
+            //     alertify.error(resultado.mensaje);                
+            // });
         },         
 
         onGuardarIdiomas(){     

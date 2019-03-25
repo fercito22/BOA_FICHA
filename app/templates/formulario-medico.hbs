@@ -22,7 +22,7 @@
                     class="form-control text-secondary border border-info "
                 }}                                     
           </div>   
-          <label hidden={{nombreMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoNombre}}</label>
+          <label hidden={{nombreMedicoVal}} class="errorMessage mensaje-error">{{mensajeErrorTextoNombre}}</label>
           {{!-- <label hidden={{longitud2}} class="errorMessage mensaje-error">no hay nada</label> --}}
         </div>
 
@@ -37,7 +37,7 @@
                     class="form-control text-secondary border border-info "
                 }}
           </div>  
-          <label hidden={{direccionValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoDireccion}}</label>
+          <label hidden={{direccionMedicoVal}} class="errorMessage mensaje-error">{{mensajeErrorTextoDireccion}}</label>
         </div>
 
         <div class="row">
@@ -53,7 +53,8 @@
                                 class="form-control text-secondary border border-info "
                             }}
                     </div>   
-                    <label hidden={{TelefonoMedicoValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoTelefono}}</label>              
+                    <label hidden={{validarTelefono}} class="errorMessage mensaje-error">{{mensajeErrorTextoTelefono}}</label>              
+                    {{!-- <label hidden={{pruebN1}} class="errorMessage mensaje-error">{{mensajeErrorTextoCondicionado}}</label>               --}}
                 </div> 
             </div>
 
@@ -69,7 +70,8 @@
                                 class="form-control text-secondary border border-info "
                             }}
                     </div> 
-                    <label hidden={{NroCelularValido}} class="errorMessage mensaje-error">{{mensajeErrorTextoCelular}}</label>
+                    <label hidden={{validarTelefono}} class="errorMessage mensaje-error">{{mensajeErrorTextoCelular}}</label>
+                    {{!-- <label hidden={{num2}} class="errorMessage mensaje-error">{{mensajeErrorTextoCondicionado}}</label> --}}
                 </div> 
             </div>
         </div>   
@@ -144,7 +146,12 @@
             Regresar
         {{/link-to}} --}}
         {{!-- <button type="button" class="btn btn-primary" disabled={{isDisabledMedico}} data-dismiss="modal" {{action 'onGuardarMedico'}}>Guardar</button> --}}
-        <button type="button" class="btn btn-primary"  data-dismiss="modal"  {{action 'onGuardarMedico'}}>Guardar</button>
+        {{!-- <button type="button" class="btn btn-primary"  data-dismiss="modal"  {{action 'onGuardarMedico'}}>Guardar</button> --}}
+
+        <button hidden={{isDisabledMedico}} data-dismiss="modal"   type="button" class="btn btn-primary"  disabled={{isDisabled}}   {{action 'onGuardarMedico'}}>Guardar</button>
+            <button hidden={{habilitarMedico}} type="button" class="btn btn-danger"   {{action 'onGuardarMedico'}}>Guardar</button>
+
+
       </div>
     </div>
   </div>

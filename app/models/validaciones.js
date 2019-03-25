@@ -1,5 +1,6 @@
 var valida = {
     numeros: /^[0-9]+$/,    
+    numeros2: /^([0-9 ]){0,60}$/,
     numerosMinMax: /^([0-9 ]){3,60}$/,
     numerosMinMax2: '^[a-zA-Z\ \.\,\(\)\ñ\Ñ\áéíóú\ÁÉÍÓÚ\-\+]+[0-9]+$',
     mensajeNumeros: "No son numeros validos.",
