@@ -79,6 +79,7 @@ export default Service.extend({
                 EmpleadoItemID: form.EmpleadoItemID ,
                 codTalla: form.CodTalla,
                 Talla: form.Talla,
+                id: Config.usuario_id   
            };
         //    console.log("PARAMETROS SERVICIO");
         //    console.log(parametros);                       
