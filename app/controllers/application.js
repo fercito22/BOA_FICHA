@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import {inject} from '@ember/service';
 import { computed } from '@ember/object';
 import Config from '../models/config';
+// PRUEBA DE GIT VERSION
 
 export default Controller.extend({
   usersService : inject("user"),
