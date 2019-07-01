@@ -3,6 +3,8 @@
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
+FICHA PERSONAL FUNCIONANDO 1 Julio 2019
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
